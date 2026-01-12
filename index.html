@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -7,28 +8,27 @@
   <meta name="theme-color" content="#0b1220" />
   <style>
     :root{
-      --bg: #070b14;
-      --panel: rgba(255,255,255,.06);
-      --panel-2: rgba(255,255,255,.09);
-      --stroke: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.66);
-      --brand: #27d3ff;
+      --bg:#070b14;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.09);
+      --stroke:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.66);
+      --brand:#27d3ff;
       --brand2:#7c5cff;
       --ok:#41f3b4;
-      --shadow: 0 18px 45px rgba(0,0,0,.55);
-      --radius: 18px;
-      --radius2: 14px;
-      --max: 1100px;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --shadow:0 18px 45px rgba(0,0,0,.55);
+      --radius:18px;
+      --radius2:14px;
+      --max:1100px;
+      --font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
     }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: var(--font);
-      color: var(--text);
+      font-family:var(--font);
+      color:var(--text);
       background:
         radial-gradient(1200px 700px at 10% 10%, rgba(39,211,255,.12), transparent 60%),
         radial-gradient(900px 600px at 85% 18%, rgba(124,92,255,.14), transparent 55%),
@@ -36,145 +36,90 @@
         linear-gradient(180deg, #050913 0%, #070b14 45%, #050913 100%);
       overflow-x:hidden;
     }
-
-    /* grid "tático" no fundo */
     .bg-grid{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
+      position:fixed; inset:0; pointer-events:none;
       background-image:
         linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,.05) 1px, transparent 1px);
-      background-size: 64px 64px;
-      mask-image: radial-gradient(ellipse at 50% 25%, black 0%, transparent 70%);
+      background-size:64px 64px;
+      mask-image:radial-gradient(ellipse at 50% 25%, black 0%, transparent 70%);
       opacity:.25;
     }
 
     header{
-      position:sticky;
-      top:0;
-      z-index:10;
+      position:sticky; top:0; z-index:10;
       backdrop-filter: blur(10px);
       background: linear-gradient(180deg, rgba(7,11,20,.72), rgba(7,11,20,.35));
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
-
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 18px 18px;
-    }
-
-    .topbar{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 260px;
-    }
-
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+    .topbar{display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+    .brand{display:flex; align-items:center; gap:12px; min-width:260px}
     .badge{
-      width:42px;
-      height:42px;
-      border-radius: 14px;
+      width:42px;height:42px;border-radius:14px;
       background:
         radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
         linear-gradient(135deg, rgba(39,211,255,.95), rgba(124,92,255,.85));
-      box-shadow: 0 10px 25px rgba(39,211,255,.18);
-      border: 1px solid rgba(255,255,255,.18);
-      position:relative;
-      overflow:hidden;
+      box-shadow:0 10px 25px rgba(39,211,255,.18);
+      border:1px solid rgba(255,255,255,.18);
+      position:relative; overflow:hidden;
     }
     .badge:after{
-      content:"";
-      position:absolute;
-      inset:-30%;
-      background: conic-gradient(from 180deg, transparent, rgba(255,255,255,.28), transparent);
-      animation: spin 6s linear infinite;
+      content:""; position:absolute; inset:-30%;
+      background:conic-gradient(from 180deg, transparent, rgba(255,255,255,.28), transparent);
+      animation:spin 6s linear infinite;
     }
-    @keyframes spin{ to{ transform: rotate(360deg); } }
+    @keyframes spin{to{transform:rotate(360deg)}}
 
-    .brand h1{
-      font-size: 15px;
-      margin:0;
-      letter-spacing:.7px;
-      text-transform:uppercase;
-    }
-    .brand p{
-      margin:2px 0 0 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .brand h1{font-size:15px; margin:0; letter-spacing:.7px; text-transform:uppercase}
+    .brand p{margin:2px 0 0 0; color:var(--muted); font-size:13px}
 
-    .actions{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
+    .actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
     .chip{
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:10px;
       padding:10px 12px;
-      background: rgba(255,255,255,.06);
+      background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
-      border-radius: 999px;
-      color: var(--muted);
-      font-size: 13px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--ok);
+      box-shadow:0 0 0 4px rgba(65,243,180,.12);
+      display:inline-block;
     }
 
-    .search{
-      position:relative;
-      min-width: min(420px, 92vw);
-      flex: 1 1 320px;
-      max-width: 520px;
-    }
+    .search{position:relative; min-width:min(420px,92vw); flex:1 1 320px; max-width:520px}
     .search input{
       width:100%;
-      padding: 12px 14px 12px 40px;
-      border-radius: 999px;
+      padding:12px 14px 12px 40px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
       outline:none;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,.10);
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.10);
     }
-    .search input::placeholder{ color: rgba(255,255,255,.45); }
+    .search input::placeholder{color:rgba(255,255,255,.45)}
     .search .icon{
-      position:absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity:.7;
-      font-size: 14px;
+      position:absolute; left:14px; top:50%;
+      transform:translateY(-50%);
+      opacity:.7; font-size:14px;
     }
 
-    main{
-      padding: 26px 0 26px 0;
-    }
-
+    main{padding:26px 0}
     .hero{
       display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 18px;
+      grid-template-columns:1.25fr .75fr;
+      gap:18px;
       align-items:stretch;
-      margin-top: 8px;
+      margin-top:8px;
     }
-
     @media (max-width: 920px){
-      .hero{ grid-template-columns: 1fr; }
-      .actions{ width:100%; justify-content:space-between; }
-      .search{ max-width:none; }
+      .hero{grid-template-columns:1fr}
+      .search{max-width:none}
     }
 
     .card{
@@ -185,109 +130,78 @@
       overflow:hidden;
       position:relative;
     }
+    .sheen:before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.08) 50%, transparent 60%);
+      transform: rotate(10deg);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .inner{padding:18px}
 
-    .card .inner{
-      padding: 18px;
-    }
+    .hero h2{margin:0; font-size:22px}
+    .subtitle{margin:8px 0 0 0; color:var(--muted); line-height:1.45; font-size:14px; max-width:72ch}
 
-    .hero-title{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .hero h2{
-      margin:0;
-      font-size: 22px;
-      letter-spacing:.2px;
-    }
-    .hero .subtitle{
-      margin:8px 0 0 0;
-      color: var(--muted);
-      line-height: 1.45;
-      font-size: 14px;
-      max-width: 64ch;
-    }
-
-    .hint{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 14px;
-    }
+    .hint{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
     .pill{
-      font-size: 12px;
-      color: rgba(255,255,255,.78);
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
+      font-size:12px;
+      color:rgba(255,255,255,.78);
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
     }
-    .pill strong{ color: #fff; font-weight: 600; }
-
-    .panel{
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    .status{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      padding: 18px;
-    }
-    .status .row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding: 10px 12px;
-      border-radius: var(--radius2);
-      background: rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .status .row span{ color: var(--muted); font-size: 13px; }
-    .status .row b{ font-size: 13px; font-weight: 650; }
-    .dot{
-      width:10px; height:10px; border-radius: 50%;
-      background: var(--ok);
-      box-shadow: 0 0 0 4px rgba(65,243,180,.12);
-      display:inline-block;
-      margin-right:8px;
-      vertical-align:middle;
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      color: rgba(255,255,255,.75);
     }
 
-    .section{
-      margin-top: 18px;
-    }
+    .section{margin-top:18px}
     .section h3{
       margin: 0 0 10px 0;
-      font-size: 13px;
-      letter-spacing: .8px;
+      font-size:13px;
+      letter-spacing:.8px;
       text-transform:uppercase;
       color: rgba(255,255,255,.72);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
     }
+    .section h3 a{
+      color: rgba(39,211,255,.85);
+      text-decoration:none;
+      font-size:12px;
+      letter-spacing:.2px;
+      text-transform:none;
+      border:1px solid rgba(39,211,255,.25);
+      background: rgba(39,211,255,.08);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .section h3 a:hover{border-color:rgba(39,211,255,.45)}
 
     .grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns:repeat(3, 1fr);
+      gap:14px;
     }
-    @media (max-width: 920px){
-      .grid{ grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 560px){
-      .grid{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 920px){ .grid{grid-template-columns:repeat(2, 1fr)} }
+    @media (max-width: 560px){ .grid{grid-template-columns:1fr} }
 
     a.tile{
       text-decoration:none;
       color: inherit;
       display:block;
-      padding: 16px;
-      border-radius: var(--radius);
+      padding:16px;
+      border-radius:var(--radius);
       background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
       border: 1px solid rgba(255,255,255,.12);
       box-shadow: 0 12px 26px rgba(0,0,0,.35);
@@ -305,65 +219,88 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 10px;
+      gap:10px;
     }
     .tile .name{
-      font-size: 16px;
-      font-weight: 720;
-      letter-spacing:.2px;
+      font-size:16px;
+      font-weight:720;
       margin:0;
+      letter-spacing:.2px;
     }
     .tile .tag{
-      font-size: 11px;
-      color: rgba(255,255,255,.75);
-      padding: 6px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
+      font-size:11px;
+      color:rgba(255,255,255,.75);
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.18);
       white-space:nowrap;
     }
     .tile .desc{
-      margin: 10px 0 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
+      margin:10px 0 0 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.35;
     }
     .tile .meta{
-      margin-top: 12px;
+      margin-top:12px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      color: rgba(255,255,255,.60);
-      font-size: 12px;
+      color:rgba(255,255,255,.60);
+      font-size:12px;
     }
 
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 10px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.20);
-      color: rgba(255,255,255,.75);
+    aside.card{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
     }
+    .status{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:18px;
+    }
+    .status .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:var(--radius2);
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .status .row span{color:var(--muted); font-size:13px}
+    .status .row b{font-size:13px; font-weight:650}
+
+    .quick{
+      padding: 0 18px 18px 18px;
+      display:grid;
+      gap:10px;
+    }
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.88);
+      cursor:pointer;
+      text-decoration:none;
+    }
+    .btn:hover{border-color: rgba(39,211,255,.35); background: rgba(39,211,255,.08)}
+    .btn small{color: rgba(255,255,255,.60); font-size:12px}
 
     footer{
-      border-top: 1px solid rgba(255,255,255,.08);
+      border-top:1px solid rgba(255,255,255,.08);
       padding: 14px 0 22px 0;
       color: rgba(255,255,255,.52);
-      font-size: 12px;
-    }
-
-    /* brilho diagonal sutil nos cards */
-    .sheen:before{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.08) 50%, transparent 60%);
-      transform: rotate(10deg);
-      opacity:.55;
-      pointer-events:none;
+      font-size:12px;
     }
   </style>
 </head>
@@ -378,7 +315,7 @@
           <div class="badge" aria-hidden="true"></div>
           <div>
             <h1>Painel do Supervisor</h1>
-            <p>Segurança Patrimonial • Acesso rápido a sistemas e formulários</p>
+            <p>Segurança Patrimonial • Acesso rápido a sistemas e rotinas</p>
           </div>
         </div>
 
@@ -390,7 +327,7 @@
 
           <div class="search" role="search">
             <span class="icon">⌕</span>
-            <input id="search" type="search" placeholder="Pesquisar por GLPI, SGO, Fusion, Nexti, Inspeção..." autocomplete="off" />
+            <input id="search" type="search" placeholder="Pesquisar por nome ou palavra-chave..." autocomplete="off" />
           </div>
         </div>
       </div>
@@ -399,125 +336,155 @@
 
   <main class="wrap">
     <section class="hero">
+
       <div class="card sheen">
         <div class="inner">
-          <div class="hero-title">
-            <div>
-              <h2>Central de Ferramentas do Supervisor</h2>
-              <p class="subtitle">
-                Acesse rapidamente os sistemas operacionais do dia a dia. Use a barra de pesquisa para filtrar os atalhos.
-              </p>
-              <div class="hint">
-                <div class="pill"><strong>Dica:</strong> pressione <span class="kbd">/</span> para focar na busca</div>
-                <div class="pill"><strong>Atalhos:</strong> abrir em nova aba por padrão</div>
-              </div>
-            </div>
+          <h2>Central de Ferramentas do Supervisor</h2>
+          <p class="subtitle">
+            Links organizados por categoria. Use a busca para filtrar rapidamente.
+          </p>
+
+          <div class="hint">
+            <div class="pill"><strong>Dica:</strong> pressione <span class="kbd">/</span> para focar na busca</div>
+            <div class="pill"><strong>Escape:</strong> limpa a busca</div>
+            <div class="pill"><strong>Padrão:</strong> abre em nova aba</div>
           </div>
 
-          <div class="section" style="margin-top:18px;">
-            <h3>Links principais</h3>
-            <div class="grid" id="tiles">
+          <!-- ===================== SISTEMAS ===================== -->
+          <div class="section" id="sistemas">
+            <h3>
+              Sistemas
+              <a href="#topo" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Voltar ao topo</a>
+            </h3>
 
+            <div class="grid" data-section="sistemas">
               <a class="tile" href="https://suprimentos.orbenk.com.br/index.php?redirect=%2Ffront%2Fticket.php&error=3" target="_blank" rel="noopener noreferrer"
-                 data-name="glpi" data-tags="chamados suporte tickets">
-                <div class="top">
-                  <p class="name">GLPI</p>
-                  <span class="tag">Chamados</span>
-                </div>
+                 data-name="glpi" data-tags="sistemas chamados suporte tickets glpi orbenk">
+                <div class="top"><p class="name">GLPI</p><span class="tag">Chamados</span></div>
                 <p class="desc">Abertura e acompanhamento de tickets, solicitações e suporte.</p>
-                <div class="meta">
-                  <span>suprimentos.orbenk.com.br</span>
-                  <span class="kbd">Abrir ↗</span>
-                </div>
+                <div class="meta"><span>suprimentos.orbenk.com.br</span><span class="kbd">Abrir ↗</span></div>
               </a>
 
               <a class="tile" href="https://sgo.orbenk.com.br/" target="_blank" rel="noopener noreferrer"
-                 data-name="sgo" data-tags="gestao operacional ocorrencias">
-                <div class="top">
-                  <p class="name">SGO</p>
-                  <span class="tag">Operacional</span>
-                </div>
+                 data-name="sgo" data-tags="sistemas gestao operacional sgo orbenk">
+                <div class="top"><p class="name">SGO</p><span class="tag">Operacional</span></div>
                 <p class="desc">Gestão operacional e rotinas de acompanhamento.</p>
-                <div class="meta">
-                  <span>sgo.orbenk.com.br</span>
-                  <span class="kbd">Abrir ↗</span>
-                </div>
+                <div class="meta"><span>sgo.orbenk.com.br</span><span class="kbd">Abrir ↗</span></div>
               </a>
 
               <a class="tile" href="https://fusion.orbenk.com.br/portal" target="_blank" rel="noopener noreferrer"
-                 data-name="fusion" data-tags="portal processos workflow">
-                <div class="top">
-                  <p class="name">FUSION</p>
-                  <span class="tag">Portal</span>
-                </div>
+                 data-name="fusion" data-tags="sistemas portal processos workflow fusion orbenk">
+                <div class="top"><p class="name">FUSION</p><span class="tag">Portal</span></div>
                 <p class="desc">Portal de processos/fluxos (workflows) e solicitações internas.</p>
-                <div class="meta">
-                  <span>fusion.orbenk.com.br</span>
-                  <span class="kbd">Abrir ↗</span>
-                </div>
+                <div class="meta"><span>fusion.orbenk.com.br</span><span class="kbd">Abrir ↗</span></div>
               </a>
 
               <a class="tile" href="https://app.nexti.com/?_gl=1*1ho5932*_gcl_aw*R0NMLjE3NjMwMzc3MDAuQ2p3S0NBaUFvTmJJQmhCNUVpd0FaRmJZR0ZlOU81YnNtZmxwVDJnMnVpNTU3ZmFvcWg0b0kwTWwyUmxpSURjaFV3LUtMM1pIMjJRRmZob0NEdHdRQXZEX0J3RQ..*_gcl_au*MTkxNTA2NTQ2LjE3NjMwMzc2OTg.*_ga*MTc1NzIyOTQxOS4xNzYzMDM3NzAw*_ga_9ERJMQJGNC*czE3NjMwMzc2OTkkbzEkZzAkdDE3NjMwMzc2OTkkajYwJGwwJGgxOTA5NzE5Mzk5*_fplc*cTBNZjBIOHY5VkdJV1FFU1VQWXRZbThaZmRZQ3c5YmQ5OXZwajhhZ1olMkI1WUVnYjFnN2tzUzFTJTJCUTFvUkc3b3F0NDZ3ZFZncDZKWFExU1JoN3FLa0VxTSUyRkdCcW1KMUU1NmwyN0Y4dFZ6TjFLQUFlWFJsQ0lCTkxzMFc0cmZnJTNEJTNE#/login"
                  target="_blank" rel="noopener noreferrer"
-                 data-name="nexti" data-tags="escala ponto rh acesso">
-                <div class="top">
-                  <p class="name">NEXTI</p>
-                  <span class="tag">Acesso</span>
-                </div>
+                 data-name="nexti" data-tags="sistemas nexti escala ponto rh acesso login">
+                <div class="top"><p class="name">NEXTI</p><span class="tag">Acesso</span></div>
                 <p class="desc">Acesso ao sistema (login) para rotinas e acompanhamento.</p>
-                <div class="meta">
-                  <span>app.nexti.com</span>
-                  <span class="kbd">Abrir ↗</span>
-                </div>
+                <div class="meta"><span>app.nexti.com</span><span class="kbd">Abrir ↗</span></div>
               </a>
-
-              <a class="tile" href="https://forms.gle/eFSPdJvjjYE4Mewi6" target="_blank" rel="noopener noreferrer"
-                 data-name="inspeção e ocorrencias" data-tags="formulario inspecao ocorrencias checklist">
-                <div class="top">
-                  <p class="name">INSPEÇÃO E OCORRÊNCIAS</p>
-                  <span class="tag">Formulário</span>
-                </div>
-                <p class="desc">Registro rápido de inspeções e ocorrências operacionais.</p>
-                <div class="meta">
-                  <span>forms.gle</span>
-                  <span class="kbd">Abrir ↗</span>
-                </div>
-              </a>
-
             </div>
           </div>
+
+          <!-- ===================== FORMULÁRIOS ===================== -->
+          <div class="section" id="formularios">
+            <h3>
+              Formulários
+              <a href="#topo" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Voltar ao topo</a>
+            </h3>
+
+            <div class="grid" data-section="formularios">
+              <a class="tile" href="https://forms.gle/eFSPdJvjjYE4Mewi6" target="_blank" rel="noopener noreferrer"
+                 data-name="inspeção e ocorrências" data-tags="formulario inspecao ocorrencias checklist google forms">
+                <div class="top"><p class="name">INSPEÇÃO E OCORRÊNCIAS</p><span class="tag">Google Forms</span></div>
+                <p class="desc">Registro rápido de inspeções e ocorrências operacionais.</p>
+                <div class="meta"><span>forms.gle</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/forms/d/1c9s7rie3ZhAtYdT-rVNaU8nYM0xiUGWRK7w2nZ7KPgA/edit" target="_blank" rel="noopener noreferrer"
+                 data-name="formulário de coberturas" data-tags="formulario coberturas escala cobertura google forms">
+                <div class="top"><p class="name">FORMULÁRIO DE COBERTURAS</p><span class="tag">Google Forms</span></div>
+                <p class="desc">Registro de coberturas e solicitações relacionadas.</p>
+                <div class="meta"><span>docs.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+            </div>
+          </div>
+
+          <!-- ===================== PLANILHAS / DRIVE ===================== -->
+          <div class="section" id="planilhas-drive">
+            <h3>
+              Planilhas / Drive
+              <a href="#topo" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Voltar ao topo</a>
+            </h3>
+
+            <div class="grid" data-section="planilhas-drive">
+              <a class="tile" href="https://drive.google.com/drive/folders/12seW8B6sRdklulNeb8Ye70fbzUxTipL5?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="qls da região" data-tags="drive pasta qls regiao documentos google drive">
+                <div class="top"><p class="name">QLS DA REGIÃO</p><span class="tag">Drive</span></div>
+                <p class="desc">Pasta com documentos/arquivos da região.</p>
+                <div class="meta"><span>drive.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="retificações" data-tags="planilha google sheets retificacoes ajustes">
+                <div class="top"><p class="name">RETIFICAÇÕES</p><span class="tag">Planilha</span></div>
+                <p class="desc">Planilha de retificações e ajustes operacionais.</p>
+                <div class="meta"><span>docs.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="requisição de uniformes" data-tags="planilha google sheets uniformes requisicao epi">
+                <div class="top"><p class="name">REQUISIÇÃO DE UNIFORMES</p><span class="tag">Planilha</span></div>
+                <p class="desc">Controle e solicitação de uniformes.</p>
+                <div class="meta"><span>docs.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="planilha inspeção ocorrências" data-tags="planilha google sheets inspecao ocorrencias registros">
+                <div class="top"><p class="name">PLANILHA INSPEÇÃO OCORRÊNCIAS</p><span class="tag">Planilha</span></div>
+                <p class="desc">Base de registros de inspeções e ocorrências.</p>
+                <div class="meta"><span>docs.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="coberturas planilha" data-tags="planilha google sheets coberturas escala">
+                <div class="top"><p class="name">COBERTURAS (PLANILHA)</p><span class="tag">Planilha</span></div>
+                <p class="desc">Controle e acompanhamento das coberturas.</p>
+                <div class="meta"><span>docs.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <aside class="card panel">
+      <aside class="card">
         <div class="status">
-          <div class="row">
-            <span>Perfil</span>
-            <b>Supervisor</b>
-          </div>
-          <div class="row">
-            <span>Área</span>
-            <b>Segurança Patrimonial</b>
-          </div>
-          <div class="row">
-            <span>Uso</span>
-            <b>Links do dia a dia</b>
-          </div>
-          <div class="row">
-            <span>Observação</span>
-            <b>Padronizado e direto</b>
-          </div>
+          <div class="row"><span>Perfil</span><b>Supervisor</b></div>
+          <div class="row"><span>Área</span><b>Segurança Patrimonial</b></div>
+          <div class="row"><span>Uso</span><b>Links do dia a dia</b></div>
+          <div class="row"><span>Atalho</span><b><span class="kbd">/</span> Buscar</b></div>
         </div>
 
-        <div class="inner" style="padding-top:0;">
-          <div class="section">
-            <h3>Boas práticas (opcional)</h3>
-            <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.45;">
-              Se desejar, posso adicionar: botões por categoria, ícones, aviso de manutenção, e “modo noturno/alto contraste”.
-            </p>
-          </div>
+        <div class="quick">
+          <a class="btn" href="#sistemas">
+            <span>Sistemas</span>
+            <small>Ir para seção</small>
+          </a>
+          <a class="btn" href="#formularios">
+            <span>Formulários</span>
+            <small>Ir para seção</small>
+          </a>
+          <a class="btn" href="#planilhas-drive">
+            <span>Planilhas / Drive</span>
+            <small>Ir para seção</small>
+          </a>
         </div>
       </aside>
+
     </section>
 
     <footer>
@@ -531,9 +498,7 @@
   </main>
 
   <script>
-    // Busca rápida (filtra cartões)
     const input = document.getElementById('search');
-    const tiles = Array.from(document.querySelectorAll('#tiles .tile'));
 
     function normalize(s){
       return (s || '')
@@ -543,6 +508,7 @@
 
     function filter(){
       const q = normalize(input.value.trim());
+      const tiles = Array.from(document.querySelectorAll('.tile'));
       tiles.forEach(t => {
         const name = normalize(t.dataset.name);
         const tags = normalize(t.dataset.tags);
@@ -553,7 +519,6 @@
 
     input.addEventListener('input', filter);
 
-    // Atalho "/" para focar no campo de busca
     window.addEventListener('keydown', (e) => {
       if (e.key === '/' && document.activeElement !== input) {
         e.preventDefault();
@@ -565,6 +530,10 @@
         input.blur();
       }
     });
+
+    // primeira renderização
+    filter();
   </script>
 </body>
 </html>
+```
