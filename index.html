@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -310,7 +309,7 @@
 
   <header>
     <div class="wrap">
-      <div class="topbar">
+      <div class="topbar" id="topo">
         <div class="brand">
           <div class="badge" aria-hidden="true"></div>
           <div>
@@ -352,11 +351,7 @@
 
           <!-- ===================== SISTEMAS ===================== -->
           <div class="section" id="sistemas">
-            <h3>
-              Sistemas
-              <a href="#topo" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Voltar ao topo</a>
-            </h3>
-
+            <h3>Sistemas <a href="#topo">Voltar ao topo</a></h3>
             <div class="grid" data-section="sistemas">
               <a class="tile" href="https://suprimentos.orbenk.com.br/index.php?redirect=%2Ffront%2Fticket.php&error=3" target="_blank" rel="noopener noreferrer"
                  data-name="glpi" data-tags="sistemas chamados suporte tickets glpi orbenk">
@@ -391,10 +386,7 @@
 
           <!-- ===================== FORMULÁRIOS ===================== -->
           <div class="section" id="formularios">
-            <h3>
-              Formulários
-              <a href="#topo" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Voltar ao topo</a>
-            </h3>
+            <h3>Formulários <a href="#topo">Voltar ao topo</a></h3>
 
             <div class="grid" data-section="formularios">
               <a class="tile" href="https://forms.gle/eFSPdJvjjYE4Mewi6" target="_blank" rel="noopener noreferrer"
@@ -415,10 +407,7 @@
 
           <!-- ===================== PLANILHAS / DRIVE ===================== -->
           <div class="section" id="planilhas-drive">
-            <h3>
-              Planilhas / Drive
-              <a href="#topo" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Voltar ao topo</a>
-            </h3>
+            <h3>Planilhas / Drive <a href="#topo">Voltar ao topo</a></h3>
 
             <div class="grid" data-section="planilhas-drive">
               <a class="tile" href="https://drive.google.com/drive/folders/12seW8B6sRdklulNeb8Ye70fbzUxTipL5?usp=sharing" target="_blank" rel="noopener noreferrer"
@@ -427,6 +416,29 @@
                 <p class="desc">Pasta com documentos/arquivos da região.</p>
                 <div class="meta"><span>drive.google.com</span><span class="kbd">Abrir ↗</span></div>
               </a>
+
+              <!-- NOVOS BOTÕES (ADICIONADOS AGORA) -->
+              <a class="tile" href="https://drive.google.com/drive/folders/1YQ3sATmbY7kkhYNVKH9HKLXywUm6ADvw?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="dds treinamentos" data-tags="drive pasta dds treinamentos seguranca treinamento">
+                <div class="top"><p class="name">DDS / TREINAMENTOS</p><span class="tag">Drive</span></div>
+                <p class="desc">Materiais de DDS e treinamentos.</p>
+                <div class="meta"><span>drive.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="documentos rh" data-tags="drive pasta rh documentos recursos humanos">
+                <div class="top"><p class="name">DOCUMENTOS RH</p><span class="tag">Drive</span></div>
+                <p class="desc">Pasta com documentos e rotinas de RH.</p>
+                <div class="meta"><span>drive.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="controle de ferias" data-tags="drive pasta controle ferias rh">
+                <div class="top"><p class="name">CONTROLE DE FÉRIAS</p><span class="tag">Drive</span></div>
+                <p class="desc">Pasta para controle e acompanhamento de férias.</p>
+                <div class="meta"><span>drive.google.com</span><span class="kbd">Abrir ↗</span></div>
+              </a>
+              <!-- FIM NOVOS BOTÕES -->
 
               <a class="tile" href="https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
                  data-name="retificações" data-tags="planilha google sheets retificacoes ajustes">
@@ -470,18 +482,9 @@
         </div>
 
         <div class="quick">
-          <a class="btn" href="#sistemas">
-            <span>Sistemas</span>
-            <small>Ir para seção</small>
-          </a>
-          <a class="btn" href="#formularios">
-            <span>Formulários</span>
-            <small>Ir para seção</small>
-          </a>
-          <a class="btn" href="#planilhas-drive">
-            <span>Planilhas / Drive</span>
-            <small>Ir para seção</small>
-          </a>
+          <a class="btn" href="#sistemas"><span>Sistemas</span><small>Ir para seção</small></a>
+          <a class="btn" href="#formularios"><span>Formulários</span><small>Ir para seção</small></a>
+          <a class="btn" href="#planilhas-drive"><span>Planilhas / Drive</span><small>Ir para seção</small></a>
         </div>
       </aside>
 
@@ -531,9 +534,7 @@
       }
     });
 
-    // primeira renderização
     filter();
   </script>
 </body>
 </html>
-```
