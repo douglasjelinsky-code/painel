@@ -1,815 +1,222 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#02050a" />
-  <title>Painel do Supervisor • Segurança Patrimonial</title>
+@import "tailwindcss";
+@import "tw-animate-css";
 
-  <style>
-    :root{
-      /* Palette “Mission / Tactical HUD” */
-      --bg:#02050a;
-      --bg2:#050c12;
-      --card: rgba(255,255,255,.055);
-      --stroke: rgba(0,255,198,.22);
-      --stroke2: rgba(255,0,88,.18);
-      --text: rgba(232,255,248,.92);
-      --muted: rgba(232,255,248,.64);
+@custom-variant dark (&:is(.dark *));
 
-      --neon: #00ffc6;     /* cyan */
-      --neon2:#ff0058;     /* magenta/red */
-      --neon3:#9b5cff;     /* purple */
-      --ok:#2dff7a;
-      --warn:#ffd23d;
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
 
-      --shadow: 0 22px 60px rgba(0,0,0,.65);
-      --radius: 18px;
-      --radius2: 14px;
-      --max: 1120px;
+:root {
+  /* Futuristic Neon Palette */
+  --primary: #00ffc6;
+  --primary-foreground: #020f0d;
+  --sidebar-primary: #00d9b0;
+  --sidebar-primary-foreground: #020f0d;
+  --chart-1: #00ffc6;
+  --chart-2: #ff0058;
+  --chart-3: #9b5cff;
+  --chart-4: #ffd23d;
+  --chart-5: #2dff7a;
+  
+  --radius: 0.75rem;
+  
+  /* Dark theme - Futuristic */
+  --background: oklch(0.08 0.01 280);
+  --foreground: oklch(0.95 0.01 280);
+  --card: oklch(0.12 0.01 280);
+  --card-foreground: oklch(0.95 0.01 280);
+  --popover: oklch(0.12 0.01 280);
+  --popover-foreground: oklch(0.95 0.01 280);
+  --secondary: oklch(0.15 0.02 280);
+  --secondary-foreground: oklch(0.85 0.02 280);
+  --muted: oklch(0.45 0.01 280);
+  --muted-foreground: oklch(0.75 0.02 280);
+  --accent: #00ffc6;
+  --accent-foreground: oklch(0.08 0.01 280);
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.2 0.01 280);
+  --input: oklch(0.15 0.01 280);
+  --ring: #00ffc6;
+  --sidebar: oklch(0.12 0.01 280);
+  --sidebar-foreground: oklch(0.95 0.01 280);
+  --sidebar-accent: #00ffc6;
+  --sidebar-accent-foreground: oklch(0.08 0.01 280);
+  --sidebar-border: oklch(0.2 0.01 280);
+  --sidebar-ring: #00ffc6;
+}
 
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+.dark {
+  --primary: #00ffc6;
+  --primary-foreground: #020f0d;
+  --sidebar-primary: #00d9b0;
+  --sidebar-primary-foreground: #020f0d;
+  --background: oklch(0.08 0.01 280);
+  --foreground: oklch(0.95 0.01 280);
+  --card: oklch(0.12 0.01 280);
+  --card-foreground: oklch(0.95 0.01 280);
+  --popover: oklch(0.12 0.01 280);
+  --popover-foreground: oklch(0.95 0.01 280);
+  --secondary: oklch(0.15 0.02 280);
+  --secondary-foreground: oklch(0.85 0.02 280);
+  --muted: oklch(0.45 0.01 280);
+  --muted-foreground: oklch(0.75 0.02 280);
+  --accent: #00ffc6;
+  --accent-foreground: oklch(0.08 0.01 280);
+  --destructive: oklch(0.62 0.22 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.2 0.01 280);
+  --input: oklch(0.15 0.01 280);
+  --ring: #00ffc6;
+  --chart-1: #00ffc6;
+  --chart-2: #ff0058;
+  --chart-3: #9b5cff;
+  --chart-4: #ffd23d;
+  --chart-5: #2dff7a;
+  --sidebar: oklch(0.12 0.01 280);
+  --sidebar-foreground: oklch(0.95 0.01 280);
+  --sidebar-accent: #00ffc6;
+  --sidebar-accent-foreground: oklch(0.08 0.01 280);
+  --sidebar-border: oklch(0.2 0.01 280);
+  --sidebar-ring: #00ffc6;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
+  }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: var(--font);
-      color: var(--text);
-      background:
-        radial-gradient(900px 600px at 15% 10%, rgba(0,255,198,.10), transparent 60%),
-        radial-gradient(800px 550px at 90% 20%, rgba(255,0,88,.10), transparent 60%),
-        radial-gradient(650px 550px at 45% 95%, rgba(155,92,255,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 55%, var(--bg) 100%);
-      overflow-x:hidden;
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
     }
+  }
 
-    /* ======= HUD background layers ======= */
-    .hud-grid{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.35;
-      background-image:
-        linear-gradient(to right, rgba(0,255,198,.08) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0,255,198,.08) 1px, transparent 1px);
-      background-size: 72px 72px;
-      mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 72%);
-    }
+  /* Futuristic utility classes */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0, 255, 198, 0.3);
+  }
 
-    .scanlines{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,.045) 0px,
-        rgba(255,255,255,.045) 1px,
-        transparent 2px,
-        transparent 6px
-      );
-      opacity:.10;
-      mix-blend-mode: overlay;
-    }
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(155, 92, 255, 0.3);
+  }
 
-    .vignette{
-      position:fixed;
-      inset:-10%;
-      pointer-events:none;
-      background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.65) 85%);
-    }
+  .glow-magenta {
+    box-shadow: 0 0 20px rgba(255, 0, 88, 0.3);
+  }
 
-    /* ======= Top header ======= */
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background: linear-gradient(180deg, rgba(2,5,10,.82), rgba(2,5,10,.35));
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,255,198,.18);
-    }
+  .neon-border {
+    @apply border border-cyan-500/30;
+  }
 
-    .wrap{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 16px 16px;
-    }
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+}
 
-    .topbar{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-    .brand{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      min-width: 240px;
-    }
+::-webkit-scrollbar-track {
+  background: oklch(0.12 0.01 280);
+}
 
-    .badge{
-      width:44px; height:44px;
-      border-radius: 14px;
-      position:relative;
-      background:
-        radial-gradient(16px 16px at 30% 30%, rgba(255,255,255,.25), transparent 60%),
-        linear-gradient(135deg, rgba(0,255,198,.95), rgba(255,0,88,.55));
-      border: 1px solid rgba(0,255,198,.25);
-      box-shadow: 0 14px 34px rgba(0,255,198,.12);
-      overflow:hidden;
-    }
-    .badge:after{
-      content:"";
-      position:absolute;
-      inset:-35%;
-      background: conic-gradient(from 200deg, transparent, rgba(255,255,255,.25), transparent);
-      animation: spin 6s linear infinite;
-      opacity:.9;
-    }
-    @keyframes spin{ to{ transform: rotate(360deg); } }
+::-webkit-scrollbar-thumb {
+  background: oklch(0.25 0.01 280);
+  border-radius: 4px;
+}
 
-    .brand h1{
-      margin:0;
-      font-size: 14px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-family: var(--mono);
-    }
-    .brand p{
-      margin:2px 0 0 0;
-      color: var(--muted);
-      font-size: 12.5px;
-    }
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.35 0.01 280);
+}
 
-    .right{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      flex: 1;
-    }
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 255, 198, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 255, 198, 0.5);
+  }
+}
 
-    .status{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,255,198,.22);
-      background: rgba(0,255,198,.06);
-      color: rgba(232,255,248,.85);
-      font-size: 12.5px;
-      font-family: var(--mono);
-      white-space: nowrap;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:50%;
-      background: var(--ok);
-      box-shadow: 0 0 0 5px rgba(45,255,122,.10);
-    }
-
-    .search{
-      position:relative;
-      flex: 1 1 320px;
-      max-width: 560px;
-      min-width: min(420px, 92vw);
-    }
-    .search input{
-      width:100%;
-      padding: 12px 14px 12px 42px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(0,255,198,.18);
-      outline:none;
-      color: var(--text);
-      font-size: 14px;
-    }
-    .search input::placeholder{ color: rgba(232,255,248,.46); }
-    .search .icon{
-      position:absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(0,255,198,.85);
-      font-family: var(--mono);
-      font-size: 14px;
-      opacity:.9;
-    }
-
-    main{ padding: 22px 0 20px 0; }
-
-    /* ======= Layout ======= */
-    .layout{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 16px;
-      align-items:start;
-    }
-    @media (max-width: 980px){
-      .layout{ grid-template-columns: 1fr; }
-    }
-
-    .card{
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid rgba(0,255,198,.18);
-      box-shadow: var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-
-    /* corners / hud decorations */
-    .card:before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(90deg, rgba(0,255,198,.25), transparent 28%) top left/220px 2px no-repeat,
-        linear-gradient(180deg, rgba(0,255,198,.25), transparent 28%) top left/2px 220px no-repeat,
-        linear-gradient(270deg, rgba(255,0,88,.22), transparent 28%) bottom right/220px 2px no-repeat,
-        linear-gradient(0deg, rgba(255,0,88,.22), transparent 28%) bottom right/2px 220px no-repeat;
-      opacity:.9;
-    }
-
-    .inner{ padding: 16px; }
-
-    .titleRow{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .heroTitle{
-      margin:0;
-      font-size: 18px;
-      letter-spacing:.4px;
-    }
-    .subtitle{
-      margin:8px 0 0 0;
-      color: var(--muted);
-      font-size: 13.5px;
-      line-height: 1.45;
-      max-width: 80ch;
-    }
-
-    .chips{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top: 10px;
-    }
-    .chip{
-      font-family: var(--mono);
-      font-size: 11px;
-      color: rgba(232,255,248,.78);
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-    }
-    .chip strong{ color:#fff; font-weight:700; }
-    .kbd{
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,255,198,.20);
-      background: rgba(0,255,198,.06);
-      color: rgba(232,255,248,.90);
-      white-space:nowrap;
-    }
-
-    /* ======= Sections ======= */
-    .section{ margin-top: 16px; }
-    .sectionHeader{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin: 0 0 10px 0;
-    }
-    .sectionHeader h3{
-      margin:0;
-      font-size: 12px;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      font-family: var(--mono);
-      color: rgba(232,255,248,.78);
-    }
-    .jump{
-      text-decoration:none;
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,255,198,.22);
-      background: rgba(0,255,198,.06);
-      color: rgba(0,255,198,.92);
-    }
-    .jump:hover{ border-color: rgba(0,255,198,.40); }
-
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 560px){
-      .grid{ grid-template-columns: 1fr; }
-    }
-
-    /* ======= Tiles (mobile-optimized) ======= */
-    a.tile{
-      text-decoration:none;
-      color: inherit;
-      display:block;
-      padding: 14px;
-      border-radius: var(--radius2);
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.10);
-      position:relative;
-      overflow:hidden;
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
-      min-height: 118px;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-    a.tile:active{ transform: scale(.99); }
-    a.tile:hover{
-      border-color: rgba(0,255,198,.35);
-      background: rgba(0,255,198,.06);
-      transform: translateY(-1px);
-    }
-    .tile:after{
-      content:"";
-      position:absolute;
-      inset:-30%;
-      background: linear-gradient(120deg, transparent 45%, rgba(0,255,198,.10) 55%, transparent 70%);
-      transform: rotate(10deg);
-      opacity:.65;
-      pointer-events:none;
-    }
-    .tileTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .name{
-      margin:0;
-      font-weight: 800;
-      letter-spacing:.2px;
-      font-size: 15px;
-    }
-    .tag{
-      font-family: var(--mono);
-      font-size: 10.5px;
-      padding: 6px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.22);
-      color: rgba(232,255,248,.80);
-      white-space:nowrap;
-    }
-    .desc{
-      margin: 10px 0 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-    .meta{
-      margin-top: 10px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      color: rgba(232,255,248,.55);
-      font-size: 12px;
-      font-family: var(--mono);
-    }
-    .meta .open{
-      color: rgba(0,255,198,.95);
-      border: 1px solid rgba(0,255,198,.22);
-      background: rgba(0,255,198,.06);
-      padding: 4px 8px;
-      border-radius: 10px;
-      white-space:nowrap;
-    }
-
-    /* ======= Sidebar ======= */
-    .side .block{
-      padding: 14px;
-      border-top: 1px solid rgba(0,255,198,.14);
-    }
-    .side .block:first-child{ border-top: 0; }
-    .kv{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.08);
-      margin-bottom: 10px;
-    }
-    .kv span{ color: var(--muted); font-size: 12.5px; }
-    .kv b{ font-family: var(--mono); font-size: 12.5px; }
-
-    .navBtns{
-      display:grid;
-      gap:10px;
-      margin-top: 8px;
-    }
-    .navBtn{
-      text-decoration:none;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(0,255,198,.18);
-      background: rgba(0,255,198,.05);
-      color: rgba(232,255,248,.90);
-      font-family: var(--mono);
-      font-size: 12.5px;
-    }
-    .navBtn:hover{ border-color: rgba(0,255,198,.35); background: rgba(0,255,198,.08); }
-    .navBtn small{ color: rgba(232,255,248,.60); font-size: 11.5px; }
-
-    /* ======= Footer ======= */
-    footer{
-      margin-top: 16px;
-      border-top: 1px solid rgba(0,255,198,.14);
-      color: rgba(232,255,248,.55);
-      font-size: 12px;
-      padding: 14px 0 20px 0;
-      font-family: var(--mono);
-    }
-
-    /* ======= Mobile refinements ======= */
-    @media (max-width: 560px){
-      .wrap{ padding: 14px 12px; }
-      .brand p{ display:none; }
-      .heroTitle{ font-size: 17px; }
-      .search{ min-width: 100%; }
-      a.tile{ min-height: 112px; }
-      .name{ font-size: 15px; }
-      .desc{ font-size: 13px; }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .badge:after{ animation:none; }
-      a.tile:hover{ transform:none; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="hud-grid" aria-hidden="true"></div>
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-
-  <header>
-    <div class="wrap">
-      <div class="topbar" id="topo">
-        <div class="brand">
-          <div class="badge" aria-hidden="true"></div>
-          <div>
-            <h1>PAINEL • SUPERVISOR</h1>
-            <p>Segurança Patrimonial — interface tática (HUD)</p>
-          </div>
-        </div>
-
-        <div class="right">
-          <div class="status" title="Status do painel">
-            <span class="dot"></span>
-            ONLINE / OPERACIONAL
-          </div>
-
-          <div class="search" role="search">
-            <span class="icon">SYS&gt;</span>
-            <input id="search" type="search" placeholder="Buscar (ex.: GLPI, Rotas, Coberturas, RH...)" autocomplete="off" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="layout">
-      <div class="card">
-        <div class="inner">
-          <div class="titleRow">
-            <div>
-              <h2 class="heroTitle">Central de Acessos — Segurança Patrimonial</h2>
-              <p class="subtitle">
-                Estilo “Missão Impossível”: visual tático/HUD, atalhos rápidos e pesquisa instantânea.
-                Em celular, os botões viram “cards” grandes para toque.
-              </p>
-              <div class="chips">
-                <div class="chip"><strong>Dica:</strong> pressione <span class="kbd">/</span> para buscar</div>
-                <div class="chip"><strong>ESC:</strong> limpa</div>
-                <div class="chip"><strong>Padrão:</strong> nova aba</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ===================== SISTEMAS (A-Z) ===================== -->
-          <div class="section" id="sistemas">
-            <div class="sectionHeader">
-              <h3>SISTEMAS</h3>
-              <a class="jump" href="#topo">Topo</a>
-            </div>
-
-            <div class="grid">
-              <!-- FUSION -->
-              <a class="tile" href="https://fusion.orbenk.com.br/portal" target="_blank" rel="noopener noreferrer"
-                 data-name="fusion" data-tags="sistemas portal processos workflow fusion orbenk">
-                <div class="tileTop">
-                  <p class="name">FUSION</p>
-                  <span class="tag">PORTAL</span>
-                </div>
-                <p class="desc">Portal de processos/fluxos (workflows) e solicitações internas.</p>
-                <div class="meta"><span>fusion.orbenk.com.br</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- GLPI -->
-              <a class="tile" href="https://suprimentos.orbenk.com.br/index.php?redirect=%2Ffront%2Fticket.php&error=3" target="_blank" rel="noopener noreferrer"
-                 data-name="glpi" data-tags="sistemas chamados suporte tickets glpi orbenk">
-                <div class="tileTop">
-                  <p class="name">GLPI</p>
-                  <span class="tag">CHAMADOS</span>
-                </div>
-                <p class="desc">Abertura e acompanhamento de tickets, solicitações e suporte.</p>
-                <div class="meta"><span>suprimentos.orbenk.com.br</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- NEXTI -->
-              <a class="tile" href="https://app.nexti.com/?_gl=1*1ho5932*_gcl_aw*R0NMLjE3NjMwMzc3MDAuQ2p3S0NBaUFvTmJJQmhCNUVpd0FaRmJZR0ZlOU81YnNtZmxwVDJnMnVpNTU3ZmFvcWg0b0kwTWwyUmxpSURjaFV3LUtMM1pIMjJRRmZob0NEdHdRQXZEX0J3RQ..*_gcl_au*MTkxNTA2NTQ2LjE3NjMwMzc2OTg.*_ga*MTc1NzIyOTQxOS4xNzYzMDM3NzAw*_ga_9ERJMQJGNC*czE3NjMwMzc2OTkkbzEkZzAkdDE3NjMwMzc2OTkkajYwJGwwJGgxOTA5NzE5Mzk5*_fplc*cTBNZjBIOHY5VkdJV1FFU1VQWXRZbThaZmRZQ3c5YmQ5OXZwajhhZ1olMkI1WUVnYjFnN2tzUzFTJTJCUTFvUkc3b3F0NDZ3ZFZncDZKWFExU1JoN3FLa0VxTSUyRkdCcW1KMUU1NmwyN0Y4dFZ6TjFLQUFlWFJsQ0lCTkxzMFc0cmZnJTNEJTNE#/login"
-                 target="_blank" rel="noopener noreferrer"
-                 data-name="nexti" data-tags="sistemas nexti escala ponto rh acesso login">
-                <div class="tileTop">
-                  <p class="name">NEXTI</p>
-                  <span class="tag">ACESSO</span>
-                </div>
-                <p class="desc">Acesso ao sistema (login) para rotinas e acompanhamento.</p>
-                <div class="meta"><span>app.nexti.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- SGO -->
-              <a class="tile" href="https://sgo.orbenk.com.br/" target="_blank" rel="noopener noreferrer"
-                 data-name="sgo" data-tags="sistemas gestao operacional sgo orbenk">
-                <div class="tileTop">
-                  <p class="name">SGO</p>
-                  <span class="tag">OPERACIONAL</span>
-                </div>
-                <p class="desc">Gestão operacional e rotinas de acompanhamento.</p>
-                <div class="meta"><span>sgo.orbenk.com.br</span><span class="open">ABRIR ↗</span></div>
-              </a>
-            </div>
-          </div>
-
-          <!-- ===================== FORMULÁRIOS (A-Z) ===================== -->
-          <div class="section" id="formularios">
-            <div class="sectionHeader">
-              <h3>FORMULÁRIOS</h3>
-              <a class="jump" href="#topo">Topo</a>
-            </div>
-
-            <div class="grid">
-              <!-- FORMULÁRIO DE COBERTURAS -->
-              <a class="tile" href="https://docs.google.com/forms/d/1c9s7rie3ZhAtYdT-rVNaU8nYM0xiUGWRK7w2nZ7KPgA/edit" target="_blank" rel="noopener noreferrer"
-                 data-name="formulário de coberturas" data-tags="formulario coberturas escala cobertura google forms">
-                <div class="tileTop">
-                  <p class="name">FORMULÁRIO DE COBERTURAS</p>
-                  <span class="tag">FORMS</span>
-                </div>
-                <p class="desc">Registro de coberturas e solicitações relacionadas.</p>
-                <div class="meta"><span>docs.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- INSPEÇÃO E OCORRÊNCIAS -->
-              <a class="tile" href="https://forms.gle/eFSPdJvjjYE4Mewi6" target="_blank" rel="noopener noreferrer"
-                 data-name="inspeção e ocorrências" data-tags="formulario inspecao ocorrencias checklist google forms">
-                <div class="tileTop">
-                  <p class="name">INSPEÇÃO E OCORRÊNCIAS</p>
-                  <span class="tag">FORMS</span>
-                </div>
-                <p class="desc">Registro rápido de inspeções e ocorrências operacionais.</p>
-                <div class="meta"><span>forms.gle</span><span class="open">ABRIR ↗</span></div>
-              </a>
-            </div>
-          </div>
-
-          <!-- ===================== PLANILHAS / DRIVE (A-Z) ===================== -->
-          <div class="section" id="planilhas-drive">
-            <div class="sectionHeader">
-              <h3>PLANILHAS / DRIVE</h3>
-              <a class="jump" href="#topo">Topo</a>
-            </div>
-
-            <div class="grid">
-              <!-- COBERTURAS (PLANILHA) -->
-              <a class="tile" href="https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="coberturas (planilha)" data-tags="planilha google sheets coberturas escala">
-                <div class="tileTop">
-                  <p class="name">COBERTURAS (PLANILHA)</p>
-                  <span class="tag">SHEETS</span>
-                </div>
-                <p class="desc">Controle e acompanhamento das coberturas.</p>
-                <div class="meta"><span>docs.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- CONTROLE DE FÉRIAS -->
-              <a class="tile" href="https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="controle de férias" data-tags="drive pasta controle ferias rh">
-                <div class="tileTop">
-                  <p class="name">CONTROLE DE FÉRIAS</p>
-                  <span class="tag">DRIVE</span>
-                </div>
-                <p class="desc">Pasta para controle e acompanhamento de férias.</p>
-                <div class="meta"><span>drive.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- DDS / TREINAMENTOS -->
-              <a class="tile" href="https://drive.google.com/drive/folders/1YQ3sATmbY7kkhYNVKH9HKLXywUm6ADvw?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="dds / treinamentos" data-tags="drive pasta dds treinamentos seguranca treinamento">
-                <div class="tileTop">
-                  <p class="name">DDS / TREINAMENTOS</p>
-                  <span class="tag">DRIVE</span>
-                </div>
-                <p class="desc">Materiais de DDS e treinamentos.</p>
-                <div class="meta"><span>drive.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- DOCUMENTOS RH -->
-              <a class="tile" href="https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="documentos rh" data-tags="drive pasta rh documentos recursos humanos">
-                <div class="tileTop">
-                  <p class="name">DOCUMENTOS RH</p>
-                  <span class="tag">DRIVE</span>
-                </div>
-                <p class="desc">Pasta com documentos e rotinas de RH.</p>
-                <div class="meta"><span>drive.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- PLANILHA INSPEÇÃO OCORRÊNCIAS -->
-              <a class="tile" href="https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="planilha inspeção ocorrências" data-tags="planilha google sheets inspecao ocorrencias registros">
-                <div class="tileTop">
-                  <p class="name">PLANILHA INSPEÇÃO OCORRÊNCIAS</p>
-                  <span class="tag">SHEETS</span>
-                </div>
-                <p class="desc">Base de registros de inspeções e ocorrências.</p>
-                <div class="meta"><span>docs.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- QLS DA REGIÃO -->
-              <a class="tile" href="https://drive.google.com/drive/folders/12seW8B6sRdklulNeb8Ye70fbzUxTipL5?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="qls da região" data-tags="drive pasta qls regiao documentos google drive">
-                <div class="tileTop">
-                  <p class="name">QLS DA REGIÃO</p>
-                  <span class="tag">DRIVE</span>
-                </div>
-                <p class="desc">Pasta com documentos/arquivos da região.</p>
-                <div class="meta"><span>drive.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- RECICLAGENS -->
-              <a class="tile" href="https://drive.google.com/drive/folders/1SFKht_maxNC5cgKdtusv2bPKI0PMCgRf?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="reciclagens" data-tags="drive pasta reciclagens treinamentos atualizacao">
-                <div class="tileTop">
-                  <p class="name">RECICLAGENS</p>
-                  <span class="tag">DRIVE</span>
-                </div>
-                <p class="desc">Pasta com materiais de reciclagem e atualização.</p>
-                <div class="meta"><span>drive.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- REQUISIÇÃO DE UNIFORMES -->
-              <a class="tile" href="https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="requisição de uniformes" data-tags="planilha google sheets uniformes requisicao epi">
-                <div class="tileTop">
-                  <p class="name">REQUISIÇÃO DE UNIFORMES</p>
-                  <span class="tag">SHEETS</span>
-                </div>
-                <p class="desc">Controle e solicitação de uniformes.</p>
-                <div class="meta"><span>docs.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- RETIFICAÇÕES -->
-              <a class="tile" href="https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="retificações" data-tags="planilha google sheets retificacoes ajustes">
-                <div class="tileTop">
-                  <p class="name">RETIFICAÇÕES</p>
-                  <span class="tag">SHEETS</span>
-                </div>
-                <p class="desc">Planilha de retificações e ajustes operacionais.</p>
-                <div class="meta"><span>docs.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-
-              <!-- ROTAS -->
-              <a class="tile" href="https://drive.google.com/drive/folders/1PreAkrW2j00pTaKS6osz-xDDSil1nOyd?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="rotas" data-tags="drive pasta rotas rondas trajeto roteiro">
-                <div class="tileTop">
-                  <p class="name">ROTAS</p>
-                  <span class="tag">DRIVE</span>
-                </div>
-                <p class="desc">Pasta com rotas, roteiros e materiais de apoio.</p>
-                <div class="meta"><span>drive.google.com</span><span class="open">ABRIR ↗</span></div>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Sidebar -->
-      <aside class="card side">
-        <div class="inner">
-          <div class="kv"><span>PERFIL</span><b>SUPERVISOR</b></div>
-          <div class="kv"><span>ÁREA</span><b>SEGURANÇA PATRIMONIAL</b></div>
-          <div class="kv"><span>MODO</span><b>HUD / TÁTICO</b></div>
-          <div class="kv"><span>ATALHO</span><b><span class="kbd">/</span> BUSCA</b></div>
-        </div>
-
-        <div class="block">
-          <div class="navBtns">
-            <a class="navBtn" href="#sistemas"><span>SISTEMAS</span><small>ir para seção</small></a>
-            <a class="navBtn" href="#formularios"><span>FORMULÁRIOS</span><small>ir para seção</small></a>
-            <a class="navBtn" href="#planilhas-drive"><span>PLANILHAS / DRIVE</span><small>ir para seção</small></a>
-          </div>
-        </div>
-
-        <div class="block">
-          <div class="kv" style="border-color: rgba(255,0,88,.20);">
-            <span>AVISO</span>
-            <b style="color: rgba(255,0,88,.95);">ACESSO RESTRITO</b>
-          </div>
-          <p style="margin:0;color:var(--muted);font-size:12.5px;line-height:1.45;">
-            Use somente links oficiais. Em celular, toque no card para abrir.
-          </p>
-        </div>
-      </aside>
-    </section>
-
-    <footer>
-      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-        <span>© Painel Operacional • Segurança Patrimonial</span>
-        <span>Supervisor Douglas Jelinsky</span>
-      </div>
-    </footer>
-  </main>
-
-  <script>
-    const input = document.getElementById('search');
-
-    function normalize(s){
-      return (s || '')
-        .toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    }
-
-    function filter(){
-      const q = normalize(input.value.trim());
-      const tiles = Array.from(document.querySelectorAll('.tile'));
-      tiles.forEach(t => {
-        const name = normalize(t.dataset.name);
-        const tags = normalize(t.dataset.tags);
-        const ok = !q || name.includes(q) || tags.includes(q);
-        t.style.display = ok ? 'block' : 'none';
-      });
-    }
-
-    input.addEventListener('input', filter);
-
-    // Atalho "/" para focar no campo de busca (desktop)
-    window.addEventListener('keydown', (e) => {
-      if (e.key === '/' && document.activeElement !== input) {
-        e.preventDefault();
-        input.focus();
-      }
-      if (e.key === 'Escape') {
-        input.value = '';
-        filter();
-        input.blur();
-      }
-    });
-
-    filter();
-  </script>
-</body>
-</html>
+.animate-pulse-glow {
+  animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
