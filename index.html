@@ -1,28 +1,1091 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#020f0d" />
+  <meta name="description" content="Painel do Supervisor de Segurança Patrimonial - Acesso centralizado a sistemas, formulários e documentos operacionais." />
+  <title>Painel do Supervisor • Segurança Patrimonial</title>
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <meta name="theme-color" content="#020f0d" />
-    <meta name="description" content="Painel do Supervisor de Segurança Patrimonial - Acesso centralizado a sistemas, formulários e documentos operacionais." />
-    <title>Painel do Supervisor • Segurança Patrimonial</title>
-    
-    <!-- Google Fonts - Optimized for futuristic design -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
-  </body>
+  <style>
+    /* ========== RESET & BASE ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #e8fff8;
+      background: linear-gradient(135deg, #020f0d 0%, #0a1a18 50%, #020f0d 100%);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ========== BACKGROUND EFFECTS ========== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(900px 600px at 15% 10%, rgba(0, 255, 198, 0.08), transparent 60%),
+        radial-gradient(800px 550px at 90% 20%, rgba(155, 92, 255, 0.08), transparent 60%),
+        radial-gradient(650px 550px at 45% 95%, rgba(255, 0, 88, 0.06), transparent 60%);
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0, 255, 198, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 198, 0.03) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    /* ========== LAYOUT WRAPPER ========== */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(180deg, rgba(2, 15, 13, 0.85), rgba(2, 15, 13, 0.4));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 255, 198, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      min-width: 240px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(0, 255, 198, 0.9), rgba(155, 92, 255, 0.5));
+      border: 1px solid rgba(0, 255, 198, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 8px 20px rgba(0, 255, 198, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-icon::after {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: conic-gradient(from 200deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .brand h1 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      font-family: 'Space Mono', monospace;
+      color: #fff;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: rgba(232, 255, 248, 0.6);
+      margin-top: 2px;
+    }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(45, 255, 122, 0.3);
+      background: rgba(45, 255, 122, 0.08);
+      font-size: 12px;
+      font-family: 'Space Mono', monospace;
+      color: rgba(45, 255, 122, 0.9);
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2dff7a;
+      box-shadow: 0 0 10px rgba(45, 255, 122, 0.5);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 500px;
+      min-width: 250px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 14px 10px 40px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(0, 255, 198, 0.2);
+      color: #e8fff8;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input::placeholder {
+      color: rgba(232, 255, 248, 0.4);
+    }
+
+    .search-box input:focus {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(0, 255, 198, 0.5);
+      box-shadow: 0 0 20px rgba(0, 255, 198, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(0, 255, 198, 0.6);
+      font-size: 16px;
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    main {
+      flex: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 2rem 1.5rem;
+    }
+
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .content-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========== WELCOME SECTION ========== */
+    .welcome-section {
+      background: linear-gradient(135deg, rgba(0, 255, 198, 0.08), rgba(155, 92, 255, 0.05));
+      border: 1px solid rgba(0, 255, 198, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .welcome-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(0, 255, 198, 0.1);
+      border: 1px solid rgba(0, 255, 198, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .welcome-content h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .welcome-content p {
+      font-size: 14px;
+      color: rgba(232, 255, 248, 0.7);
+      line-height: 1.6;
+    }
+
+    /* ========== SECTIONS ========== */
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      font-family: 'Space Mono', monospace;
+      color: #00ffc6;
+      white-space: nowrap;
+    }
+
+    .section-divider {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0, 255, 198, 0.4), transparent);
+    }
+
+    /* ========== TILES GRID ========== */
+    .tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .tiles-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tiles-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========== TILE CARD ========== */
+    .tile {
+      display: block;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 45%, rgba(0, 255, 198, 0.08) 55%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .tile:hover::before {
+      transform: translateX(100%);
+    }
+
+    .tile:hover {
+      border-color: rgba(0, 255, 198, 0.4);
+      background: linear-gradient(135deg, rgba(0, 255, 198, 0.1), rgba(155, 92, 255, 0.08));
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 255, 198, 0.1);
+    }
+
+    .tile-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tile-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .tile-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tag-sistema {
+      background: linear-gradient(135deg, rgba(0, 255, 198, 0.2), rgba(0, 255, 198, 0.1));
+      border: 1px solid rgba(0, 255, 198, 0.4);
+      color: #00ffc6;
+    }
+
+    .tag-form {
+      background: linear-gradient(135deg, rgba(155, 92, 255, 0.2), rgba(155, 92, 255, 0.1));
+      border: 1px solid rgba(155, 92, 255, 0.4);
+      color: #c9a3ff;
+    }
+
+    .tag-sheets {
+      background: linear-gradient(135deg, rgba(45, 255, 122, 0.2), rgba(45, 255, 122, 0.1));
+      border: 1px solid rgba(45, 255, 122, 0.4);
+      color: #2dff7a;
+    }
+
+    .tag-drive {
+      background: linear-gradient(135deg, rgba(255, 210, 61, 0.2), rgba(255, 210, 61, 0.1));
+      border: 1px solid rgba(255, 210, 61, 0.4);
+      color: #ffd23d;
+    }
+
+    .tile-description {
+      font-size: 13px;
+      color: rgba(232, 255, 248, 0.65);
+      margin-bottom: 0.75rem;
+      flex: 1;
+      line-height: 1.5;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tile-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tile-meta {
+      color: rgba(232, 255, 248, 0.5);
+    }
+
+    .tile-open {
+      color: rgba(0, 255, 198, 0.6);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .tile:hover .tile-open {
+      color: #00ffc6;
+    }
+
+    /* ========== SIDEBAR ========== */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sidebar-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .sidebar-card.profile {
+      border-color: rgba(155, 92, 255, 0.2);
+      background: linear-gradient(135deg, rgba(155, 92, 255, 0.08), rgba(155, 92, 255, 0.03));
+    }
+
+    .sidebar-card.links {
+      border-color: rgba(45, 255, 122, 0.2);
+      background: linear-gradient(135deg, rgba(45, 255, 122, 0.08), rgba(45, 255, 122, 0.03));
+    }
+
+    .sidebar-card.alert {
+      border-color: rgba(255, 0, 88, 0.2);
+      background: linear-gradient(135deg, rgba(255, 0, 88, 0.08), rgba(255, 0, 88, 0.03));
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-card.profile .sidebar-title {
+      color: #c9a3ff;
+    }
+
+    .sidebar-card.links .sidebar-title {
+      color: #2dff7a;
+    }
+
+    .sidebar-card.alert .sidebar-title {
+      color: #ff0058;
+    }
+
+    .profile-item {
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .profile-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .profile-label {
+      font-size: 11px;
+      color: rgba(232, 255, 248, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .profile-value.accent {
+      color: #00ffc6;
+    }
+
+    .kbd {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 12px;
+    }
+
+    .kbd-key {
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-family: 'Space Mono', monospace;
+      color: rgba(232, 255, 248, 0.8);
+      font-size: 11px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .nav-button {
+      display: block;
+      padding: 0.75rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+      color: rgba(232, 255, 248, 0.8);
+      font-size: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-button:hover {
+      background: rgba(45, 255, 122, 0.1);
+      border-color: rgba(45, 255, 122, 0.3);
+      color: #2dff7a;
+    }
+
+    .nav-button-title {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-button-subtitle {
+      font-size: 11px;
+      color: rgba(232, 255, 248, 0.5);
+    }
+
+    .alert-content {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .alert-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .alert-text {
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(232, 255, 248, 0.7);
+    }
+
+    .alert-title {
+      font-weight: 600;
+      color: #ff0058;
+      margin-bottom: 0.25rem;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ========== EMPTY STATE ========== */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      text-align: center;
+      color: rgba(232, 255, 248, 0.6);
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state small {
+      font-size: 12px;
+      color: rgba(232, 255, 248, 0.4);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(232, 255, 248, 0.5);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .header-content {
+        padding: 1rem;
+      }
+
+      .brand h1 {
+        font-size: 12px;
+      }
+
+      main {
+        padding: 1.5rem 1rem;
+      }
+
+      .welcome-section {
+        padding: 1.5rem;
+      }
+
+      .tiles-grid {
+        gap: 1rem;
+      }
+    }
+
+    /* ========== SCROLLBAR ========== */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 255, 198, 0.2);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 255, 198, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- HEADER -->
+    <header>
+      <div class="header-content">
+        <div class="brand">
+          <div class="brand-icon">🛡️</div>
+          <div>
+            <h1>Painel Supervisor</h1>
+            <p>Segurança Patrimonial</p>
+          </div>
+        </div>
+
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>OPERACIONAL</span>
+        </div>
+
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="search" 
+            placeholder="Buscar (/ para focar)..."
+          />
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+      <div class="content-wrapper">
+        <!-- LEFT COLUMN -->
+        <div>
+          <!-- WELCOME SECTION -->
+          <div class="welcome-section">
+            <div class="welcome-icon">⚡</div>
+            <div class="welcome-content">
+              <h2>Bem-vindo ao Painel Operacional</h2>
+              <p>Acesso centralizado a todos os sistemas, formulários e documentos operacionais. Use a busca para encontrar rapidamente o que precisa.</p>
+            </div>
+          </div>
+
+          <!-- SISTEMAS SECTION -->
+          <div class="section">
+            <div class="section-header">
+              <h3 class="section-title">Sistemas</h3>
+              <div class="section-divider"></div>
+            </div>
+            <div class="tiles-grid" id="sistemas">
+              <a class="tile" href="https://fusion.orbenk.com.br/portal" target="_blank" rel="noopener noreferrer" data-name="fusion" data-tags="fusion sistema portal orbenk">
+                <div class="tile-header">
+                  <div class="tile-title">FUSION</div>
+                  <span class="tile-tag tag-sistema">SISTEMA</span>
+                </div>
+                <div class="tile-description">Sistema de gestão de operações e recursos.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">fusion.orbenk.com.br</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://suprimentos.orbenk.com.br/index.php?redirect=%2Ffront%2Fticket.php&error=3" target="_blank" rel="noopener noreferrer" data-name="suprimentos" data-tags="suprimentos portal orbenk requisição">
+                <div class="tile-header">
+                  <div class="tile-title">SUPRIMENTOS</div>
+                  <span class="tile-tag tag-sistema">SISTEMA</span>
+                </div>
+                <div class="tile-description">Portal de suprimentos e requisições.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">suprimentos.orbenk.com.br</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://app.nexti.com/" target="_blank" rel="noopener noreferrer" data-name="nexti" data-tags="nexti app tarefas projetos">
+                <div class="tile-header">
+                  <div class="tile-title">NEXTI</div>
+                  <span class="tile-tag tag-sistema">SISTEMA</span>
+                </div>
+                <div class="tile-description">Plataforma de gestão de tarefas e projetos.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">nexti.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://sgo.orbenk.com.br/" target="_blank" rel="noopener noreferrer" data-name="sgo" data-tags="sgo sistema gestão operacional">
+                <div class="tile-header">
+                  <div class="tile-title">SGO</div>
+                  <span class="tile-tag tag-sistema">SISTEMA</span>
+                </div>
+                <div class="tile-description">Sistema de Gestão Operacional.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">sgo.orbenk.com.br</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- FORMULÁRIOS SECTION -->
+          <div class="section">
+            <div class="section-header">
+              <h3 class="section-title">Formulários</h3>
+              <div class="section-divider"></div>
+            </div>
+            <div class="tiles-grid" id="formularios">
+              <a class="tile" href="https://docs.google.com/forms/d/1c9s7rie3ZhAtYdT-rVNaU8nYM0xiUGWRK7w2nZ7KPgA/edit" target="_blank" rel="noopener noreferrer" data-name="ocorrências" data-tags="formulário ocorrências eventos registro">
+                <div class="tile-header">
+                  <div class="tile-title">OCORRÊNCIAS</div>
+                  <span class="tile-tag tag-form">FORM</span>
+                </div>
+                <div class="tile-description">Formulário para registro de ocorrências operacionais.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">forms.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://forms.gle/eFSPdJvjjYE4Mewi6" target="_blank" rel="noopener noreferrer" data-name="feedback" data-tags="formulário feedback sugestões avaliação">
+                <div class="tile-header">
+                  <div class="tile-title">FEEDBACK</div>
+                  <span class="tile-tag tag-form">FORM</span>
+                </div>
+                <div class="tile-description">Formulário para feedback e sugestões.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">forms.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- PLANILHAS / DRIVE SECTION -->
+          <div class="section">
+            <div class="section-header">
+              <h3 class="section-title">Planilhas / Drive</h3>
+              <div class="section-divider"></div>
+            </div>
+            <div class="tiles-grid" id="planilhas-drive">
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="planilha operacional" data-tags="planilha sheets operacional controle">
+                <div class="tile-header">
+                  <div class="tile-title">PLANILHA OPERACIONAL</div>
+                  <span class="tile-tag tag-sheets">SHEETS</span>
+                </div>
+                <div class="tile-description">Planilha central de operações e controle.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">docs.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="documentos" data-tags="drive pasta documentos referência">
+                <div class="tile-header">
+                  <div class="tile-title">DOCUMENTOS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com documentos e materiais de referência.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1YQ3sATmbY7kkhYNVKH9HKLXywUm6ADvw?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="protocolos" data-tags="drive pasta protocolos procedimentos">
+                <div class="tile-header">
+                  <div class="tile-title">PROTOCOLOS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com protocolos e procedimentos operacionais.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="treinamentos" data-tags="drive pasta treinamento capacitação">
+                <div class="tile-header">
+                  <div class="tile-title">TREINAMENTOS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com materiais de treinamento e capacitação.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="cronograma" data-tags="sheets cronograma agenda eventos">
+                <div class="tile-header">
+                  <div class="tile-title">CRONOGRAMA</div>
+                  <span class="tile-tag tag-sheets">SHEETS</span>
+                </div>
+                <div class="tile-description">Cronograma de atividades e eventos operacionais.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">docs.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/12seW8B6sRdklulNeb8Ye70fbzUxTipL5?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="relatórios" data-tags="drive pasta relatórios análise">
+                <div class="tile-header">
+                  <div class="tile-title">RELATÓRIOS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com relatórios operacionais e análises.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1SFKht_maxNC5cgKdtusv2bPKI0PMCgRf?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="recursos" data-tags="drive pasta recursos ferramentas">
+                <div class="tile-header">
+                  <div class="tile-title">RECURSOS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com recursos e ferramentas auxiliares.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="indicadores" data-tags="sheets indicadores métricas performance">
+                <div class="tile-header">
+                  <div class="tile-title">INDICADORES</div>
+                  <span class="tile-tag tag-sheets">SHEETS</span>
+                </div>
+                <div class="tile-description">Planilha de indicadores e métricas operacionais.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">docs.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="controle" data-tags="sheets controle rastreamento tarefas">
+                <div class="tile-header">
+                  <div class="tile-title">CONTROLE</div>
+                  <span class="tile-tag tag-sheets">SHEETS</span>
+                </div>
+                <div class="tile-description">Planilha de controle e rastreamento de tarefas.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">docs.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="retificações" data-tags="sheets retificações ajustes operacional">
+                <div class="tile-header">
+                  <div class="tile-title">RETIFICAÇÕES</div>
+                  <span class="tile-tag tag-sheets">SHEETS</span>
+                </div>
+                <div class="tile-description">Planilha de retificações e ajustes operacionais.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">docs.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1PreAkrW2j00pTaKS6osz-xDDSil1nOyd?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="rotas" data-tags="drive pasta rotas rondas trajeto roteiro">
+                <div class="tile-header">
+                  <div class="tile-title">ROTAS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com rotas, roteiros e materiais de apoio.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- EMPTY STATE (hidden by default) -->
+          <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-icon">⚠️</div>
+            <p id="emptyText">Nenhum resultado encontrado</p>
+            <small id="emptyHint">Tente uma busca diferente</small>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN - SIDEBAR -->
+        <aside class="sidebar">
+          <!-- PROFILE CARD -->
+          <div class="sidebar-card profile">
+            <h3 class="sidebar-title">Perfil</h3>
+            <div class="profile-item">
+              <div class="profile-label">Função</div>
+              <div class="profile-value">SUPERVISOR</div>
+            </div>
+            <div class="profile-item">
+              <div class="profile-label">Área</div>
+              <div class="profile-value">Segurança Patrimonial</div>
+            </div>
+            <div class="profile-item">
+              <div class="profile-label">Modo</div>
+              <div class="profile-value accent">HUD / TÁTICO</div>
+            </div>
+            <div class="profile-item">
+              <div class="profile-label">Atalho</div>
+              <div class="kbd">
+                <span class="kbd-key">/</span>
+                <span>Busca</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- NAVIGATION CARD -->
+          <div class="sidebar-card links">
+            <h3 class="sidebar-title">Navegação Rápida</h3>
+            <div class="nav-buttons">
+              <a href="#sistemas" class="nav-button">
+                <span class="nav-button-title">SISTEMAS</span>
+                <span class="nav-button-subtitle">Ir para seção</span>
+              </a>
+              <a href="#formularios" class="nav-button">
+                <span class="nav-button-title">FORMULÁRIOS</span>
+                <span class="nav-button-subtitle">Ir para seção</span>
+              </a>
+              <a href="#planilhas-drive" class="nav-button">
+                <span class="nav-button-title">PLANILHAS / DRIVE</span>
+                <span class="nav-button-subtitle">Ir para seção</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- ALERT CARD -->
+          <div class="sidebar-card alert">
+            <h3 class="sidebar-title">Acesso Restrito</h3>
+            <div class="alert-content">
+              <div class="alert-icon">⚠️</div>
+              <div>
+                <div class="alert-title">IMPORTANTE</div>
+                <div class="alert-text">Use somente links oficiais. Em celular, toque no card para abrir.</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <span>© Painel Operacional • Segurança Patrimonial</span>
+        <span>Supervisor Douglas Jelinsky</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Search functionality
+    const searchInput = document.getElementById('search');
+    const tiles = document.querySelectorAll('.tile');
+    const emptyState = document.getElementById('emptyState');
+    const emptyText = document.getElementById('emptyText');
+    const emptyHint = document.getElementById('emptyHint');
+
+    function normalize(str) {
+      return (str || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function filterTiles() {
+      const query = normalize(searchInput.value.trim());
+      let visibleCount = 0;
+
+      tiles.forEach(tile => {
+        const name = normalize(tile.dataset.name || '');
+        const tags = normalize(tile.dataset.tags || '');
+        const matches = !query || name.includes(query) || tags.includes(query);
+
+        tile.style.display = matches ? 'block' : 'none';
+        if (matches) visibleCount++;
+      });
+
+      if (visibleCount === 0) {
+        emptyState.style.display = 'flex';
+        emptyText.textContent = `Nenhum resultado encontrado para "${searchInput.value}"`;
+      } else {
+        emptyState.style.display = 'none';
+      }
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', filterTiles);
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        filterTiles();
+        searchInput.blur();
+      }
+    });
+
+    // Keyboard shortcut: "/" to focus search
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+
+    // Initial filter
+    filterTiles();
+  </script>
+</body>
 </html>
