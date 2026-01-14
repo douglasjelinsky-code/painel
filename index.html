@@ -13,16 +13,8 @@
 
   <style>
     /* ========== RESET & BASE ========== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -89,12 +81,7 @@
       flex-wrap: wrap;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      min-width: 240px;
-    }
+    .brand { display: flex; align-items: center; gap: 1rem; min-width: 240px; }
 
     .brand-icon {
       width: 44px;
@@ -119,9 +106,7 @@
       animation: spin 6s linear infinite;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .brand h1 {
       font-size: 13px;
@@ -132,11 +117,7 @@
       color: #fff;
     }
 
-    .brand p {
-      font-size: 12px;
-      color: rgba(232, 255, 248, 0.6);
-      margin-top: 2px;
-    }
+    .brand p { font-size: 12px; color: rgba(232, 255, 248, 0.6); margin-top: 2px; }
 
     .status-badge {
       display: flex;
@@ -161,17 +142,9 @@
       animation: pulse 2s infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-    .search-box {
-      position: relative;
-      flex: 1;
-      max-width: 500px;
-      min-width: 250px;
-    }
+    .search-box { position: relative; flex: 1; max-width: 500px; min-width: 250px; }
 
     .search-box input {
       width: 100%;
@@ -185,9 +158,7 @@
       transition: all 0.3s ease;
     }
 
-    .search-box input::placeholder {
-      color: rgba(232, 255, 248, 0.4);
-    }
+    .search-box input::placeholder { color: rgba(232, 255, 248, 0.4); }
 
     .search-box input:focus {
       background: rgba(255, 255, 255, 0.06);
@@ -221,9 +192,7 @@
     }
 
     @media (max-width: 1024px) {
-      .content-wrapper {
-        grid-template-columns: 1fr;
-      }
+      .content-wrapper { grid-template-columns: 1fr; }
     }
 
     /* ========== WELCOME SECTION ========== */
@@ -252,23 +221,11 @@
       flex-shrink: 0;
     }
 
-    .welcome-content h2 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
-
-    .welcome-content p {
-      font-size: 14px;
-      color: rgba(232, 255, 248, 0.7);
-      line-height: 1.6;
-    }
+    .welcome-content h2 { font-size: 18px; font-weight: 700; margin-bottom: 0.5rem; color: #fff; }
+    .welcome-content p { font-size: 14px; color: rgba(232, 255, 248, 0.7); line-height: 1.6; }
 
     /* ========== SECTIONS ========== */
-    .section {
-      margin-bottom: 2.5rem;
-    }
+    .section { margin-bottom: 2.5rem; }
 
     .section-header {
       display: flex;
@@ -300,17 +257,8 @@
       gap: 1.2rem;
     }
 
-    @media (max-width: 768px) {
-      .tiles-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      }
-    }
-
-    @media (max-width: 480px) {
-      .tiles-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    @media (max-width: 768px) { .tiles-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); } }
+    @media (max-width: 480px) { .tiles-grid { grid-template-columns: 1fr; } }
 
     /* ========== TILE CARD ========== */
     .tile {
@@ -339,9 +287,7 @@
       transition: transform 0.6s ease;
     }
 
-    .tile:hover::before {
-      transform: translateX(100%);
-    }
+    .tile:hover::before { transform: translateX(100%); }
 
     .tile:hover {
       border-color: rgba(0, 255, 198, 0.4);
@@ -360,11 +306,7 @@
       z-index: 2;
     }
 
-    .tile-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-    }
+    .tile-title { font-size: 14px; font-weight: 700; color: #fff; }
 
     .tile-tag {
       font-size: 10px;
@@ -419,9 +361,7 @@
       z-index: 2;
     }
 
-    .tile-meta {
-      color: rgba(232, 255, 248, 0.5);
-    }
+    .tile-meta { color: rgba(232, 255, 248, 0.5); }
 
     .tile-open {
       color: rgba(0, 255, 198, 0.6);
@@ -429,16 +369,10 @@
       transition: color 0.3s ease;
     }
 
-    .tile:hover .tile-open {
-      color: #00ffc6;
-    }
+    .tile:hover .tile-open { color: #00ffc6; }
 
     /* ========== SIDEBAR ========== */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
 
     .sidebar-card {
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
@@ -471,29 +405,16 @@
       margin-bottom: 1rem;
     }
 
-    .sidebar-card.profile .sidebar-title {
-      color: #c9a3ff;
-    }
-
-    .sidebar-card.links .sidebar-title {
-      color: #2dff7a;
-    }
-
-    .sidebar-card.alert .sidebar-title {
-      color: #ff0058;
-    }
+    .sidebar-card.profile .sidebar-title { color: #c9a3ff; }
+    .sidebar-card.links .sidebar-title { color: #2dff7a; }
+    .sidebar-card.alert .sidebar-title { color: #ff0058; }
 
     .profile-item {
       padding-bottom: 0.75rem;
       margin-bottom: 0.75rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-
-    .profile-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
+    .profile-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
     .profile-label {
       font-size: 11px;
@@ -503,23 +424,10 @@
       margin-bottom: 0.25rem;
     }
 
-    .profile-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: #fff;
-    }
+    .profile-value { font-size: 14px; font-weight: 600; color: #fff; }
+    .profile-value.accent { color: #00ffc6; }
 
-    .profile-value.accent {
-      color: #00ffc6;
-    }
-
-    .kbd {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 12px;
-    }
-
+    .kbd { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 12px; }
     .kbd-key {
       padding: 3px 8px;
       border-radius: 6px;
@@ -530,11 +438,7 @@
       font-size: 11px;
     }
 
-    .nav-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
+    .nav-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
 
     .nav-button {
       display: block;
@@ -555,41 +459,13 @@
       color: #2dff7a;
     }
 
-    .nav-button-title {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 0.25rem;
-    }
+    .nav-button-title { font-weight: 600; display: block; margin-bottom: 0.25rem; }
+    .nav-button-subtitle { font-size: 11px; color: rgba(232, 255, 248, 0.5); }
 
-    .nav-button-subtitle {
-      font-size: 11px;
-      color: rgba(232, 255, 248, 0.5);
-    }
-
-    .alert-content {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .alert-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .alert-text {
-      font-size: 12px;
-      line-height: 1.5;
-      color: rgba(232, 255, 248, 0.7);
-    }
-
-    .alert-title {
-      font-weight: 600;
-      color: #ff0058;
-      margin-bottom: 0.25rem;
-      font-size: 11px;
-      letter-spacing: 0.5px;
-    }
+    .alert-content { display: flex; gap: 0.75rem; }
+    .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .alert-text { font-size: 12px; line-height: 1.5; color: rgba(232, 255, 248, 0.7); }
+    .alert-title { font-weight: 600; color: #ff0058; margin-bottom: 0.25rem; font-size: 11px; letter-spacing: 0.5px; }
 
     /* ========== EMPTY STATE ========== */
     .empty-state {
@@ -601,22 +477,9 @@
       text-align: center;
       color: rgba(232, 255, 248, 0.6);
     }
-
-    .empty-icon {
-      font-size: 48px;
-      margin-bottom: 1rem;
-      opacity: 0.5;
-    }
-
-    .empty-state p {
-      font-size: 14px;
-      margin-bottom: 0.5rem;
-    }
-
-    .empty-state small {
-      font-size: 12px;
-      color: rgba(232, 255, 248, 0.4);
-    }
+    .empty-icon { font-size: 48px; margin-bottom: 1rem; opacity: 0.5; }
+    .empty-state p { font-size: 14px; margin-bottom: 0.5rem; }
+    .empty-state small { font-size: 12px; color: rgba(232, 255, 248, 0.4); }
 
     /* ========== FOOTER ========== */
     footer {
@@ -637,47 +500,21 @@
     }
 
     @media (max-width: 640px) {
-      .header-content {
-        padding: 1rem;
-      }
-
-      .brand h1 {
-        font-size: 12px;
-      }
-
-      main {
-        padding: 1.5rem 1rem;
-      }
-
-      .welcome-section {
-        padding: 1.5rem;
-      }
-
-      .tiles-grid {
-        gap: 1rem;
-      }
+      .header-content { padding: 1rem; }
+      .brand h1 { font-size: 12px; }
+      main { padding: 1.5rem 1rem; }
+      .welcome-section { padding: 1.5rem; }
+      .tiles-grid { gap: 1rem; }
     }
 
     /* ========== SCROLLBAR ========== */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(0, 255, 198, 0.2);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0, 255, 198, 0.4);
-    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+    ::-webkit-scrollbar-thumb { background: rgba(0, 255, 198, 0.2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0, 255, 198, 0.4); }
   </style>
 </head>
+
 <body>
   <div class="wrapper">
     <!-- HEADER -->
@@ -698,11 +535,7 @@
 
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input 
-            type="text" 
-            id="search" 
-            placeholder="Buscar (/ para focar)..."
-          />
+          <input type="text" id="search" placeholder="Buscar (/ para focar)..." />
         </div>
       </div>
     </header>
@@ -727,8 +560,10 @@
               <h3 class="section-title">Sistemas</h3>
               <div class="section-divider"></div>
             </div>
+
             <div class="tiles-grid" id="sistemas">
-              <a class="tile" href="https://fusion.orbenk.com.br/portal" target="_blank" rel="noopener noreferrer" data-name="fusion" data-tags="fusion sistema portal orbenk">
+              <a class="tile" href="https://fusion.orbenk.com.br/portal" target="_blank" rel="noopener noreferrer"
+                 data-name="fusion" data-tags="fusion sistema portal orbenk">
                 <div class="tile-header">
                   <div class="tile-title">FUSION</div>
                   <span class="tile-tag tag-sistema">SISTEMA</span>
@@ -740,7 +575,8 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://suprimentos.orbenk.com.br/index.php?redirect=%2Ffront%2Fticket.php&error=3" target="_blank" rel="noopener noreferrer" data-name="suprimentos" data-tags="suprimentos portal orbenk requisição">
+              <a class="tile" href="https://suprimentos.orbenk.com.br/index.php?redirect=%2Ffront%2Fticket.php&error=3" target="_blank" rel="noopener noreferrer"
+                 data-name="suprimentos" data-tags="suprimentos portal orbenk requisição">
                 <div class="tile-header">
                   <div class="tile-title">SUPRIMENTOS</div>
                   <span class="tile-tag tag-sistema">SISTEMA</span>
@@ -752,7 +588,8 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://app.nexti.com/" target="_blank" rel="noopener noreferrer" data-name="nexti" data-tags="nexti app tarefas projetos">
+              <a class="tile" href="https://app.nexti.com/" target="_blank" rel="noopener noreferrer"
+                 data-name="nexti" data-tags="nexti app tarefas projetos">
                 <div class="tile-header">
                   <div class="tile-title">NEXTI</div>
                   <span class="tile-tag tag-sistema">SISTEMA</span>
@@ -764,7 +601,8 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://sgo.orbenk.com.br/" target="_blank" rel="noopener noreferrer" data-name="sgo" data-tags="sgo sistema gestão operacional">
+              <a class="tile" href="https://sgo.orbenk.com.br/" target="_blank" rel="noopener noreferrer"
+                 data-name="sgo" data-tags="sgo sistema gestão operacional">
                 <div class="tile-header">
                   <div class="tile-title">SGO</div>
                   <span class="tile-tag tag-sistema">SISTEMA</span>
@@ -784,8 +622,10 @@
               <h3 class="section-title">Formulários</h3>
               <div class="section-divider"></div>
             </div>
+
             <div class="tiles-grid" id="formularios">
-              <a class="tile" href="https://docs.google.com/forms/d/1c9s7rie3ZhAtYdT-rVNaU8nYM0xiUGWRK7w2nZ7KPgA/edit" target="_blank" rel="noopener noreferrer" data-name="ocorrências" data-tags="formulário ocorrências eventos registro">
+              <a class="tile" href="https://docs.google.com/forms/d/1c9s7rie3ZhAtYdT-rVNaU8nYM0xiUGWRK7w2nZ7KPgA/edit" target="_blank" rel="noopener noreferrer"
+                 data-name="coberturas de posto" data-tags="formulário coberturas posto registro">
                 <div class="tile-header">
                   <div class="tile-title">COBERTURAS DE POSTO</div>
                   <span class="tile-tag tag-form">FORM</span>
@@ -797,12 +637,42 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://forms.gle/eFSPdJvjjYE4Mewi6" target="_blank" rel="noopener noreferrer" data-name="feedback" data-tags="formulário feedback sugestões avaliação">
+              <!-- NOVO: FORMULÁRIO DE ADM E MOVIMENTAÇÃO -->
+              <a class="tile" href="https://docs.google.com/forms/d/e/1FAIpQLScYNtmjlhN8tstCtovNXhplcfYVjbO4bH0K6eKc12LjhFcQlw/viewform?usp=sharing&ouid=109010654904216395929"
+                 target="_blank" rel="noopener noreferrer"
+                 data-name="formulário adm e movimentação" data-tags="formulário adm movimentação movimentacoes administrativo">
+                <div class="tile-header">
+                  <div class="tile-title">FORMULÁRIO ADM E MOVIMENTAÇÃO</div>
+                  <span class="tile-tag tag-form">FORM</span>
+                </div>
+                <div class="tile-description">Registro administrativo e movimentações da equipe.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">forms.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <!-- NOVO: FORMULÁRIO DE CURRÍCULO -->
+              <a class="tile" href="https://forms.gle/EoP4xeFzTQnp6rTB8" target="_blank" rel="noopener noreferrer"
+                 data-name="formulário de currículo" data-tags="formulário currículo curriculo recrutamento rh">
+                <div class="tile-header">
+                  <div class="tile-title">FORMULÁRIO DE CURRÍCULO</div>
+                  <span class="tile-tag tag-form">FORM</span>
+                </div>
+                <div class="tile-description">Envio/registro de currículos (cadastro de candidatos).</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">forms.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://forms.gle/eFSPdJvjjYE4Mewi6" target="_blank" rel="noopener noreferrer"
+                 data-name="ocorrências" data-tags="formulário ocorrências eventos registro">
                 <div class="tile-header">
                   <div class="tile-title">OCORRÊNCIAS</div>
                   <span class="tile-tag tag-form">FORM</span>
                 </div>
-                <div class="tile-description">Formulário para registro de  ocorrências .</div>
+                <div class="tile-description">Formulário para registro de ocorrências.</div>
                 <div class="tile-footer">
                   <span class="tile-meta">forms.google.com</span>
                   <span class="tile-open">ABRIR ↗</span>
@@ -817,20 +687,38 @@
               <h3 class="section-title">Planilhas / Drive</h3>
               <div class="section-divider"></div>
             </div>
+
             <div class="tiles-grid" id="planilhas-drive">
-              <a class="tile" href="https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="planilha operacional" data-tags="planilha sheets operacional controle">
+              <!-- NOVO: BANCO DE CURRÍCULO -->
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1RTVaVtUgit3tSEekrTS0kd1bMsbl_IaH8vQf9aG4orA/edit?usp=sharing"
+                 target="_blank" rel="noopener noreferrer"
+                 data-name="banco de currículo" data-tags="planilha sheets banco currículo curriculo rh recrutamento">
                 <div class="tile-header">
-                  <div class="tile-title">COBERTURA RESPOSTAS</div>
+                  <div class="tile-title">BANCO DE CURRÍCULO</div>
                   <span class="tile-tag tag-sheets">SHEETS</span>
                 </div>
-                <div class="tile-description">Planilha Com os dados das coberturas.</div>
+                <div class="tile-description">Planilha com banco de currículos e cadastros.</div>
                 <div class="tile-footer">
                   <span class="tile-meta">docs.google.com</span>
                   <span class="tile-open">ABRIR ↗</span>
                 </div>
               </a>
 
-              <a class="tile" href="https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="documentos" data-tags="drive pasta documentos referência">
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="cobertura respostas" data-tags="planilha sheets operacional coberturas controle">
+                <div class="tile-header">
+                  <div class="tile-title">COBERTURA RESPOSTAS</div>
+                  <span class="tile-tag tag-sheets">SHEETS</span>
+                </div>
+                <div class="tile-description">Planilha com os dados das coberturas.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">docs.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="controle de férias" data-tags="drive pasta ferias rh controle">
                 <div class="tile-header">
                   <div class="tile-title">CONTROLE DE FÉRIAS</div>
                   <span class="tile-tag tag-drive">DRIVE</span>
@@ -842,19 +730,8 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://drive.google.com/drive/folders/1YQ3sATmbY7kkhYNVKH9HKLXywUm6ADvw?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="protocolos" data-tags="drive pasta protocolos procedimentos">
-                <div class="tile-header">
-                  <div class="tile-title">TREINAMENTOS / DDS</div>
-                  <span class="tile-tag tag-drive">DRIVE</span>
-                </div>
-                <div class="tile-description">Pasta com treinamentos e DDS.</div>
-                <div class="tile-footer">
-                  <span class="tile-meta">drive.google.com</span>
-                  <span class="tile-open">ABRIR ↗</span>
-                </div>
-              </a>
-
-              <a class="tile" href="https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="" data-tags="drive pasta treinamento capacitação">
+              <a class="tile" href="https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="documentos rh" data-tags="drive pasta rh documentos recursos humanos">
                 <div class="tile-header">
                   <div class="tile-title">DOCUMENTOS RH</div>
                   <span class="tile-tag tag-drive">DRIVE</span>
@@ -866,43 +743,36 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="cronograma" data-tags="sheets cronograma agenda eventos">
+              <!-- NOVO: PLANILHA ADM MOVIMENTAÇÕES -->
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1GH-iW3b4txgV1MYHLo2ARGLdY_qJqefkkcA6KHVckmo/edit?usp=sharing"
+                 target="_blank" rel="noopener noreferrer"
+                 data-name="planilha adm movimentações" data-tags="planilha sheets adm movimentação movimentacoes administrativo">
                 <div class="tile-header">
-                  <div class="tile-title">RESPOSTAS DAS OCORRÊNCIAS</div>
+                  <div class="tile-title">PLANILHA ADM MOVIMENTAÇÕES</div>
                   <span class="tile-tag tag-sheets">SHEETS</span>
                 </div>
-                <div class="tile-description">Planilha com as Respostas das Ocorrências.</div>
+                <div class="tile-description">Controle administrativo e movimentações registradas.</div>
                 <div class="tile-footer">
                   <span class="tile-meta">docs.google.com</span>
                   <span class="tile-open">ABRIR ↗</span>
                 </div>
               </a>
 
-              <a class="tile" href="https://drive.google.com/drive/folders/12seW8B6sRdklulNeb8Ye70fbzUxTipL5?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="relatórios" data-tags="drive pasta relatórios análise">
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="respostas das ocorrências" data-tags="planilha sheets ocorrencias registros">
                 <div class="tile-header">
-                  <div class="tile-title">QLS SEMANAIS</div>
-                  <span class="tile-tag tag-drive">DRIVE</span>
+                  <div class="tile-title">RESPOSTAS DAS OCORRÊNCIAS</div>
+                  <span class="tile-tag tag-sheets">SHEETS</span>
                 </div>
-                <div class="tile-description">Pasta com todos os QLS.</div>
+                <div class="tile-description">Planilha com as respostas das ocorrências.</div>
                 <div class="tile-footer">
-                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-meta">docs.google.com</span>
                   <span class="tile-open">ABRIR ↗</span>
                 </div>
               </a>
 
-              <a class="tile" href="https://drive.google.com/drive/folders/1SFKht_maxNC5cgKdtusv2bPKI0PMCgRf?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="recursos" data-tags="drive pasta recursos ferramentas">
-                <div class="tile-header">
-                  <div class="tile-title">RECICLAGENS</div>
-                  <span class="tile-tag tag-drive">DRIVE</span>
-                </div>
-                <div class="tile-description">Pasta com controles de reciclagen.</div>
-                <div class="tile-footer">
-                  <span class="tile-meta">drive.google.com</span>
-                  <span class="tile-open">ABRIR ↗</span>
-                </div>
-              </a>
-
-              <a class="tile" href="https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="indicadores" data-tags="sheets indicadores métricas performance">
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="requisição uniformes" data-tags="planilha sheets uniformes requisicao">
                 <div class="tile-header">
                   <div class="tile-title">REQUISIÇÃO UNIFORMES</div>
                   <span class="tile-tag tag-sheets">SHEETS</span>
@@ -914,7 +784,8 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="controle" data-tags="sheets controle rastreamento tarefas">
+              <a class="tile" href="https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="pedidos e retificações" data-tags="planilha sheets pedidos retificacoes">
                 <div class="tile-header">
                   <div class="tile-title">PEDIDOS E RETIFICAÇOES</div>
                   <span class="tile-tag tag-sheets">SHEETS</span>
@@ -926,12 +797,52 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://drive.google.com/drive/folders/1PreAkrW2j00pTaKS6osz-xDDSil1nOyd?usp=sharing" target="_blank" rel="noopener noreferrer" data-name="rotas" data-tags="drive pasta rotas rondas trajeto roteiro">
+              <a class="tile" href="https://drive.google.com/drive/folders/12seW8B6sRdklulNeb8Ye70fbzUxTipL5?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="qls semanais" data-tags="drive pasta qls relatorios">
+                <div class="tile-header">
+                  <div class="tile-title">QLS SEMANAIS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com todos os QLS.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1SFKht_maxNC5cgKdtusv2bPKI0PMCgRf?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="reciclagens" data-tags="drive pasta reciclagens treinamentos">
+                <div class="tile-header">
+                  <div class="tile-title">RECICLAGENS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com controles de reciclagem.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1PreAkrW2j00pTaKS6osz-xDDSil1nOyd?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="rotas" data-tags="drive pasta rotas rondas">
                 <div class="tile-header">
                   <div class="tile-title">ROTAS</div>
                   <span class="tile-tag tag-drive">DRIVE</span>
                 </div>
                 <div class="tile-description">Pasta com rotas, roteiros e materiais de apoio.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1YQ3sATmbY7kkhYNVKH9HKLXywUm6ADvw?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="treinamentos dds" data-tags="drive pasta treinamentos dds">
+                <div class="tile-header">
+                  <div class="tile-title">TREINAMENTOS / DDS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com treinamentos e DDS.</div>
                 <div class="tile-footer">
                   <span class="tile-meta">drive.google.com</span>
                   <span class="tile-open">ABRIR ↗</span>
@@ -950,7 +861,6 @@
 
         <!-- RIGHT COLUMN - SIDEBAR -->
         <aside class="sidebar">
-          <!-- PROFILE CARD -->
           <div class="sidebar-card profile">
             <h3 class="sidebar-title">Perfil</h3>
             <div class="profile-item">
@@ -974,7 +884,6 @@
             </div>
           </div>
 
-          <!-- NAVIGATION CARD -->
           <div class="sidebar-card links">
             <h3 class="sidebar-title">Navegação Rápida</h3>
             <div class="nav-buttons">
@@ -993,7 +902,6 @@
             </div>
           </div>
 
-          <!-- ALERT CARD -->
           <div class="sidebar-card alert">
             <h3 class="sidebar-title">Acesso Restrito</h3>
             <div class="alert-content">
@@ -1018,12 +926,10 @@
   </div>
 
   <script>
-    // Search functionality
     const searchInput = document.getElementById('search');
     const tiles = document.querySelectorAll('.tile');
     const emptyState = document.getElementById('emptyState');
     const emptyText = document.getElementById('emptyText');
-    const emptyHint = document.getElementById('emptyHint');
 
     function normalize(str) {
       return (str || '')
@@ -1053,7 +959,6 @@
       }
     }
 
-    // Event listeners
     searchInput.addEventListener('input', filterTiles);
 
     searchInput.addEventListener('keydown', (e) => {
@@ -1064,7 +969,6 @@
       }
     });
 
-    // Keyboard shortcut: "/" to focus search
     window.addEventListener('keydown', (e) => {
       if (e.key === '/' && document.activeElement !== searchInput) {
         e.preventDefault();
@@ -1072,7 +976,6 @@
       }
     });
 
-    // Initial filter
     filterTiles();
   </script>
 </body>
