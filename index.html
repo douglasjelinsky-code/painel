@@ -390,6 +390,25 @@
       color: #ffd23d;
     }
 
+    /* DESTAQUE PARA O BOTÃO DE CURRÍCULO */
+    .tile-highlight {
+      border-color: rgba(255, 107, 107, 0.5) !important;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(155, 92, 255, 0.1)) !important;
+      box-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
+    }
+    
+    .tile-highlight:hover {
+      border-color: rgba(255, 107, 107, 0.8) !important;
+      box-shadow: 0 0 30px rgba(255, 107, 107, 0.3) !important;
+    }
+
+    .tag-highlight {
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 107, 107, 0.2));
+      border: 1px solid rgba(255, 107, 107, 0.6);
+      color: #ff6b6b;
+      font-weight: 800;
+    }
+
     .tile-description {
       font-size: 13px;
       color: rgba(232, 255, 248, 0.6);
@@ -690,16 +709,16 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://forms.gle/EoP4xeFzTQnp6rTB8" target="_blank" rel="noopener noreferrer"
-                 data-name="formulário de currículo" data-tags="formulário currículo curriculo recrutamento rh">
+              <a class="tile tile-highlight" href="https://api.whatsapp.com/send?text=Olá! Segue o link para cadastro de currículo: https://forms.gle/EoP4xeFzTQnp6rTB8" target="_blank" rel="noopener noreferrer"
+                 data-name="formulário de currículo" data-tags="formulário currículo curriculo recrutamento rh whatsapp compartilhar">
                 <div class="tile-header">
                   <div class="tile-title">FORMULÁRIO DE CURRÍCULO</div>
-                  <span class="tile-tag tag-form">FORM</span>
+                  <span class="tile-tag tag-highlight">COMPARTILHAR</span>
                 </div>
-                <div class="tile-description">Envie este link Para Candidatos (cadastro de currículos).</div>
+                <div class="tile-description">Clique para enviar o link do formulário para candidatos via WhatsApp.</div>
                 <div class="tile-footer">
-                  <span class="tile-meta">forms.google.com</span>
-                  <span class="tile-open">ABRIR ↗</span>
+                  <span class="tile-meta">whatsapp.com</span>
+                  <span class="tile-open">ENVIAR VIA WHATSAPP ↗</span>
                 </div>
               </a>
 
