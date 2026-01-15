@@ -13,7 +13,7 @@
 
   <style>
     /* ========== RESET & BASE ========== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     html, body { height: 100%; width: 100%; }
 
     body {
@@ -63,8 +63,8 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: linear-gradient(180deg, rgba(2, 15, 13, 0.85), rgba(2, 15, 13, 0.4));
+      z-index: 100;
+      background: rgba(2, 15, 13, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(0, 255, 198, 0.15);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -175,6 +175,54 @@
       font-size: 16px;
     }
 
+    /* ========== TOP NAVIGATION ========== */
+    .top-nav {
+      background: rgba(2, 15, 13, 0.7);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0, 255, 198, 0.1);
+      padding: 0.75rem 1.5rem;
+      position: sticky;
+      top: 73px; /* Height of header */
+      z-index: 90;
+    }
+
+    .top-nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .top-nav-content::-webkit-scrollbar { height: 4px; }
+
+    .nav-link {
+      text-decoration: none;
+      color: rgba(232, 255, 248, 0.6);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: 'Space Mono', monospace;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover {
+      color: #00ffc6;
+      background: rgba(0, 255, 198, 0.05);
+      border-color: rgba(0, 255, 198, 0.2);
+    }
+
+    .nav-link i { font-style: normal; }
+
     /* ========== MAIN CONTENT ========== */
     main {
       flex: 1;
@@ -225,7 +273,7 @@
     .welcome-content p { font-size: 14px; color: rgba(232, 255, 248, 0.7); line-height: 1.6; }
 
     /* ========== SECTIONS ========== */
-    .section { margin-bottom: 2.5rem; }
+    .section { margin-bottom: 2.5rem; scroll-margin-top: 140px; }
 
     .section-header {
       display: flex;
@@ -344,10 +392,9 @@
 
     .tile-description {
       font-size: 13px;
-      color: rgba(232, 255, 248, 0.65);
-      margin-bottom: 0.75rem;
+      color: rgba(232, 255, 248, 0.6);
+      margin-bottom: 1.25rem;
       flex: 1;
-      line-height: 1.5;
       position: relative;
       z-index: 2;
     }
@@ -356,152 +403,134 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 12px;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       position: relative;
       z-index: 2;
     }
 
-    .tile-meta { color: rgba(232, 255, 248, 0.5); }
-
-    .tile-open {
-      color: rgba(0, 255, 198, 0.6);
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    .tile:hover .tile-open { color: #00ffc6; }
+    .tile-meta { font-size: 11px; color: rgba(232, 255, 248, 0.4); font-family: 'Space Mono', monospace; }
+    .tile-open { font-size: 11px; font-weight: 700; color: #00ffc6; letter-spacing: 0.5px; }
 
     /* ========== SIDEBAR ========== */
-    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+    .sidebar { display: flex; flex-direction: column; gap: 1.5rem; position: sticky; top: 140px; }
 
     .sidebar-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 1.5rem;
       backdrop-filter: blur(10px);
-    }
-
-    .sidebar-card.profile {
-      border-color: rgba(155, 92, 255, 0.2);
-      background: linear-gradient(135deg, rgba(155, 92, 255, 0.08), rgba(155, 92, 255, 0.03));
-    }
-
-    .sidebar-card.links {
-      border-color: rgba(45, 255, 122, 0.2);
-      background: linear-gradient(135deg, rgba(45, 255, 122, 0.08), rgba(45, 255, 122, 0.03));
-    }
-
-    .sidebar-card.alert {
-      border-color: rgba(255, 0, 88, 0.2);
-      background: linear-gradient(135deg, rgba(255, 0, 88, 0.08), rgba(255, 0, 88, 0.03));
     }
 
     .sidebar-title {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .sidebar-card.profile .sidebar-title { color: #c9a3ff; }
-    .sidebar-card.links .sidebar-title { color: #2dff7a; }
-    .sidebar-card.alert .sidebar-title { color: #ff0058; }
-
-    .profile-item {
-      padding-bottom: 0.75rem;
-      margin-bottom: 0.75rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .profile-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-    .profile-label {
-      font-size: 11px;
+      font-family: 'Space Mono', monospace;
       color: rgba(232, 255, 248, 0.5);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .profile-value { font-size: 14px; font-weight: 600; color: #fff; }
+    .profile-item { margin-bottom: 1rem; }
+    .profile-item:last-child { margin-bottom: 0; }
+    .profile-label { font-size: 10px; text-transform: uppercase; color: rgba(232, 255, 248, 0.4); margin-bottom: 4px; }
+    .profile-value { font-size: 13px; font-weight: 600; color: #fff; }
     .profile-value.accent { color: #00ffc6; }
 
-    .kbd { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 12px; }
-    .kbd-key {
-      padding: 3px 8px;
+    .kbd {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 8px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      font-family: 'Space Mono', monospace;
-      color: rgba(232, 255, 248, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       font-size: 11px;
+      color: rgba(232, 255, 248, 0.6);
+    }
+
+    .kbd-key {
+      background: #fff;
+      color: #020f0d;
+      padding: 0 6px;
+      border-radius: 3px;
+      font-weight: 800;
     }
 
     .nav-buttons { display: flex; flex-direction: column; gap: 0.75rem; }
 
     .nav-button {
-      display: block;
-      padding: 0.75rem;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      flex-direction: column;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
       text-decoration: none;
-      color: rgba(232, 255, 248, 0.8);
-      font-size: 12px;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
     .nav-button:hover {
-      background: rgba(45, 255, 122, 0.1);
-      border-color: rgba(45, 255, 122, 0.3);
-      color: #2dff7a;
+      background: rgba(0, 255, 198, 0.08);
+      border-color: rgba(0, 255, 198, 0.3);
+      transform: translateX(4px);
     }
 
-    .nav-button-title { font-weight: 600; display: block; margin-bottom: 0.25rem; }
-    .nav-button-subtitle { font-size: 11px; color: rgba(232, 255, 248, 0.5); }
+    .nav-button-title { font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+    .nav-button-subtitle { font-size: 10px; color: rgba(232, 255, 248, 0.4); }
 
-    .alert-content { display: flex; gap: 0.75rem; }
-    .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
-    .alert-text { font-size: 12px; line-height: 1.5; color: rgba(232, 255, 248, 0.7); }
-    .alert-title { font-weight: 600; color: #ff0058; margin-bottom: 0.25rem; font-size: 11px; letter-spacing: 0.5px; }
+    .alert-content { display: flex; gap: 1rem; align-items: flex-start; }
+    .alert-icon { font-size: 20px; }
+    .alert-title { font-size: 12px; font-weight: 700; color: #ffd23d; margin-bottom: 4px; }
+    .alert-text { font-size: 11px; color: rgba(232, 255, 248, 0.6); line-height: 1.4; }
 
     /* ========== EMPTY STATE ========== */
     .empty-state {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 3rem 1rem;
-      text-align: center;
-      color: rgba(232, 255, 248, 0.6);
+      gap: 1rem;
     }
-    .empty-icon { font-size: 48px; margin-bottom: 1rem; opacity: 0.5; }
-    .empty-state p { font-size: 14px; margin-bottom: 0.5rem; }
-    .empty-state small { font-size: 12px; color: rgba(232, 255, 248, 0.4); }
+
+    .empty-icon { font-size: 48px; opacity: 0.5; }
+    .empty-state p { font-size: 16px; color: #fff; }
+    .empty-state small { color: rgba(232, 255, 248, 0.4); }
 
     /* ========== FOOTER ========== */
     footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.2));
+      margin-top: auto;
       padding: 2rem 1.5rem;
-      text-align: center;
-      font-size: 12px;
-      color: rgba(232, 255, 248, 0.5);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.2);
     }
 
     .footer-content {
       max-width: 1400px;
       margin: 0 auto;
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: rgba(232, 255, 248, 0.4);
     }
 
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 640px) {
       .header-content { padding: 1rem; }
       .brand h1 { font-size: 12px; }
+      .top-nav { top: 110px; padding: 0.5rem 1rem; }
       main { padding: 1.5rem 1rem; }
       .welcome-section { padding: 1.5rem; }
       .tiles-grid { gap: 1rem; }
@@ -540,6 +569,16 @@
       </div>
     </header>
 
+    <!-- TOP NAVIGATION -->
+    <nav class="top-nav">
+      <div class="top-nav-content">
+        <a href="#sistemas" class="nav-link"><i>🖥️</i> Sistemas</a>
+        <a href="#formularios" class="nav-link"><i>📝</i> Formulários</a>
+        <a href="#planilhas" class="nav-link"><i>📊</i> Planilhas</a>
+        <a href="#pastas-drive" class="nav-link"><i>📁</i> Pastas Drive</a>
+      </div>
+    </nav>
+
     <!-- MAIN CONTENT -->
     <main>
       <div class="content-wrapper">
@@ -555,13 +594,13 @@
           </div>
 
           <!-- SISTEMAS SECTION -->
-          <div class="section">
+          <div class="section" id="sistemas">
             <div class="section-header">
               <h3 class="section-title">Sistemas</h3>
               <div class="section-divider"></div>
             </div>
 
-            <div class="tiles-grid" id="sistemas">
+            <div class="tiles-grid">
               <a class="tile" href="https://fusion.orbenk.com.br/portal" target="_blank" rel="noopener noreferrer"
                  data-name="fusion" data-tags="fusion sistema portal orbenk">
                 <div class="tile-header">
@@ -578,7 +617,7 @@
               <a class="tile" href="https://suprimentos.orbenk.com.br/index.php?redirect=%2Ffront%2Fticket.php&error=3" target="_blank" rel="noopener noreferrer"
                  data-name="suprimentos" data-tags="suprimentos portal orbenk requisição">
                 <div class="tile-header">
-                  <div class="tile-title">SUPRIMENTOS</div>
+                  <div class="tile-title">SUPRIMENTOS [ GLPI ]</div>
                   <span class="tile-tag tag-sistema">SISTEMA</span>
                 </div>
                 <div class="tile-description">Portal de suprimentos e requisições.</div>
@@ -617,13 +656,13 @@
           </div>
 
           <!-- FORMULÁRIOS SECTION -->
-          <div class="section">
+          <div class="section" id="formularios">
             <div class="section-header">
               <h3 class="section-title">Formulários</h3>
               <div class="section-divider"></div>
             </div>
 
-            <div class="tiles-grid" id="formularios">
+            <div class="tiles-grid">
               <a class="tile" href="https://docs.google.com/forms/d/1c9s7rie3ZhAtYdT-rVNaU8nYM0xiUGWRK7w2nZ7KPgA/edit" target="_blank" rel="noopener noreferrer"
                  data-name="coberturas de posto" data-tags="formulário coberturas posto registro">
                 <div class="tile-header">
@@ -637,7 +676,6 @@
                 </div>
               </a>
 
-              <!-- NOVO: FORMULÁRIO DE ADM E MOVIMENTAÇÃO -->
               <a class="tile" href="https://docs.google.com/forms/d/e/1FAIpQLScYNtmjlhN8tstCtovNXhplcfYVjbO4bH0K6eKc12LjhFcQlw/viewform?usp=sharing&ouid=109010654904216395929"
                  target="_blank" rel="noopener noreferrer"
                  data-name="formulário adm e movimentação" data-tags="formulário adm movimentação movimentacoes administrativo">
@@ -652,14 +690,13 @@
                 </div>
               </a>
 
-              <!-- NOVO: FORMULÁRIO DE CURRÍCULO -->
               <a class="tile" href="https://forms.gle/EoP4xeFzTQnp6rTB8" target="_blank" rel="noopener noreferrer"
                  data-name="formulário de currículo" data-tags="formulário currículo curriculo recrutamento rh">
                 <div class="tile-header">
                   <div class="tile-title">FORMULÁRIO DE CURRÍCULO</div>
                   <span class="tile-tag tag-form">FORM</span>
                 </div>
-                <div class="tile-description">Envio/registro de currículos (cadastro de candidatos).</div>
+                <div class="tile-description">Envie este link Para Candidatos (cadastro de currículos).</div>
                 <div class="tile-footer">
                   <span class="tile-meta">forms.google.com</span>
                   <span class="tile-open">ABRIR ↗</span>
@@ -672,7 +709,7 @@
                   <div class="tile-title">OCORRÊNCIAS</div>
                   <span class="tile-tag tag-form">FORM</span>
                 </div>
-                <div class="tile-description">Formulário para registro de ocorrências.</div>
+                <div class="tile-description">Registre as Ocorrências do Seu Plantão.</div>
                 <div class="tile-footer">
                   <span class="tile-meta">forms.google.com</span>
                   <span class="tile-open">ABRIR ↗</span>
@@ -681,15 +718,14 @@
             </div>
           </div>
 
-          <!-- PLANILHAS / DRIVE SECTION -->
-          <div class="section">
+          <!-- PLANILHAS SECTION -->
+          <div class="section" id="planilhas">
             <div class="section-header">
-              <h3 class="section-title">Planilhas / Drive</h3>
+              <h3 class="section-title">Planilhas</h3>
               <div class="section-divider"></div>
             </div>
 
-            <div class="tiles-grid" id="planilhas-drive">
-              <!-- NOVO: BANCO DE CURRÍCULO -->
+            <div class="tiles-grid">
               <a class="tile" href="https://docs.google.com/spreadsheets/d/1RTVaVtUgit3tSEekrTS0kd1bMsbl_IaH8vQf9aG4orA/edit?usp=sharing"
                  target="_blank" rel="noopener noreferrer"
                  data-name="banco de currículo" data-tags="planilha sheets banco currículo curriculo rh recrutamento">
@@ -717,33 +753,6 @@
                 </div>
               </a>
 
-              <a class="tile" href="https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="controle de férias" data-tags="drive pasta ferias rh controle">
-                <div class="tile-header">
-                  <div class="tile-title">CONTROLE DE FÉRIAS</div>
-                  <span class="tile-tag tag-drive">DRIVE</span>
-                </div>
-                <div class="tile-description">Pasta com planilhas de férias.</div>
-                <div class="tile-footer">
-                  <span class="tile-meta">drive.google.com</span>
-                  <span class="tile-open">ABRIR ↗</span>
-                </div>
-              </a>
-
-              <a class="tile" href="https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF?usp=sharing" target="_blank" rel="noopener noreferrer"
-                 data-name="documentos rh" data-tags="drive pasta rh documentos recursos humanos">
-                <div class="tile-header">
-                  <div class="tile-title">DOCUMENTOS RH</div>
-                  <span class="tile-tag tag-drive">DRIVE</span>
-                </div>
-                <div class="tile-description">Pasta com materiais de RH.</div>
-                <div class="tile-footer">
-                  <span class="tile-meta">drive.google.com</span>
-                  <span class="tile-open">ABRIR ↗</span>
-                </div>
-              </a>
-
-              <!-- NOVO: PLANILHA ADM MOVIMENTAÇÕES -->
               <a class="tile" href="https://docs.google.com/spreadsheets/d/1GH-iW3b4txgV1MYHLo2ARGLdY_qJqefkkcA6KHVckmo/edit?usp=sharing"
                  target="_blank" rel="noopener noreferrer"
                  data-name="planilha adm movimentações" data-tags="planilha sheets adm movimentação movimentacoes administrativo">
@@ -793,6 +802,42 @@
                 <div class="tile-description">Planilha de pedidos e retificações.</div>
                 <div class="tile-footer">
                   <span class="tile-meta">docs.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- PASTAS DRIVE SECTION -->
+          <div class="section" id="pastas-drive">
+            <div class="section-header">
+              <h3 class="section-title">Pastas Drive</h3>
+              <div class="section-divider"></div>
+            </div>
+
+            <div class="tiles-grid">
+              <a class="tile" href="https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="controle de férias" data-tags="drive pasta ferias rh controle">
+                <div class="tile-header">
+                  <div class="tile-title">CONTROLE DE FÉRIAS</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com controle de férias da equipe.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
+                  <span class="tile-open">ABRIR ↗</span>
+                </div>
+              </a>
+
+              <a class="tile" href="https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF?usp=sharing" target="_blank" rel="noopener noreferrer"
+                 data-name="documentos rh" data-tags="drive pasta rh documentos recursos humanos">
+                <div class="tile-header">
+                  <div class="tile-title">DOCUMENTOS RH</div>
+                  <span class="tile-tag tag-drive">DRIVE</span>
+                </div>
+                <div class="tile-description">Pasta com materiais de RH.</div>
+                <div class="tile-footer">
+                  <span class="tile-meta">drive.google.com</span>
                   <span class="tile-open">ABRIR ↗</span>
                 </div>
               </a>
@@ -895,8 +940,12 @@
                 <span class="nav-button-title">FORMULÁRIOS</span>
                 <span class="nav-button-subtitle">Ir para seção</span>
               </a>
-              <a href="#planilhas-drive" class="nav-button">
-                <span class="nav-button-title">PLANILHAS / DRIVE</span>
+              <a href="#planilhas" class="nav-button">
+                <span class="nav-button-title">PLANILHAS</span>
+                <span class="nav-button-subtitle">Ir para seção</span>
+              </a>
+              <a href="#pastas-drive" class="nav-button">
+                <span class="nav-button-title">PASTAS DRIVE</span>
                 <span class="nav-button-subtitle">Ir para seção</span>
               </a>
             </div>
@@ -928,6 +977,7 @@
   <script>
     const searchInput = document.getElementById('search');
     const tiles = document.querySelectorAll('.tile');
+    const sections = document.querySelectorAll('.section');
     const emptyState = document.getElementById('emptyState');
     const emptyText = document.getElementById('emptyText');
 
@@ -940,18 +990,29 @@
 
     function filterTiles() {
       const query = normalize(searchInput.value.trim());
-      let visibleCount = 0;
+      let totalVisibleCount = 0;
 
-      tiles.forEach(tile => {
-        const name = normalize(tile.dataset.name || '');
-        const tags = normalize(tile.dataset.tags || '');
-        const matches = !query || name.includes(query) || tags.includes(query);
+      sections.forEach(section => {
+        const sectionTiles = section.querySelectorAll('.tile');
+        let sectionVisibleCount = 0;
 
-        tile.style.display = matches ? 'block' : 'none';
-        if (matches) visibleCount++;
+        sectionTiles.forEach(tile => {
+          const name = normalize(tile.dataset.name || '');
+          const tags = normalize(tile.dataset.tags || '');
+          const matches = !query || name.includes(query) || tags.includes(query);
+
+          tile.style.display = matches ? 'block' : 'none';
+          if (matches) {
+            sectionVisibleCount++;
+            totalVisibleCount++;
+          }
+        });
+
+        // Hide section if no tiles are visible
+        section.style.display = sectionVisibleCount > 0 ? 'block' : 'none';
       });
 
-      if (visibleCount === 0) {
+      if (totalVisibleCount === 0) {
         emptyState.style.display = 'flex';
         emptyText.textContent = `Nenhum resultado encontrado para "${searchInput.value}"`;
       } else {
