@@ -1,357 +1,2140 @@
 <!DOCTYPE html>
-<html lang='pt-BR'>
+<html lang='pt-BR' data-theme='dark'>
 <head>
   <meta charset='UTF-8' />
   <meta name='viewport' content='width=device-width, initial-scale=1.0, viewport-fit=cover' />
   <meta name='theme-color' content='#004294' />
-  <title>Painel do Supervisor • Segurança Patrimonial</title>
+  <title>Centro de Comando Orbenk • Segurança Patrimonial</title>
   
   <link rel='preconnect' href='https://fonts.googleapis.com'>
   <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap' rel='stylesheet'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
 
   <style>
     :root {
-      --orbenk-blue: #004294;
-      --orbenk-blue-light: #0066cc;
-      --orbenk-blue-dim: rgba(0, 66, 148, 0.8);
-      --bg-deep: #05080f;
-      --bg-card: #0d1424;
-      --text-main: #e6edf3;
-      --text-dim: #8b949e;
-      --border-color: #21262d;
+      /* Cores Primárias */
+      --primary-50: #e6f0ff;
+      --primary-100: #cce0ff;
+      --primary-200: #99c2ff;
+      --primary-300: #66a3ff;
+      --primary-400: #3385ff;
+      --primary-500: #004294;
+      --primary-600: #003a85;
+      --primary-700: #002d66;
+      --primary-800: #001f47;
+      --primary-900: #001029;
+      
+      /* Cores de Status */
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #3b82f6;
+      
+      /* Modo Escuro (Default) */
+      --bg-primary: #0a0f1c;
+      --bg-secondary: #111827;
+      --bg-tertiary: #1f2937;
+      --bg-elevated: rgba(31, 41, 55, 0.8);
+      --bg-glass: rgba(17, 24, 39, 0.7);
+      
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-tertiary: #6b7280;
+      
+      --border-primary: rgba(75, 85, 99, 0.4);
+      --border-secondary: rgba(75, 85, 99, 0.2);
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+      --shadow-glow: 0 0 20px rgba(0, 66, 148, 0.3);
+      
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      
+      --transition-fast: 150ms ease;
+      --transition-base: 250ms ease;
+      --transition-slow: 350ms ease;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    [data-theme='light'] {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f3f4f6;
+      --bg-tertiary: #e5e7eb;
+      --bg-elevated: rgba(255, 255, 255, 0.9);
+      --bg-glass: rgba(255, 255, 255, 0.8);
+      
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-tertiary: #9ca3af;
+      
+      --border-primary: rgba(0, 0, 0, 0.1);
+      --border-secondary: rgba(0, 0, 0, 0.05);
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-glow: 0 0 20px rgba(0, 66, 148, 0.15);
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
     
     body {
-      font-family: 'Inter', sans-serif;
-      color: var(--text-main);
-      background-color: var(--bg-deep);
-      background-image: radial-gradient(circle at 50% 0%, rgba(0, 66, 148, 0.1) 0%, transparent 70%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
       line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color var(--transition-base), color var(--transition-base);
     }
 
+    /* Background Effects */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-gradient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 50% 0%, var(--primary-500) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 40%);
+      opacity: 0.15;
+      animation: pulse 15s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.15; }
+      50% { transform: scale(1.1); opacity: 0.2; }
+    }
+
+    /* Grid Pattern */
+    .grid-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(var(--border-secondary) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-secondary) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Header */
     header {
-      background: rgba(13, 20, 36, 0.95);
-      border-bottom: 2px solid var(--orbenk-blue);
-      padding: 1rem 0;
-      position: relative;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
-      backdrop-filter: blur(10px);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-primary);
+      transition: all var(--transition-base);
     }
 
     .header-content {
-      max-width: 1400px;
+      max-width: 1600px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 1rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
-    .brand { display: flex; align-items: center; gap: 1rem; }
+    .brand { 
+      display: flex; 
+      align-items: center; 
+      gap: 1rem; 
+      flex-shrink: 0;
+    }
+    
     .brand-icon {
-      width: 50px; height: 50px; border-radius: 8px;
+      width: 48px; 
+      height: 48px; 
+      border-radius: var(--radius-md);
       overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      background: #004294; /* Fundo azul para combinar com a nova logo */
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      box-shadow: var(--shadow-glow);
+      position: relative;
     }
-    .brand-icon img { width: 100%; height: 100%; object-fit: cover; }
-    .brand h1 { font-family: 'Space Mono', monospace; font-size: 16px; color: #3399ff; text-transform: uppercase; }
-    .brand p { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
 
-    .search-box { position: relative; flex: 1; max-width: 400px; }
+    .brand-icon::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.2));
+    }
+    
+    .brand-icon img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+    }
+    
+    .brand-text h1 { 
+      font-family: 'JetBrains Mono', monospace; 
+      font-size: 1.125rem; 
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-300), var(--primary-400));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+    
+    .brand-text p { 
+      font-size: 0.75rem; 
+      color: var(--text-secondary); 
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    /* Search */
+    .search-container {
+      flex: 1;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+    }
+
     .search-box input {
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border-color);
-      color: var(--text-main); border-radius: 6px; padding: 8px 12px 8px 35px;
-      width: 100%; font-size: 14px;
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      color: var(--text-primary);
+      border-radius: var(--radius-lg);
+      padding: 0.875rem 1rem 0.875rem 3rem;
+      font-size: 0.9375rem;
+      font-family: inherit;
+      transition: all var(--transition-fast);
+      outline: none;
     }
-    .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--orbenk-blue-light); }
 
+    .search-box input:focus {
+      border-color: var(--primary-400);
+      box-shadow: 0 0 0 3px rgba(0, 66, 148, 0.1);
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .search-icon { 
+      position: absolute; 
+      left: 1rem; 
+      top: 50%; 
+      transform: translateY(-50%); 
+      color: var(--text-tertiary);
+      font-size: 1rem;
+    }
+
+    .search-shortcut {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      border: 1px solid var(--border-primary);
+    }
+
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-primary);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+      font-size: 1rem;
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border-color: var(--primary-400);
+      transform: translateY(-2px);
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.875rem;
+      cursor: pointer;
+      border: 2px solid var(--border-primary);
+      transition: all var(--transition-fast);
+    }
+
+    .user-avatar:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Navigation */
     .top-nav { 
-      background: var(--bg-card); 
-      border-bottom: 1px solid var(--border-color); 
-      padding: 10px 0;
-      position: sticky;
-      top: 0;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
       z-index: 999;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-primary);
+      padding: 0.75rem 0;
     }
+    
     .top-nav-content { 
-      max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; 
-      display: flex; gap: 8px; overflow-x: auto; 
-      scrollbar-width: none; 
+      max-width: 1600px; 
+      margin: 0 auto; 
+      padding: 0 2rem; 
+      display: flex; 
+      gap: 0.5rem; 
+      overflow-x: auto; 
+      scrollbar-width: none;
     }
-    .top-nav-content::-webkit-scrollbar { display: none; }
+    
+    .top-nav-content::-webkit-scrollbar { 
+      display: none; 
+    }
 
     .nav-link {
-      color: #ffffff; font-size: 13px; font-weight: 600;
-      text-decoration: none; padding: 8px 16px; border-radius: 4px; 
-      white-space: nowrap; border: 1px solid var(--orbenk-blue); background: var(--orbenk-blue);
-      transition: 0.2s;
+      color: var(--text-secondary); 
+      font-size: 0.8125rem; 
+      font-weight: 600;
+      text-decoration: none; 
+      padding: 0.625rem 1.25rem; 
+      border-radius: var(--radius-md); 
+      white-space: nowrap; 
+      border: 1px solid transparent;
+      background: transparent;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .nav-link:hover { color: #ffffff; background: #0056b3; border-color: #007bff; }
 
-    main { max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem; }
-    .section { margin-bottom: 3rem; scroll-margin-top: 60px; }
-    .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-    .section-title { color: #3399ff; font-family: 'Space Mono', monospace; font-size: 14px; text-transform: uppercase; border-left: 4px solid var(--orbenk-blue); padding-left: 10px; }
-    .section-divider { background: var(--border-color); height: 1px; flex: 1; }
+    .nav-link:hover { 
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      border-color: var(--border-primary);
+    }
 
-    .tiles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+    .nav-link.active {
+      color: var(--primary-300);
+      background: rgba(0, 66, 148, 0.15);
+      border-color: var(--primary-500);
+    }
+
+    /* Main Content */
+    main { 
+      max-width: 1600px; 
+      margin: 0 auto; 
+      padding: 140px 2rem 2rem; 
+    }
+
+    /* Stats Dashboard */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary-400);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-500), var(--primary-300));
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .stat-card:hover::before {
+      opacity: 1;
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .stat-icon.blue { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+    .stat-icon.green { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+    .stat-icon.amber { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+    .stat-icon.red { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-change {
+      font-size: 0.8125rem;
+      color: var(--success);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-change.negative {
+      color: var(--danger);
+    }
+
+    /* Section */
+    .section { 
+      margin-bottom: 4rem; 
+      scroll-margin-top: 140px; 
+    }
+
+    .section-header { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+
+    .section-title-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-title { 
+      color: var(--text-primary); 
+      font-family: 'JetBrains Mono', monospace; 
+      font-size: 0.875rem; 
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
+      border-radius: 2px;
+    }
+
+    .section-count {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .section-divider { 
+      background: var(--border-primary); 
+      height: 1px; 
+      flex: 1;
+    }
+
+    .section-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 1px solid var(--border-primary);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-sm:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border-color: var(--primary-400);
+    }
+
+    /* Tiles Grid */
+    .tiles-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+      gap: 1.25rem; 
+    }
+
     .tile {
-      background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.2rem;
-      border-radius: 8px; text-decoration: none; color: inherit; transition: 0.2s;
-      display: flex; flex-direction: column; height: 100%;
+      background: var(--bg-secondary); 
+      border: 1px solid var(--border-primary); 
+      padding: 1.5rem;
+      border-radius: var(--radius-lg); 
+      text-decoration: none; 
+      color: inherit; 
+      transition: all var(--transition-base);
+      display: flex; 
+      flex-direction: column; 
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      group: tile;
     }
-    .tile:hover { border-color: #007bff; transform: translateY(-3px); background: #121d33; }
 
-    .tile-header { margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: flex-start; }
-    .tile-title { color: var(--text-main); font-weight: 600; font-size: 15px; }
-    .tile-icon { font-size: 20px; color: #ffffff; background: var(--orbenk-blue); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
-    .tile-description { font-size: 12px; color: var(--text-dim); margin-bottom: 1rem; flex: 1; }
-    .tile-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 0.8rem; border-top: 1px solid var(--border-color); font-size: 10px; color: #3399ff; font-family: 'Space Mono', monospace; }
+    .tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 66, 148, 0.05), transparent);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
 
-    footer { background: var(--bg-deep); border-top: 1px solid var(--border-color); padding: 2rem 1.5rem; text-align: center; color: var(--text-dim); font-size: 11px; }
+    .tile:hover { 
+      border-color: var(--primary-400); 
+      transform: translateY(-4px); 
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
 
+    .tile:hover::before {
+      opacity: 1;
+    }
+
+    .tile-favorite {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-primary);
+      background: var(--bg-primary);
+      color: var(--text-tertiary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all var(--transition-fast);
+      z-index: 10;
+    }
+
+    .tile:hover .tile-favorite {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .tile-favorite:hover {
+      color: #f59e0b;
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .tile-favorite.active {
+      opacity: 1;
+      transform: scale(1);
+      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .tile-header { 
+      margin-bottom: 1rem; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tile-icon { 
+      font-size: 1.5rem; 
+      color: white; 
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      width: 48px; 
+      height: 48px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+    }
+
+    .tile:hover .tile-icon {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .tile-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 2px var(--bg-secondary), 0 0 0 4px var(--success);
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+    }
+
+    .tile-status.warning { background: var(--warning); box-shadow: 0 0 0 2px var(--bg-secondary), 0 0 0 4px var(--warning); }
+    .tile-status.danger { background: var(--danger); box-shadow: 0 0 0 2px var(--bg-secondary), 0 0 0 4px var(--danger); }
+
+    .tile-content {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tile-title { 
+      color: var(--text-primary); 
+      font-weight: 700; 
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .tile-description { 
+      font-size: 0.875rem; 
+      color: var(--text-secondary); 
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .tile-footer { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding-top: 1rem; 
+      margin-top: 1rem;
+      border-top: 1px solid var(--border-primary); 
+      font-size: 0.75rem; 
+      color: var(--text-tertiary);
+      font-family: 'JetBrains Mono', monospace;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tile-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tile-tag {
+      background: var(--bg-tertiary);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .tile-arrow {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all var(--transition-fast);
+      color: var(--primary-400);
+    }
+
+    .tile:hover .tile-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-secondary);
+      display: none;
+    }
+
+    .empty-state.show {
+      display: block;
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    /* Footer */
+    footer { 
+      background: var(--bg-secondary); 
+      border-top: 1px solid var(--border-primary); 
+      padding: 3rem 2rem; 
+      text-align: center; 
+      color: var(--text-secondary); 
+      font-size: 0.875rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+      font-weight: 500;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-400);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all var(--transition-base);
+      z-index: 9999;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .toast-content {
+      flex: 1;
+    }
+
+    .toast-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.9375rem;
+    }
+
+    .toast-message {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    /* Scroll to Top */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all var(--transition-base);
+      z-index: 998;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-top:hover {
+      background: var(--primary-500);
+      color: white;
+      border-color: var(--primary-400);
+      transform: translateY(-4px);
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
-      header { padding: 0.8rem 0; }
-      .header-content { flex-direction: column; gap: 0.8rem; }
-      .brand h1 { font-size: 14px; }
-      .search-box { width: 100%; max-width: none; }
-      .top-nav { top: 0; }
-      .section { scroll-margin-top: 120px; }
+      .header-content {
+        padding: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .search-container {
+        order: 3;
+        max-width: none;
+        width: 100%;
+      }
+
+      .search-shortcut {
+        display: none;
+      }
+
+      main {
+        padding: 120px 1rem 1rem;
+      }
+
+      .top-nav {
+        top: 130px;
+      }
+
+      .top-nav-content {
+        padding: 0 1rem;
+      }
+
+      .section {
+        scroll-margin-top: 180px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tiles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tile-favorite {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Loading Animation */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: var(--radius-md);
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus styles */
+    *:focus-visible {
+      outline: 2px solid var(--primary-400);
+      outline-offset: 2px;
     }
   </style>
-
-  <script>
-    function filterTiles() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const tiles = document.querySelectorAll('.tile');
-      tiles.forEach(tile => {
-        const title = tile.querySelector('.tile-title').innerText.toLowerCase();
-        const desc = tile.querySelector('.tile-description').innerText.toLowerCase();
-        tile.style.display = (title.includes(query) || desc.includes(query)) ? 'flex' : 'none';
-      });
-    }
-  </script>
 </head>
 
 <body>
+  <div class='bg-gradient'></div>
+  <div class='grid-pattern'></div>
+
   <header>
     <div class='header-content'>
       <div class='brand'>
-        <div class='brand-icon'><img src='https://files.manuscdn.com/user_upload_by_module/session_file/310519663074137771/hJbeoIhKqYfmJnTc.jpg' alt='Orbenk Logo'></div>
-        <div><h1>Centro de Comando</h1><p>Segurança Patrimonial</p></div>
+        <div class='brand-icon'>
+          <img src='https://files.manuscdn.com/user_upload_by_module/session_file/310519663074137771/hJbeoIhKqYfmJnTc.jpg' alt='Orbenk'>
+        </div>
+        <div class='brand-text'>
+          <h1>Centro de Comando</h1>
+          <p>Segurança Patrimonial</p>
+        </div>
       </div>
-      <div class='search-box'>
-        <i class='fas fa-search search-icon'></i>
-        <input type='text' id='searchInput' placeholder='Pesquisar...' onkeyup='filterTiles()'>
+      
+      <div class='search-container'>
+        <div class='search-box'>
+          <i class='fas fa-search search-icon'></i>
+          <input type='text' id='searchInput' placeholder='Buscar sistemas, formulários, registros...' autocomplete='off'>
+          <span class='search-shortcut'>Ctrl K</span>
+        </div>
+      </div>
+
+      <div class='header-actions'>
+        <button class='btn-icon' id='themeToggle' title='Alternar tema'>
+          <i class='fas fa-sun'></i>
+        </button>
+        <button class='btn-icon' id='favoritesBtn' title='Ver favoritos'>
+          <i class='fas fa-star'></i>
+        </button>
+        <div class='user-avatar' title='Supervisor Douglas Jelinsky'>DJ</div>
       </div>
     </div>
   </header>
 
   <nav class='top-nav'>
     <div class='top-nav-content'>
-      <a href='#sistemas' class='nav-link'>Sistemas</a>
-      <a href='#formularios' class='nav-link'>Formulários</a>
-      <a href='#registros' class='nav-link'>Registros</a>
-      <a href='#pastas-drive' class='nav-link'>Pastas Drive</a>
-      <a href='#treinamentos' class='nav-link'>Treinamentos</a>
+      <a href='#sistemas' class='nav-link active' data-section='sistemas'>
+        <i class='fas fa-th-large'></i> Sistemas
+      </a>
+      <a href='#formularios' class='nav-link' data-section='formularios'>
+        <i class='fas fa-edit'></i> Formulários
+      </a>
+      <a href='#registros' class='nav-link' data-section='registros'>
+        <i class='fas fa-table'></i> Registros
+      </a>
+      <a href='#pastas-drive' class='nav-link' data-section='pastas-drive'>
+        <i class='fas fa-folder'></i> Pastas Drive
+      </a>
+      <a href='#treinamentos' class='nav-link' data-section='treinamentos'>
+        <i class='fas fa-graduation-cap'></i> Treinamentos
+      </a>
     </div>
   </nav>
 
   <main>
+    <!-- Dashboard Stats -->
+    <div class='stats-grid'>
+      <div class='stat-card'>
+        <div class='stat-header'>
+          <span class='stat-label'>Sistemas Online</span>
+          <div class='stat-icon blue'><i class='fas fa-server'></i></div>
+        </div>
+        <div class='stat-value'>6</div>
+        <div class='stat-change'>
+          <i class='fas fa-check-circle'></i> 100% operacional
+        </div>
+      </div>
+      
+      <div class='stat-card'>
+        <div class='stat-header'>
+          <span class='stat-label'>Formulários Ativos</span>
+          <div class='stat-icon green'><i class='fas fa-clipboard-check'></i></div>
+        </div>
+        <div class='stat-value'>7</div>
+        <div class='stat-change'>
+          <i class='fas fa-arrow-up'></i> 2 novos este mês
+        </div>
+      </div>
+      
+      <div class='stat-card'>
+        <div class='stat-header'>
+          <span class='stat-label'>Registros Totais</span>
+          <div class='stat-icon amber'><i class='fas fa-database'></i></div>
+        </div>
+        <div class='stat-value'>10</div>
+        <div class='stat-change'>
+          <i class='fas fa-sync'></i> Atualizado agora
+        </div>
+      </div>
+      
+      <div class='stat-card'>
+        <div class='stat-header'>
+          <span class='stat-label'>Acesso Rápido</span>
+          <div class='stat-icon red'><i class='fas fa-star'></i></div>
+        </div>
+        <div class='stat-value' id='favCount'>0</div>
+        <div class='stat-change'>
+          <i class='fas fa-heart'></i> Favoritos salvos
+        </div>
+      </div>
+    </div>
+
+    <!-- Sistemas -->
     <section id='sistemas' class='section'>
-      <div class='section-header'><h2 class='section-title'>Sistemas</h2><div class='section-divider'></div></div>
-      <div class='tiles-grid'>
-        <a href='https://mail.google.com/' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-envelope'></i></div></div>
-          <h3 class='tile-title'>GMAIL</h3><p class='tile-description'>Acesso ao e-mail corporativo.</p>
-          <div class='tile-footer'><span>mail.google.com</span><i class='fas fa-external-link-alt'></i></div>
+      <div class='section-header'>
+        <div class='section-title-group'>
+          <h2 class='section-title'>Sistemas</h2>
+          <span class='section-count'>6</span>
+        </div>
+        <div class='section-divider'></div>
+        <div class='section-actions'>
+          <button class='btn-sm' onclick='expandAll("sistemas")'>
+            <i class='fas fa-expand'></i> Expandir
+          </button>
+        </div>
+      </div>
+      
+      <div class='tiles-grid' data-category='sistemas'>
+        <a href='https://mail.google.com/' class='tile' target='_blank' data-title='Gmail' data-desc='Email corporativo'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-envelope'></i>
+              <span class='tile-status'></span>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Gmail</h3>
+            <p class='tile-description'>Acesso ao e-mail corporativo Orbenk com integração completa e segurança avançada.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Email</span>
+              <span>mail.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://fusion.orbenk.com.br/portal' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-network-wired'></i></div></div>
-          <h3 class='tile-title'>PORTAL FUSION</h3><p class='tile-description'>Gestão de operações e recursos humanos.</p>
-          <div class='tile-footer'><span>fusion.orbenk.com.br</span><i class='fas fa-external-link-alt'></i></div>
+
+        <a href='https://fusion.orbenk.com.br/portal' class='tile' target='_blank' data-title='Portal Fusion' data-desc='Gestão de operações'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-network-wired'></i>
+              <span class='tile-status'></span>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Portal Fusion</h3>
+            <p class='tile-description'>Gestão completa de operações, recursos humanos e controle administrativo.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>ERP</span>
+              <span>fusion.orbenk.com.br</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://suprimentos.orbenk.com.br/index.php?redirect=%2Ffront%2Fticket.php&error=3' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-box-open'></i></div></div>
-          <h3 class='tile-title'>SOLICITE UNIFORMES [ GLPI ]</h3><p class='tile-description'>Portal de de pedidos de uniformes.</p>
-          <div class='tile-footer'><span>suprimentos.orbenk.com.br</span><i class='fas fa-external-link-alt'></i></div>
+
+        <a href='https://suprimentos.orbenk.com.br/' class='tile' target='_blank' data-title='GLPI Uniformes' data-desc='Solicitação de uniformes'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-tshirt'></i>
+              <span class='tile-status'></span>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>GLPI - Uniformes</h3>
+            <p class='tile-description'>Portal de pedidos e gestão de uniformes para colaboradores.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Suprimentos</span>
+              <span>suprimentos.orbenk.com.br</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://app.nexti.com/' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-tasks'></i></div></div>
-          <h3 class='tile-title'>ACESSE O NEXTI PONTO</h3><p class='tile-description'>Gestão de ponto dos colaboradores.</p>
-          <div class='tile-footer'><span>nexti.com</span><i class='fas fa-external-link-alt'></i></div>
+
+        <a href='https://app.nexti.com/' class='tile' target='_blank' data-title='Nexti Ponto' data-desc='Controle de ponto'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-clock'></i>
+              <span class='tile-status'></span>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Nexti Ponto</h3>
+            <p class='tile-description'>Gestão de ponto eletrônico e controle de jornada dos colaboradores.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>RH</span>
+              <span>app.nexti.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://sgo.orbenk.com.br/' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-chart-line'></i></div></div>
-          <h3 class='tile-title'>PORTAL DE CONSULTA [ SGO ] </h3><p class='tile-description'>Consulte dados de todos os colaboradores.</p>
-          <div class='tile-footer'><span>sgo.orbenk.com.br</span><i class='fas fa-external-link-alt'></i></div>
+
+        <a href='https://sgo.orbenk.com.br/' class='tile' target='_blank' data-title='Portal SGO' data-desc='Consulta de dados'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-chart-line'></i>
+              <span class='tile-status'></span>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Portal SGO</h3>
+            <p class='tile-description'>Consulta completa de dados e indicadores de todos os colaboradores.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>BI</span>
+              <span>sgo.orbenk.com.br</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://api.whatsapp.com/send?text=Olá! Segue o link do Portal do Vigilante: https://douglasjelinsky-code.github.io/supervisao/' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fab fa-whatsapp'></i></div></div>
-          <h3 class='tile-title'>PORTAL DO VIGILANTE</h3><p class='tile-description'>Compartilhar link via WhatsApp.</p>
-          <div class='tile-footer'><span>whatsapp.com</span><i class='fas fa-share-alt'></i></div>
+
+        <a href='https://api.whatsapp.com/send?text=Olá! Segue o link do Portal do Vigilante: https://douglasjelinsky-code.github.io/supervisao/' class='tile' target='_blank' data-title='Portal do Vigilante' data-desc='Compartilhar via WhatsApp'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #25d366, #128c7e);'>
+              <i class='fab fa-whatsapp'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Portal do Vigilante</h3>
+            <p class='tile-description'>Compartilhe o portal diretamente com os vigilantes via WhatsApp.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Compartilhar</span>
+              <span>whatsapp.com</span>
+            </div>
+            <i class='fas fa-share tile-arrow'></i>
+          </div>
         </a>
+      </div>
+      
+      <div class='empty-state' id='empty-sistemas'>
+        <div class='empty-icon'><i class='fas fa-search'></i></div>
+        <h3>Nenhum sistema encontrado</h3>
+        <p>Tente buscar com termos diferentes</p>
       </div>
     </section>
 
+    <!-- Formulários -->
     <section id='formularios' class='section'>
-      <div class='section-header'><h2 class='section-title'>Formulários</h2><div class='section-divider'></div></div>
-      <div class='tiles-grid'>
-        <a href='https://docs.google.com/forms/d/1c9s7rie3ZhAtYdT-rVNaU8nYM0xiUGWRK7w2nZ7KPgA/edit' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-clipboard-list'></i></div></div>
-          <h3 class='tile-title'>REGISTRE AS COBERTURAS</h3><p class='tile-description'>Registre todas as coberturas operacionais.</p>
-          <div class='tile-footer'><span>forms.google.com</span><i class='fas fa-edit'></i></div>
+      <div class='section-header'>
+        <div class='section-title-group'>
+          <h2 class='section-title'>Formulários</h2>
+          <span class='section-count'>7</span>
+        </div>
+        <div class='section-divider'></div>
+      </div>
+      
+      <div class='tiles-grid' data-category='formularios'>
+        <a href='https://docs.google.com/forms/d/1c9s7rie3ZhAtYdT-rVNaU8nYM0xiUGWRK7w2nZ7KPgA/edit' class='tile' target='_blank' data-title='Registro de Coberturas' data-desc='Coberturas operacionais'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-clipboard-list'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Registro de Coberturas</h3>
+            <p class='tile-description'>Registre todas as coberturas operacionais e substituições de equipe.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Operacional</span>
+              <span>forms.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/forms/d/e/1FAIpQLScYNtmjlhN8tstCtovNXhplcfYVjbO4bH0K6eKc12LjhFcQlw/viewform?usp=sharing&ouid=109010654904216395929' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-exchange-alt'></i></div></div>
-          <h3 class='tile-title'>REGISTRE AS ADMISSÕES E MOVIMENTAÇÃO</h3><p class='tile-description'>Registre todas as admissões e movimentações.</p>
-          <div class='tile-footer'><span>forms.google.com</span><i class='fas fa-edit'></i></div>
+
+        <a href='https://docs.google.com/forms/d/e/1FAIpQLScYNtmjlhN8tstCtovNXhplcfYVjbO4bH0K6eKc12LjhFcQlw/viewform' class='tile' target='_blank' data-title='Admissões e Movimentação' data-desc='RH e contratações'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-user-plus'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Admissões e Movimentação</h3>
+            <p class='tile-description'>Controle de admissões, demissões e movimentações de pessoal.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>RH</span>
+              <span>forms.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://api.whatsapp.com/send?text=Olá! Segue o link para cadastro de currículo: https://forms.gle/EoP4xeFzTQnp6rTB8' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fab fa-whatsapp'></i></div></div>
-          <h3 class='tile-title'>CADASTRO DE CURRÍCULOS</h3><p class='tile-description'>Envie este link aos cantitados.</p>
-          <div class='tile-footer'><span>whatsapp.com</span><i class='fas fa-share-alt'></i></div>
+
+        <a href='https://api.whatsapp.com/send?text=Olá! Segue o link para cadastro de currículo: https://forms.gle/EoP4xeFzTQnp6rTB8' class='tile' target='_blank' data-title='Cadastro de Currículos' data-desc='Recrutamento'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #25d366, #128c7e);'>
+              <i class='fab fa-whatsapp'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Cadastro de Currículos</h3>
+            <p class='tile-description'>Envie este link aos candidatos para cadastro de currículos.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Recrutamento</span>
+              <span>whatsapp.com</span>
+            </div>
+            <i class='fas fa-share tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://forms.gle/eFSPdJvjjYE4Mewi6' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-exclamation-triangle'></i></div></div>
-          <h3 class='tile-title'>REGISTRE AS OCORRÊNCIAS</h3><p class='tile-description'>Registre todas as ocorrências operacionais.</p>
-          <div class='tile-footer'><span>forms.gle</span><i class='fas fa-edit'></i></div>
+
+        <a href='https://forms.gle/eFSPdJvjjYE4Mewi6' class='tile' target='_blank' data-title='Registro de Ocorrências' data-desc='Ocorrências operacionais'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-exclamation-triangle'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Registro de Ocorrências</h3>
+            <p class='tile-description'>Registre todas as ocorrências operacionais e incidentes.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Segurança</span>
+              <span>forms.gle</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://forms.gle/Y5r3t12n6kxXPRBQ6' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-check-double'></i></div></div>
-          <h3 class='tile-title'>REGISTRE AS TAREFAS IMPORTANTES [COORDENADOR ] </h3><p class='tile-description'>Registro de tarefas importantes .</p>
-          <div class='tile-footer'><span>forms.gle</span><i class='fas fa-edit'></i></div>
+
+        <a href='https://forms.gle/Y5r3t12n6kxXPRBQ6' class='tile' target='_blank' data-title='Tarefas Importantes' data-desc='Coordenador'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-check-double'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Tarefas Importantes</h3>
+            <p class='tile-description'>Registro de tarefas prioritárias para coordenação.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Gestão</span>
+              <span>forms.gle</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://forms.gle/C8TK8ADNqocdZwE99' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-skull'></i></div></div>
-          <h3 class='tile-title'>REGISTRE OS VIGILANTES CAVEIRA </h3><p class='tile-description'>Registre todos os Vigilantes que querem fazer hora extra.</p>
-          <div class='tile-footer'><span>forms.gle</span><i class='fas fa-edit'></i></div>
+
+        <a href='https://forms.gle/C8TK8ADNqocdZwE99' class='tile' target='_blank' data-title='Vigilantes Caveira' data-desc='Hora extra'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-skull'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Vigilantes Caveira</h3>
+            <p class='tile-description'>Registre vigilantes disponíveis para hora extra.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Escala</span>
+              <span>forms.gle</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://forms.gle/rm8TADDi2GQbufsV6' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-link'></i></div></div>
-          <h3 class='tile-title'>VINCULAÇÃO TERMINAIS NEXTI</h3><p class='tile-description'>Formulário de vinculação de terminais Nexti.</p>
-          <div class='tile-footer'><span>forms.gle</span><i class='fas fa-edit'></i></div>
+
+        <a href='https://forms.gle/rm8TADDi2GQbufsV6' class='tile' target='_blank' data-title='Vinculação Nexti' data-desc='Terminais'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-link'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Vinculação Nexti</h3>
+            <p class='tile-description'>Formulário de vinculação de terminais Nexti.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>TI</span>
+              <span>forms.gle</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
+      </div>
+      
+      <div class='empty-state' id='empty-formularios'>
+        <div class='empty-icon'><i class='fas fa-search'></i></div>
+        <h3>Nenhum formulário encontrado</h3>
+        <p>Tente buscar com termos diferentes</p>
       </div>
     </section>
 
+    <!-- Registros -->
     <section id='registros' class='section'>
-      <div class='section-header'><h2 class='section-title'>Registros</h2><div class='section-divider'></div></div>
-      <div class='tiles-grid'>
-        <a href='https://docs.google.com/spreadsheets/d/1RTVaVtUgit3tSEekrTS0kd1bMsbl_IaH8vQf9aG4orA/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>BANCO DE CURRÍCULOS</h3><p class='tile-description'>Dados dos  Currículos cadastrados </p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+      <div class='section-header'>
+        <div class='section-title-group'>
+          <h2 class='section-title'>Registros</h2>
+          <span class='section-count'>10</span>
+        </div>
+        <div class='section-divider'></div>
+      </div>
+      
+      <div class='tiles-grid' data-category='registros'>
+        <a href='https://docs.google.com/spreadsheets/d/1RTVaVtUgit3tSEekrTS0kd1bMsbl_IaH8vQf9aG4orA/edit' class='tile' target='_blank' data-title='Banco de Currículos' data-desc='Currículos cadastrados'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-address-book'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Banco de Currículos</h3>
+            <p class='tile-description'>Base de dados completa de currículos cadastrados.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>DADOS DAS COBERTURAS DE COLABORADOR</h3><p class='tile-description'>Planilha com todas as coberturas .</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit' class='tile' target='_blank' data-title='Dados de Coberturas' data-desc='Coberturas de colaboradores'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-exchange-alt'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Dados de Coberturas</h3>
+            <p class='tile-description'>Planilha com todas as coberturas e substituições.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>DADOS DAS OCORRÊNCIAS</h3><p class='tile-description'>Planilha com todas as ocorrências.</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit' class='tile' target='_blank' data-title='Dados de Ocorrências' data-desc='Registro de ocorrências'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-file-alt'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Dados de Ocorrências</h3>
+            <p class='tile-description'>Planilha completa com todas as ocorrências registradas.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>DADOS DOS UNIFORMES</h3><p class='tile-description'>Planilha de Pedidos de uniforme.</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit' class='tile' target='_blank' data-title='Dados de Uniformes' data-desc='Pedidos de uniforme'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-tshirt'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Dados de Uniformes</h3>
+            <p class='tile-description'>Controle de pedidos e entregas de uniformes.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>DADOS DAS SOLICITAÇOES VIGILANTES</h3><p class='tile-description'>Planilha de Pedidos e retificações.</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit' class='tile' target='_blank' data-title='Solicitações Vigilantes' data-desc='Pedidos e retificações'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-tasks'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Solicitações Vigilantes</h3>
+            <p class='tile-description'>Planilha de pedidos e retificações de vigilantes.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/12Y_-djZOTgNBSaqme7NlAi_JYIevoIFy9olPv2SMagE/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>DADOS DE APROVAÇÃO DE PONTO</h3><p class='tile-description'>Planilha pedidos de aceitação de ponto.</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/12Y_-djZOTgNBSaqme7NlAi_JYIevoIFy9olPv2SMagE/edit' class='tile' target='_blank' data-title='Aprovação de Ponto' data-desc='Aceitação de ponto'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-clock'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Aprovação de Ponto</h3>
+            <p class='tile-description'>Planilha de pedidos de aceitação de ponto.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/1GH-iW3b4txgV1MYHLo2ARGLdY_qJqefkkcA6KHVckmo/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>DADOS DE ADMISSÃO E MOVIMENTAÇÃO</h3><p class='tile-description'>Planilha de Movimentação de pessoal.</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/1GH-iW3b4txgV1MYHLo2ARGLdY_qJqefkkcA6KHVckmo/edit' class='tile' target='_blank' data-title='Admissão e Movimentação' data-desc='Movimentação de pessoal'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-users-cog'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Admissão e Movimentação</h3>
+            <p class='tile-description'>Planilha de movimentação completa de pessoal.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/11Epj61zDnthSYfetuO2drtr92cOc78jJckH4rwj9QRg/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>DADOS DAS TAREFAS</h3><p class='tile-description'>Registro de tarefas.</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/11Epj61zDnthSYfetuO2drtr92cOc78jJckH4rwj9QRg/edit' class='tile' target='_blank' data-title='Dados de Tarefas' data-desc='Registro de tarefas'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-clipboard-check'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Dados de Tarefas</h3>
+            <p class='tile-description'>Registro completo de todas as tarefas.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/1zvTbaY058y1b4zzD_kUGjC--10LNAYkanm7HSGx0LOE/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>DADOS DOS VIGILANTES CAVEIRA</h3><p class='tile-description'>Dados dos  Vigilantes que fazem hora extra .</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/1zvTbaY058y1b4zzD_kUGjC--10LNAYkanm7HSGx0LOE/edit' class='tile' target='_blank' data-title='Vigilantes Caveira' data-desc='Hora extra'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-skull'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Vigilantes Caveira</h3>
+            <p class='tile-description'>Dados dos vigilantes disponíveis para hora extra.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://docs.google.com/spreadsheets/d/1NsOiCZRn6NGqaaS-uurGFmiLPbAnGi186Zhg7xw8uNg/edit?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-file-excel'></i></div></div>
-          <h3 class='tile-title'>VINCULAÇÃO TERMINAIS NEXTI</h3><p class='tile-description'>Planilha de registros de vinculação Nexti.</p>
-          <div class='tile-footer'><span>docs.google.com</span><i class='fas fa-table'></i></div>
+
+        <a href='https://docs.google.com/spreadsheets/d/1NsOiCZRn6NGqaaS-uurGFmiLPbAnGi186Zhg7xw8uNg/edit' class='tile' target='_blank' data-title='Vinculação Nexti' data-desc='Terminais'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon'>
+              <i class='fas fa-link'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Vinculação Nexti</h3>
+            <p class='tile-description'>Planilha de registros de vinculação Nexti.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Planilha</span>
+              <span>docs.google.com</span>
+            </div>
+            <i class='fas fa-arrow-right tile-arrow'></i>
+          </div>
         </a>
+      </div>
+      
+      <div class='empty-state' id='empty-registros'>
+        <div class='empty-icon'><i class='fas fa-search'></i></div>
+        <h3>Nenhum registro encontrado</h3>
+        <p>Tente buscar com termos diferentes</p>
       </div>
     </section>
 
+    <!-- Pastas Drive -->
     <section id='pastas-drive' class='section'>
-      <div class='section-header'><h2 class='section-title'>Pastas Drive</h2><div class='section-divider'></div></div>
-      <div class='tiles-grid'>
-        <a href='https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-folder-open'></i></div></div>
-          <h3 class='tile-title'>ACESSE SEU CONTROLE DE FÉRIAS</h3><p class='tile-description'>Pasta com todos os Controles de férias.</p>
-          <div class='tile-footer'><span>drive.google.com</span><i class='fas fa-folder'></i></div>
+      <div class='section-header'>
+        <div class='section-title-group'>
+          <h2 class='section-title'>Pastas Drive</h2>
+          <span class='section-count'>7</span>
+        </div>
+        <div class='section-divider'></div>
+      </div>
+      
+      <div class='tiles-grid' data-category='pastas-drive'>
+        <a href='https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy' class='tile' target='_blank' data-title='Controle de Férias' data-desc='Gestão de férias'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #f59e0b, #d97706);'>
+              <i class='fas fa-umbrella-beach'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Controle de Férias</h3>
+            <p class='tile-description'>Pasta com todos os controles de férias dos colaboradores.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Drive</span>
+              <span>drive.google.com</span>
+            </div>
+            <i class='fas fa-folder-open tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-folder-open'></i></div></div>
-          <h3 class='tile-title'>ACESSE OS MODELOS DE RH</h3><p class='tile-description'>Pasta com documentos e modelos de RH.</p>
-          <div class='tile-footer'><span>drive.google.com</span><i class='fas fa-folder'></i></div>
+
+        <a href='https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF' class='tile' target='_blank' data-title='Modelos de RH' data-desc='Documentos RH'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #8b5cf6, #7c3aed);'>
+              <i class='fas fa-file-contract'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Modelos de RH</h3>
+            <p class='tile-description'>Pasta com documentos e modelos de recursos humanos.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Drive</span>
+              <span>drive.google.com</span>
+            </div>
+            <i class='fas fa-folder-open tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://drive.google.com/drive/folders/12seW8B6sRdklulNeb8Ye70fbzUxTipL5?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-folder-open'></i></div></div>
-          <h3 class='tile-title'>ACESSE TODOS OS QLS ATUALIZADOS</h3><p class='tile-description'>Pasta com todos os QLS atualizados na semana.</p>
-          <div class='tile-footer'><span>drive.google.com</span><i class='fas fa-folder'></i></div>
+
+        <a href='https://drive.google.com/drive/folders/12seW8B6sRdklulNeb8Ye70fbzUxTipL5' class='tile' target='_blank' data-title='QLS Atualizados' data-desc='Qualidade'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #10b981, #059669);'>
+              <i class='fas fa-check-circle'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>QLS Atualizados</h3>
+            <p class='tile-description'>Pasta com todos os QLS atualizados semanalmente.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Drive</span>
+              <span>drive.google.com</span>
+            </div>
+            <i class='fas fa-folder-open tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://drive.google.com/drive/folders/1SFKht_maxNC5cgKdtusv2bPKI0PMCgRf?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-folder-open'></i></div></div>
-          <h3 class='tile-title'>ACESSE A PASTA RECICLAGENS</h3><p class='tile-description'>Todos os controles de reciclagem.</p>
-          <div class='tile-footer'><span>drive.google.com</span><i class='fas fa-folder'></i></div>
+
+        <a href='https://drive.google.com/drive/folders/1SFKht_maxNC5cgKdtusv2bPKI0PMCgRf' class='tile' target='_blank' data-title='Reciclagens' data-desc='Controles'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #3b82f6, #2563eb);'>
+              <i class='fas fa-sync-alt'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Reciclagens</h3>
+            <p class='tile-description'>Todos os controles de reciclagem de vigilantes.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Drive</span>
+              <span>drive.google.com</span>
+            </div>
+            <i class='fas fa-folder-open tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://drive.google.com/drive/folders/1zrpvOWPOeNniFqUrvDj1YI1JHH5RZLlP?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-folder-open'></i></div></div>
-          <h3 class='tile-title'>ACESSE A PASTA DE CNVs</h3><p class='tile-description'>Pasta com todas as Carteiras Nacionais de Vigilante.</p>
-          <div class='tile-footer'><span>drive.google.com</span><i class='fas fa-folder'></i></div>
+
+        <a href='https://drive.google.com/drive/folders/1zrpvOWPOeNniFqUrvDj1YI1JHH5RZLlP' class='tile' target='_blank' data-title='CNVs' data-desc='Carteiras'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #ef4444, #dc2626);'>
+              <i class='fas fa-id-card'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>CNVs</h3>
+            <p class='tile-description'>Pasta com todas as Carteiras Nacionais de Vigilante.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Drive</span>
+              <span>drive.google.com</span>
+            </div>
+            <i class='fas fa-folder-open tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://drive.google.com/drive/folders/1eHM4KLLUDogMfmXN0LPhF94mYUMM3LkF?usp=drive_link' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-folder-open'></i></div></div>
-          <h3 class='tile-title'>ACESSE AS DIRETRIZES</h3><p class='tile-description'>Pasta com todas as diretrizes de postos.</p>
-          <div class='tile-footer'><span>drive.google.com</span><i class='fas fa-folder'></i></div>
+
+        <a href='https://drive.google.com/drive/folders/1eHM4KLLUDogMfmXN0LPhF94mYUMM3LkF' class='tile' target='_blank' data-title='Diretrizes' data-desc='Postos'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #6366f1, #4f46e5);'>
+              <i class='fas fa-book'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Diretrizes</h3>
+            <p class='tile-description'>Pasta com todas as diretrizes de postos de trabalho.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Drive</span>
+              <span>drive.google.com</span>
+            </div>
+            <i class='fas fa-folder-open tile-arrow'></i>
+          </div>
         </a>
-        <a href='https://drive.google.com/drive/folders/1YQ3sATmbY7kkhYNVKH9HKLXywUm6ADvw?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-folder-open'></i></div></div>
-          <h3 class='tile-title'>ACESSE A PASTA TREINAMENTOS / DDS</h3><p class='tile-description'>Pasta com todos os Treinamentos e DDS.</p>
-          <div class='tile-footer'><span>drive.google.com</span><i class='fas fa-folder'></i></div>
+
+        <a href='https://drive.google.com/drive/folders/1YQ3sATmbY7kkhYNVKH9HKLXywUm6ADvw' class='tile' target='_blank' data-title='Treinamentos/DDS' data-desc='Capacitação'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #ec4899, #db2777);'>
+              <i class='fas fa-chalkboard-teacher'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Treinamentos/DDS</h3>
+            <p class='tile-description'>Pasta com todos os treinamentos e DDS realizados.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Drive</span>
+              <span>drive.google.com</span>
+            </div>
+            <i class='fas fa-folder-open tile-arrow'></i>
+          </div>
         </a>
+      </div>
+      
+      <div class='empty-state' id='empty-pastas-drive'>
+        <div class='empty-icon'><i class='fas fa-search'></i></div>
+        <h3>Nenhuma pasta encontrada</h3>
+        <p>Tente buscar com termos diferentes</p>
       </div>
     </section>
 
+    <!-- Treinamentos -->
     <section id='treinamentos' class='section'>
-      <div class='section-header'><h2 class='section-title'>Treinamentos</h2><div class='section-divider'></div></div>
-      <div class='tiles-grid'>
-        <a href='https://drive.google.com/drive/folders/1enIiYyF30hTTbld8wkqBsaPfZ6-P4BFu?usp=sharing' class='tile' target='_blank'>
-          <div class='tile-header'><div class='tile-icon'><i class='fas fa-video'></i></div></div>
-          <h3 class='tile-title'>VIDEO DO PAINEL</h3><p class='tile-description'>Vídeo explicativo sobre o uso do painel.</p>
-          <div class='tile-footer'><span>drive.google.com</span><i class='fas fa-play-circle'></i></div>
+      <div class='section-header'>
+        <div class='section-title-group'>
+          <h2 class='section-title'>Treinamentos</h2>
+          <span class='section-count'>1</span>
+        </div>
+        <div class='section-divider'></div>
+      </div>
+      
+      <div class='tiles-grid' data-category='treinamentos'>
+        <a href='https://drive.google.com/drive/folders/1enIiYyF30hTTbld8wkqBsaPfZ6-P4BFu' class='tile' target='_blank' data-title='Vídeo do Painel' data-desc='Tutorial'>
+          <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
+            <i class='far fa-star'></i>
+          </button>
+          <div class='tile-header'>
+            <div class='tile-icon' style='background: linear-gradient(135deg, #f43f5e, #e11d48);'>
+              <i class='fas fa-play-circle'></i>
+            </div>
+          </div>
+          <div class='tile-content'>
+            <h3 class='tile-title'>Vídeo do Painel</h3>
+            <p class='tile-description'>Vídeo explicativo completo sobre o uso do painel de comando.</p>
+          </div>
+          <div class='tile-footer'>
+            <div class='tile-meta'>
+              <span class='tile-tag'>Vídeo</span>
+              <span>drive.google.com</span>
+            </div>
+            <i class='fas fa-play tile-arrow'></i>
+          </div>
         </a>
+      </div>
+      
+      <div class='empty-state' id='empty-treinamentos'>
+        <div class='empty-icon'><i class='fas fa-search'></i></div>
+        <h3>Nenhum treinamento encontrado</h3>
+        <p>Tente buscar com termos diferentes</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 Orbenk Segurança Patrimonial | Supervisor Douglas Jelinsky</p>
+    <div class='footer-content'>
+      <div class='footer-brand'>
+        <div class='footer-logo'></div>
+        <span><strong>Orbenk</strong> Segurança Patrimonial</span>
+      </div>
+      <p>Centro de Comando • Supervisor Douglas Jelinsky</p>
+      <p style='margin-top: 0.5rem; opacity: 0.7;'>© 2026 Todos os direitos reservados</p>
+      
+      <div class='footer-links'>
+        <a href='#sistemas'>Sistemas</a>
+        <a href='#formularios'>Formulários</a>
+        <a href='#registros'>Registros</a>
+        <a href='#pastas-drive'>Drive</a>
+        <a href='#treinamentos'>Treinamentos</a>
+      </div>
+    </div>
   </footer>
+
+  <!-- Toast -->
+  <div class='toast' id='toast'>
+    <div class='toast-icon'>
+      <i class='fas fa-check'></i>
+    </div>
+    <div class='toast-content'>
+      <div class='toast-title'>Sucesso</div>
+      <div class='toast-message'>Operação realizada com sucesso</div>
+    </div>
+  </div>
+
+  <!-- Scroll to Top -->
+  <button class='scroll-top' id='scrollTop' onclick='scrollToTop()'>
+    <i class='fas fa-arrow-up'></i>
+  </button>
+
+  <script>
+    // State
+    let favorites = JSON.parse(localStorage.getItem('orbenk_favorites') || '[]');
+    let currentTheme = localStorage.getItem('orbenk_theme') || 'dark';
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      applyTheme(currentTheme);
+      updateFavoritesCount();
+      initFavorites();
+      initSearch();
+      initNavigation();
+      initScrollTop();
+      initKeyboardShortcuts();
+    });
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('orbenk_theme', currentTheme);
+      applyTheme(currentTheme);
+      showToast('Tema alterado', `Modo ${currentTheme === 'dark' ? 'escuro' : 'claro'} ativado`);
+    });
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    }
+
+    // Favorites
+    function toggleFavorite(event, btn) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      const tile = btn.closest('.tile');
+      const title = tile.querySelector('.tile-title').innerText;
+      const href = tile.getAttribute('href');
+      const icon = tile.querySelector('.tile-icon i').className;
+      
+      const index = favorites.findIndex(f => f.href === href);
+      
+      if (index > -1) {
+        favorites.splice(index, 1);
+        btn.classList.remove('active');
+        btn.innerHTML = '<i class="far fa-star"></i>';
+        showToast('Removido dos favoritos', title);
+      } else {
+        favorites.push({ title, href, icon, date: new Date().toISOString() });
+        btn.classList.add('active');
+        btn.innerHTML = '<i class="fas fa-star"></i>';
+        showToast('Adicionado aos favoritos', title);
+        
+        // Animation
+        btn.style.transform = 'scale(1.3)';
+        setTimeout(() => btn.style.transform = 'scale(1)', 200);
+      }
+      
+      localStorage.setItem('orbenk_favorites', JSON.stringify(favorites));
+      updateFavoritesCount();
+    }
+
+    function initFavorites() {
+      document.querySelectorAll('.tile').forEach(tile => {
+        const href = tile.getAttribute('href');
+        const btn = tile.querySelector('.tile-favorite');
+        if (favorites.some(f => f.href === href)) {
+          btn.classList.add('active');
+          btn.innerHTML = '<i class="fas fa-star"></i>';
+        }
+      });
+    }
+
+    function updateFavoritesCount() {
+      document.getElementById('favCount').innerText = favorites.length;
+    }
+
+    // Search
+    function initSearch() {
+      const searchInput = document.getElementById('searchInput');
+      
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        
+        document.querySelectorAll('.section').forEach(section => {
+          const category = section.id;
+          const tiles = section.querySelectorAll('.tile');
+          let visibleCount = 0;
+          
+          tiles.forEach(tile => {
+            const title = tile.querySelector('.tile-title').innerText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            const desc = tile.querySelector('.tile-description').innerText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            const tags = Array.from(tile.querySelectorAll('.tile-tag')).map(t => t.innerText.toLowerCase()).join(' ');
+            
+            const match = title.includes(query) || desc.includes(query) || tags.includes(query);
+            tile.style.display = match ? 'flex' : 'none';
+            if (match) visibleCount++;
+          });
+          
+          // Update count
+          const countBadge = section.querySelector('.section-count');
+          if (countBadge) {
+            countBadge.innerText = query ? visibleCount : tiles.length;
+          }
+          
+          // Show empty state
+          const emptyState = document.getElementById(`empty-${category}`);
+          if (emptyState) {
+            emptyState.classList.toggle('show', visibleCount === 0 && query !== '');
+          }
+          
+          // Hide section if no results
+          section.style.display = visibleCount === 0 && query !== '' ? 'none' : 'block';
+        });
+      });
+    }
+
+    // Navigation
+    function initNavigation() {
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      // Click handling
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        });
+      });
+      
+      // Scroll spy
+      const observerOptions = {
+        rootMargin: '-20% 0px -80% 0px',
+        threshold: 0
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('data-section') === id);
+            });
+          }
+        });
+      }, observerOptions);
+      
+      sections.forEach(section => observer.observe(section));
+    }
+
+    // Scroll to Top
+    function initScrollTop() {
+      const scrollBtn = document.getElementById('scrollTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+      });
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Keyboard Shortcuts
+    function initKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + K for search
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          document.getElementById('searchInput').focus();
+        }
+        
+        // Escape to clear search
+        if (e.key === 'Escape') {
+          const searchInput = document.getElementById('searchInput');
+          if (document.activeElement === searchInput) {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+            searchInput.blur();
+          }
+        }
+      });
+    }
+
+    // Toast Notification
+    function showToast(title, message) {
+      const toast = document.getElementById('toast');
+      toast.querySelector('.toast-title').innerText = title;
+      toast.querySelector('.toast-message').innerText = message;
+      toast.classList.add('show');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Expand All (placeholder for future functionality)
+    function expandAll(category) {
+      showToast('Informação', 'Funcionalidade de expandir em desenvolvimento');
+    }
+
+    // Favorites Button
+    document.getElementById('favoritesBtn').addEventListener('click', () => {
+      if (favorites.length === 0) {
+        showToast('Atenção', 'Você não tem favoritos salvos');
+        return;
+      }
+      
+      // Filter to show only favorites
+      const searchInput = document.getElementById('searchInput');
+      searchInput.value = '';
+      searchInput.dispatchEvent(new Event('input'));
+      
+      document.querySelectorAll('.tile').forEach(tile => {
+        const href = tile.getAttribute('href');
+        const isFav = favorites.some(f => f.href === href);
+        tile.style.display = isFav ? 'flex' : 'none';
+      });
+      
+      showToast('Favoritos', `Mostrando ${favorites.length} item(s) favorito(s)`);
+    });
+  </script>
 </body>
 </html>
