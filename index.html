@@ -13,7 +13,6 @@
 
   <style>
     :root {
-      /* Cores Primárias */
       --primary-50: #e6f0ff;
       --primary-100: #cce0ff;
       --primary-200: #99c2ff;
@@ -25,13 +24,11 @@
       --primary-800: #001f47;
       --primary-900: #001029;
       
-      /* Cores de Status */
       --success: #10b981;
       --warning: #f59e0b;
       --danger: #ef4444;
       --info: #3b82f6;
       
-      /* Modo Escuro (Default) */
       --bg-primary: #0a0f1c;
       --bg-secondary: #111827;
       --bg-tertiary: #1f2937;
@@ -101,7 +98,6 @@
       transition: background-color var(--transition-base), color var(--transition-base);
     }
 
-    /* Background Effects */
     .bg-gradient {
       position: fixed;
       top: 0;
@@ -131,7 +127,6 @@
       50% { transform: scale(1.1); opacity: 0.2; }
     }
 
-    /* Grid Pattern */
     .grid-pattern {
       position: fixed;
       top: 0;
@@ -147,9 +142,9 @@
       z-index: -1;
     }
 
-    /* Header */
+    /* Header Compacto */
     header {
-      position: fixed;
+      position: sticky;
       top: 0;
       left: 0;
       right: 0;
@@ -163,23 +158,23 @@
     .header-content {
       max-width: 1600px;
       margin: 0 auto;
-      padding: 1rem 2rem;
+      padding: 0.75rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .brand { 
       display: flex; 
       align-items: center; 
-      gap: 1rem; 
+      gap: 0.75rem; 
       flex-shrink: 0;
     }
     
     .brand-icon {
-      width: 48px; 
-      height: 48px; 
+      width: 40px; 
+      height: 40px; 
       border-radius: var(--radius-md);
       overflow: hidden;
       display: flex; 
@@ -205,7 +200,7 @@
     
     .brand-text h1 { 
       font-family: 'JetBrains Mono', monospace; 
-      font-size: 1.125rem; 
+      font-size: 1rem; 
       font-weight: 700;
       background: linear-gradient(135deg, var(--primary-300), var(--primary-400));
       -webkit-background-clip: text;
@@ -215,17 +210,16 @@
     }
     
     .brand-text p { 
-      font-size: 0.75rem; 
+      font-size: 0.7rem; 
       color: var(--text-secondary); 
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 600;
     }
 
-    /* Search */
     .search-container {
       flex: 1;
-      max-width: 500px;
+      max-width: 450px;
       position: relative;
     }
 
@@ -240,8 +234,8 @@
       border: 1px solid var(--border-primary);
       color: var(--text-primary);
       border-radius: var(--radius-lg);
-      padding: 0.875rem 1rem 0.875rem 3rem;
-      font-size: 0.9375rem;
+      padding: 0.625rem 1rem 0.625rem 2.5rem;
+      font-size: 0.875rem;
       font-family: inherit;
       transition: all var(--transition-fast);
       outline: none;
@@ -258,37 +252,36 @@
 
     .search-icon { 
       position: absolute; 
-      left: 1rem; 
+      left: 0.875rem; 
       top: 50%; 
       transform: translateY(-50%); 
       color: var(--text-tertiary);
-      font-size: 1rem;
+      font-size: 0.875rem;
     }
 
     .search-shortcut {
       position: absolute;
-      right: 1rem;
+      right: 0.75rem;
       top: 50%;
       transform: translateY(-50%);
       background: var(--bg-tertiary);
       color: var(--text-secondary);
-      padding: 0.25rem 0.5rem;
+      padding: 0.2rem 0.4rem;
       border-radius: var(--radius-sm);
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
       font-family: 'JetBrains Mono', monospace;
       border: 1px solid var(--border-primary);
     }
 
-    /* Header Actions */
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
 
     .btn-icon {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius-md);
       border: 1px solid var(--border-primary);
       background: var(--bg-secondary);
@@ -298,7 +291,7 @@
       align-items: center;
       justify-content: center;
       transition: all var(--transition-fast);
-      font-size: 1rem;
+      font-size: 0.875rem;
     }
 
     .btn-icon:hover {
@@ -309,8 +302,8 @@
     }
 
     .user-avatar {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: var(--radius-md);
       background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
       display: flex;
@@ -318,7 +311,7 @@
       justify-content: center;
       color: white;
       font-weight: 700;
-      font-size: 0.875rem;
+      font-size: 0.75rem;
       cursor: pointer;
       border: 2px solid var(--border-primary);
       transition: all var(--transition-fast);
@@ -329,17 +322,14 @@
       box-shadow: var(--shadow-glow);
     }
 
-    /* Navigation */
+    /* Navigation - Agora abaixo do header normal, não fixo */
     .top-nav { 
-      position: fixed;
-      top: 80px;
-      left: 0;
-      right: 0;
-      z-index: 999;
-      background: var(--bg-glass);
-      backdrop-filter: blur(20px);
+      background: var(--bg-secondary);
       border-bottom: 1px solid var(--border-primary);
-      padding: 0.75rem 0;
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 61px; /* Altura do header compacto */
+      z-index: 999;
     }
     
     .top-nav-content { 
@@ -361,7 +351,7 @@
       font-size: 0.8125rem; 
       font-weight: 600;
       text-decoration: none; 
-      padding: 0.625rem 1.25rem; 
+      padding: 0.5rem 1rem; 
       border-radius: var(--radius-md); 
       white-space: nowrap; 
       border: 1px solid transparent;
@@ -374,7 +364,7 @@
 
     .nav-link:hover { 
       color: var(--text-primary);
-      background: var(--bg-secondary);
+      background: var(--bg-tertiary);
       border-color: var(--border-primary);
     }
 
@@ -384,120 +374,30 @@
       border-color: var(--primary-500);
     }
 
-    /* Main Content */
+    /* Main Content - Padding ajustado */
     main { 
       max-width: 1600px; 
       margin: 0 auto; 
-      padding: 140px 2rem 2rem; 
+      padding: 1.5rem 2rem 2rem; 
     }
 
-    /* Stats Dashboard */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .stat-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-primary);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: all var(--transition-base);
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--primary-400);
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-500), var(--primary-300));
-      opacity: 0;
-      transition: opacity var(--transition-fast);
-    }
-
-    .stat-card:hover::before {
-      opacity: 1;
-    }
-
-    .stat-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-
-    .stat-label {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .stat-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-    }
-
-    .stat-icon.blue { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
-    .stat-icon.green { background: rgba(16, 185, 129, 0.1); color: #10b981; }
-    .stat-icon.amber { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
-    .stat-icon.red { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
-
-    .stat-value {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-change {
-      font-size: 0.8125rem;
-      color: var(--success);
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-
-    .stat-change.negative {
-      color: var(--danger);
-    }
-
-    /* Section */
     .section { 
-      margin-bottom: 4rem; 
-      scroll-margin-top: 140px; 
+      margin-bottom: 3rem; 
+      scroll-margin-top: 120px; 
     }
 
     .section-header { 
       display: flex; 
       align-items: center; 
       justify-content: space-between;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       gap: 1rem;
     }
 
     .section-title-group {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .section-title { 
@@ -509,13 +409,13 @@
       font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
 
     .section-title::before {
       content: '';
       width: 4px;
-      height: 24px;
+      height: 20px;
       background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
       border-radius: 2px;
     }
@@ -523,7 +423,7 @@
     .section-count {
       background: var(--bg-tertiary);
       color: var(--text-secondary);
-      padding: 0.25rem 0.75rem;
+      padding: 0.2rem 0.6rem;
       border-radius: var(--radius-sm);
       font-size: 0.75rem;
       font-weight: 600;
@@ -542,7 +442,7 @@
     }
 
     .btn-sm {
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.875rem;
       border-radius: var(--radius-md);
       font-size: 0.8125rem;
       font-weight: 600;
@@ -562,17 +462,16 @@
       border-color: var(--primary-400);
     }
 
-    /* Tiles Grid */
     .tiles-grid { 
       display: grid; 
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-      gap: 1.25rem; 
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+      gap: 1rem; 
     }
 
     .tile {
       background: var(--bg-secondary); 
       border: 1px solid var(--border-primary); 
-      padding: 1.5rem;
+      padding: 1.25rem;
       border-radius: var(--radius-lg); 
       text-decoration: none; 
       color: inherit; 
@@ -582,7 +481,6 @@
       height: 100%;
       position: relative;
       overflow: hidden;
-      group: tile;
     }
 
     .tile::before {
@@ -599,8 +497,8 @@
 
     .tile:hover { 
       border-color: var(--primary-400); 
-      transform: translateY(-4px); 
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      transform: translateY(-3px); 
+      box-shadow: var(--shadow-md);
     }
 
     .tile:hover::before {
@@ -609,11 +507,11 @@
 
     .tile-favorite {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-md);
+      top: 0.875rem;
+      right: 0.875rem;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
       border: 1px solid var(--border-primary);
       background: var(--bg-primary);
       color: var(--text-tertiary);
@@ -625,6 +523,7 @@
       transform: scale(0.8);
       transition: all var(--transition-fast);
       z-index: 10;
+      font-size: 0.75rem;
     }
 
     .tile:hover .tile-favorite {
@@ -647,7 +546,7 @@
     }
 
     .tile-header { 
-      margin-bottom: 1rem; 
+      margin-bottom: 0.875rem; 
       display: flex; 
       justify-content: space-between; 
       align-items: flex-start;
@@ -656,37 +555,33 @@
     }
 
     .tile-icon { 
-      font-size: 1.5rem; 
+      font-size: 1.25rem; 
       color: white; 
       background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-      width: 48px; 
-      height: 48px; 
+      width: 40px; 
+      height: 40px; 
       display: flex; 
       align-items: center; 
       justify-content: center; 
       border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-sm);
       transition: all var(--transition-base);
     }
 
     .tile:hover .tile-icon {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: var(--shadow-glow);
+      transform: scale(1.05);
     }
 
     .tile-status {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: var(--success);
-      box-shadow: 0 0 0 2px var(--bg-secondary), 0 0 0 4px var(--success);
+      box-shadow: 0 0 0 2px var(--bg-secondary), 0 0 0 3px var(--success);
       position: absolute;
-      bottom: -2px;
-      right: -2px;
+      bottom: -1px;
+      right: -1px;
     }
-
-    .tile-status.warning { background: var(--warning); box-shadow: 0 0 0 2px var(--bg-secondary), 0 0 0 4px var(--warning); }
-    .tile-status.danger { background: var(--danger); box-shadow: 0 0 0 2px var(--bg-secondary), 0 0 0 4px var(--danger); }
 
     .tile-content {
       flex: 1;
@@ -697,15 +592,15 @@
     .tile-title { 
       color: var(--text-primary); 
       font-weight: 700; 
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.9375rem;
+      margin-bottom: 0.375rem;
       line-height: 1.4;
     }
 
     .tile-description { 
-      font-size: 0.875rem; 
+      font-size: 0.8125rem; 
       color: var(--text-secondary); 
-      line-height: 1.6;
+      line-height: 1.5;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -716,10 +611,10 @@
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
-      padding-top: 1rem; 
-      margin-top: 1rem;
+      padding-top: 0.875rem; 
+      margin-top: 0.875rem;
       border-top: 1px solid var(--border-primary); 
-      font-size: 0.75rem; 
+      font-size: 0.6875rem; 
       color: var(--text-tertiary);
       font-family: 'JetBrains Mono', monospace;
       position: relative;
@@ -734,9 +629,9 @@
 
     .tile-tag {
       background: var(--bg-tertiary);
-      padding: 0.25rem 0.5rem;
+      padding: 0.15rem 0.4rem;
       border-radius: var(--radius-sm);
-      font-size: 0.6875rem;
+      font-size: 0.625rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       font-weight: 600;
@@ -744,7 +639,7 @@
 
     .tile-arrow {
       opacity: 0;
-      transform: translateX(-10px);
+      transform: translateX(-8px);
       transition: all var(--transition-fast);
       color: var(--primary-400);
     }
@@ -754,10 +649,9 @@
       transform: translateX(0);
     }
 
-    /* Empty State */
     .empty-state {
       text-align: center;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem;
       color: var(--text-secondary);
       display: none;
     }
@@ -767,20 +661,19 @@
     }
 
     .empty-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
       opacity: 0.5;
     }
 
-    /* Footer */
     footer { 
       background: var(--bg-secondary); 
       border-top: 1px solid var(--border-primary); 
-      padding: 3rem 2rem; 
+      padding: 2rem; 
       text-align: center; 
       color: var(--text-secondary); 
-      font-size: 0.875rem;
-      margin-top: 4rem;
+      font-size: 0.8125rem;
+      margin-top: 3rem;
     }
 
     .footer-content {
@@ -792,13 +685,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .footer-logo {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       border-radius: var(--radius-sm);
       background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
     }
@@ -806,8 +699,8 @@
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 1.5rem;
+      gap: 1.5rem;
+      margin-top: 1rem;
       flex-wrap: wrap;
     }
 
@@ -816,25 +709,25 @@
       text-decoration: none;
       transition: color var(--transition-fast);
       font-weight: 500;
+      font-size: 0.75rem;
     }
 
     .footer-links a:hover {
       color: var(--primary-400);
     }
 
-    /* Toast Notification */
     .toast {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 1.5rem;
+      right: 1.5rem;
       background: var(--bg-secondary);
       border: 1px solid var(--border-primary);
       border-radius: var(--radius-lg);
-      padding: 1rem 1.5rem;
+      padding: 0.875rem 1.25rem;
       box-shadow: var(--shadow-lg);
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.625rem;
       transform: translateY(100px);
       opacity: 0;
       transition: all var(--transition-base);
@@ -847,14 +740,15 @@
     }
 
     .toast-icon {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       border-radius: var(--radius-md);
       background: rgba(16, 185, 129, 0.1);
       color: var(--success);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.875rem;
     }
 
     .toast-content {
@@ -864,21 +758,20 @@
     .toast-title {
       font-weight: 600;
       color: var(--text-primary);
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
     }
 
     .toast-message {
-      font-size: 0.8125rem;
+      font-size: 0.75rem;
       color: var(--text-secondary);
     }
 
-    /* Scroll to Top */
     .scroll-top {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 48px;
-      height: 48px;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: var(--bg-secondary);
       border: 1px solid var(--border-primary);
@@ -892,6 +785,7 @@
       transition: all var(--transition-base);
       z-index: 998;
       box-shadow: var(--shadow-lg);
+      font-size: 0.875rem;
     }
 
     .scroll-top.visible {
@@ -903,14 +797,26 @@
       background: var(--primary-500);
       color: white;
       border-color: var(--primary-400);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .header-content {
-        padding: 1rem;
-        flex-wrap: wrap;
+        padding: 0.625rem 1rem;
+        gap: 0.75rem;
+      }
+
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .brand-text h1 {
+        font-size: 0.875rem;
+      }
+
+      .brand-text p {
+        font-size: 0.625rem;
       }
 
       .search-container {
@@ -923,50 +829,55 @@
         display: none;
       }
 
+      .header-actions {
+        gap: 0.375rem;
+      }
+
+      .btn-icon, .user-avatar {
+        width: 32px;
+        height: 32px;
+      }
+
       main {
-        padding: 120px 1rem 1rem;
+        padding: 1rem;
       }
 
       .top-nav {
-        top: 130px;
+        top: 57px;
+        padding: 0.375rem 0;
       }
 
       .top-nav-content {
         padding: 0 1rem;
       }
 
-      .section {
-        scroll-margin-top: 180px;
+      .nav-link {
+        padding: 0.4rem 0.875rem;
+        font-size: 0.75rem;
       }
 
-      .stats-grid {
-        grid-template-columns: 1fr;
+      .section {
+        scroll-margin-top: 100px;
+        margin-bottom: 2rem;
       }
 
       .tiles-grid {
         grid-template-columns: 1fr;
+        gap: 0.875rem;
       }
 
       .tile-favorite {
         opacity: 1;
         transform: scale(1);
+        width: 32px;
+        height: 32px;
+      }
+
+      .tile {
+        padding: 1rem;
       }
     }
 
-    /* Loading Animation */
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    .skeleton {
-      background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      border-radius: var(--radius-md);
-    }
-
-    /* Accessibility */
     @media (prefers-reduced-motion: reduce) {
       * {
         animation-duration: 0.01ms !important;
@@ -975,7 +886,6 @@
       }
     }
 
-    /* Focus styles */
     *:focus-visible {
       outline: 2px solid var(--primary-400);
       outline-offset: 2px;
@@ -1002,7 +912,7 @@
       <div class='search-container'>
         <div class='search-box'>
           <i class='fas fa-search search-icon'></i>
-          <input type='text' id='searchInput' placeholder='Buscar sistemas, formulários, registros...' autocomplete='off'>
+          <input type='text' id='searchInput' placeholder='Buscar sistemas, formulários...' autocomplete='off'>
           <span class='search-shortcut'>Ctrl K</span>
         </div>
       </div>
@@ -1040,53 +950,6 @@
   </nav>
 
   <main>
-    <!-- Dashboard Stats -->
-    <div class='stats-grid'>
-      <div class='stat-card'>
-        <div class='stat-header'>
-          <span class='stat-label'>Sistemas Online</span>
-          <div class='stat-icon blue'><i class='fas fa-server'></i></div>
-        </div>
-        <div class='stat-value'>6</div>
-        <div class='stat-change'>
-          <i class='fas fa-check-circle'></i> 100% operacional
-        </div>
-      </div>
-      
-      <div class='stat-card'>
-        <div class='stat-header'>
-          <span class='stat-label'>Formulários Ativos</span>
-          <div class='stat-icon green'><i class='fas fa-clipboard-check'></i></div>
-        </div>
-        <div class='stat-value'>7</div>
-        <div class='stat-change'>
-          <i class='fas fa-arrow-up'></i> 2 novos este mês
-        </div>
-      </div>
-      
-      <div class='stat-card'>
-        <div class='stat-header'>
-          <span class='stat-label'>Registros Totais</span>
-          <div class='stat-icon amber'><i class='fas fa-database'></i></div>
-        </div>
-        <div class='stat-value'>10</div>
-        <div class='stat-change'>
-          <i class='fas fa-sync'></i> Atualizado agora
-        </div>
-      </div>
-      
-      <div class='stat-card'>
-        <div class='stat-header'>
-          <span class='stat-label'>Acesso Rápido</span>
-          <div class='stat-icon red'><i class='fas fa-star'></i></div>
-        </div>
-        <div class='stat-value' id='favCount'>0</div>
-        <div class='stat-change'>
-          <i class='fas fa-heart'></i> Favoritos salvos
-        </div>
-      </div>
-    </div>
-
     <!-- Sistemas -->
     <section id='sistemas' class='section'>
       <div class='section-header'>
@@ -1095,11 +958,6 @@
           <span class='section-count'>6</span>
         </div>
         <div class='section-divider'></div>
-        <div class='section-actions'>
-          <button class='btn-sm' onclick='expandAll("sistemas")'>
-            <i class='fas fa-expand'></i> Expandir
-          </button>
-        </div>
       </div>
       
       <div class='tiles-grid' data-category='sistemas'>
@@ -1115,7 +973,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Gmail</h3>
-            <p class='tile-description'>Acesso ao e-mail corporativo Orbenk com integração completa e segurança avançada.</p>
+            <p class='tile-description'>Acesso ao e-mail corporativo Orbenk com integração completa.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1138,7 +996,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Portal Fusion</h3>
-            <p class='tile-description'>Gestão completa de operações, recursos humanos e controle administrativo.</p>
+            <p class='tile-description'>Gestão completa de operações e recursos humanos.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1161,7 +1019,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>GLPI - Uniformes</h3>
-            <p class='tile-description'>Portal de pedidos e gestão de uniformes para colaboradores.</p>
+            <p class='tile-description'>Portal de pedidos e gestão de uniformes.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1184,7 +1042,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Nexti Ponto</h3>
-            <p class='tile-description'>Gestão de ponto eletrônico e controle de jornada dos colaboradores.</p>
+            <p class='tile-description'>Gestão de ponto eletrônico dos colaboradores.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1207,7 +1065,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Portal SGO</h3>
-            <p class='tile-description'>Consulta completa de dados e indicadores de todos os colaboradores.</p>
+            <p class='tile-description'>Consulta de dados e indicadores dos colaboradores.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1229,7 +1087,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Portal do Vigilante</h3>
-            <p class='tile-description'>Compartilhe o portal diretamente com os vigilantes via WhatsApp.</p>
+            <p class='tile-description'>Compartilhe o portal com os vigilantes via WhatsApp.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1270,7 +1128,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Registro de Coberturas</h3>
-            <p class='tile-description'>Registre todas as coberturas operacionais e substituições de equipe.</p>
+            <p class='tile-description'>Registre todas as coberturas operacionais e substituições.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1292,7 +1150,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Admissões e Movimentação</h3>
-            <p class='tile-description'>Controle de admissões, demissões e movimentações de pessoal.</p>
+            <p class='tile-description'>Controle de admissões, demissões e movimentações.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1314,7 +1172,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Cadastro de Currículos</h3>
-            <p class='tile-description'>Envie este link aos candidatos para cadastro de currículos.</p>
+            <p class='tile-description'>Envie este link aos candidatos para cadastro.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1336,7 +1194,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Registro de Ocorrências</h3>
-            <p class='tile-description'>Registre todas as ocorrências operacionais e incidentes.</p>
+            <p class='tile-description'>Registre todas as ocorrências operacionais.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1358,7 +1216,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Tarefas Importantes</h3>
-            <p class='tile-description'>Registro de tarefas prioritárias para coordenação.</p>
+            <p class='tile-description'>Registro de tarefas prioritárias.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1402,7 +1260,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Vinculação Nexti</h3>
-            <p class='tile-description'>Formulário de vinculação de terminais Nexti.</p>
+            <p class='tile-description'>Formulário de vinculação de terminais.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1443,7 +1301,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Banco de Currículos</h3>
-            <p class='tile-description'>Base de dados completa de currículos cadastrados.</p>
+            <p class='tile-description'>Base de dados de currículos cadastrados.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1454,7 +1312,7 @@
           </div>
         </a>
 
-        <a href='https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit' class='tile' target='_blank' data-title='Dados de Coberturas' data-desc='Coberturas de colaboradores'>
+        <a href='https://docs.google.com/spreadsheets/d/1LOtvf-MdyD88gegGAqVz8NaAOvzig71wUZY9DzbOabM/edit' class='tile' target='_blank' data-title='Dados de Coberturas' data-desc='Coberturas'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1465,7 +1323,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Dados de Coberturas</h3>
-            <p class='tile-description'>Planilha com todas as coberturas e substituições.</p>
+            <p class='tile-description'>Planilha com todas as coberturas.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1476,7 +1334,7 @@
           </div>
         </a>
 
-        <a href='https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit' class='tile' target='_blank' data-title='Dados de Ocorrências' data-desc='Registro de ocorrências'>
+        <a href='https://docs.google.com/spreadsheets/d/1M5Z1V5iwo3dHQo89zSnvE-0ZPxKPnXuVovnu6XHY_nY/edit' class='tile' target='_blank' data-title='Dados de Ocorrências' data-desc='Ocorrências'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1487,7 +1345,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Dados de Ocorrências</h3>
-            <p class='tile-description'>Planilha completa com todas as ocorrências registradas.</p>
+            <p class='tile-description'>Planilha com todas as ocorrências.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1498,7 +1356,7 @@
           </div>
         </a>
 
-        <a href='https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit' class='tile' target='_blank' data-title='Dados de Uniformes' data-desc='Pedidos de uniforme'>
+        <a href='https://docs.google.com/spreadsheets/d/1xwXMflZPEbIHOLs9gaaqMhQMBTHmIwRCwxJBOWGIUJg/edit' class='tile' target='_blank' data-title='Dados de Uniformes' data-desc='Uniformes'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1509,7 +1367,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Dados de Uniformes</h3>
-            <p class='tile-description'>Controle de pedidos e entregas de uniformes.</p>
+            <p class='tile-description'>Controle de pedidos de uniformes.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1520,7 +1378,7 @@
           </div>
         </a>
 
-        <a href='https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit' class='tile' target='_blank' data-title='Solicitações Vigilantes' data-desc='Pedidos e retificações'>
+        <a href='https://docs.google.com/spreadsheets/d/1Q9UV6FYRprdTgK5K9HjB4KpMbLj7iTCrhWLSXApgOHQ/edit' class='tile' target='_blank' data-title='Solicitações Vigilantes' data-desc='Pedidos'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1531,7 +1389,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Solicitações Vigilantes</h3>
-            <p class='tile-description'>Planilha de pedidos e retificações de vigilantes.</p>
+            <p class='tile-description'>Planilha de pedidos e retificações.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1542,7 +1400,7 @@
           </div>
         </a>
 
-        <a href='https://docs.google.com/spreadsheets/d/12Y_-djZOTgNBSaqme7NlAi_JYIevoIFy9olPv2SMagE/edit' class='tile' target='_blank' data-title='Aprovação de Ponto' data-desc='Aceitação de ponto'>
+        <a href='https://docs.google.com/spreadsheets/d/12Y_-djZOTgNBSaqme7NlAi_JYIevoIFy9olPv2SMagE/edit' class='tile' target='_blank' data-title='Aprovação de Ponto' data-desc='Ponto'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1553,7 +1411,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Aprovação de Ponto</h3>
-            <p class='tile-description'>Planilha de pedidos de aceitação de ponto.</p>
+            <p class='tile-description'>Planilha de aceitação de ponto.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1564,7 +1422,7 @@
           </div>
         </a>
 
-        <a href='https://docs.google.com/spreadsheets/d/1GH-iW3b4txgV1MYHLo2ARGLdY_qJqefkkcA6KHVckmo/edit' class='tile' target='_blank' data-title='Admissão e Movimentação' data-desc='Movimentação de pessoal'>
+        <a href='https://docs.google.com/spreadsheets/d/1GH-iW3b4txgV1MYHLo2ARGLdY_qJqefkkcA6KHVckmo/edit' class='tile' target='_blank' data-title='Admissão e Movimentação' data-desc='RH'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1575,7 +1433,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Admissão e Movimentação</h3>
-            <p class='tile-description'>Planilha de movimentação completa de pessoal.</p>
+            <p class='tile-description'>Planilha de movimentação de pessoal.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1586,7 +1444,7 @@
           </div>
         </a>
 
-        <a href='https://docs.google.com/spreadsheets/d/11Epj61zDnthSYfetuO2drtr92cOc78jJckH4rwj9QRg/edit' class='tile' target='_blank' data-title='Dados de Tarefas' data-desc='Registro de tarefas'>
+        <a href='https://docs.google.com/spreadsheets/d/11Epj61zDnthSYfetuO2drtr92cOc78jJckH4rwj9QRg/edit' class='tile' target='_blank' data-title='Dados de Tarefas' data-desc='Tarefas'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1597,7 +1455,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Dados de Tarefas</h3>
-            <p class='tile-description'>Registro completo de todas as tarefas.</p>
+            <p class='tile-description'>Registro de todas as tarefas.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1608,7 +1466,7 @@
           </div>
         </a>
 
-        <a href='https://docs.google.com/spreadsheets/d/1zvTbaY058y1b4zzD_kUGjC--10LNAYkanm7HSGx0LOE/edit' class='tile' target='_blank' data-title='Vigilantes Caveira' data-desc='Hora extra'>
+        <a href='https://docs.google.com/spreadsheets/d/1zvTbaY058y1b4zzD_kUGjC--10LNAYkanm7HSGx0LOE/edit' class='tile' target='_blank' data-title='Vigilantes Caveira' data-desc='Extra'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1619,7 +1477,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Vigilantes Caveira</h3>
-            <p class='tile-description'>Dados dos vigilantes disponíveis para hora extra.</p>
+            <p class='tile-description'>Dados dos vigilantes para hora extra.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1641,7 +1499,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Vinculação Nexti</h3>
-            <p class='tile-description'>Planilha de registros de vinculação Nexti.</p>
+            <p class='tile-description'>Registros de vinculação Nexti.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1671,7 +1529,7 @@
       </div>
       
       <div class='tiles-grid' data-category='pastas-drive'>
-        <a href='https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy' class='tile' target='_blank' data-title='Controle de Férias' data-desc='Gestão de férias'>
+        <a href='https://drive.google.com/drive/folders/16HOItliauvCmcotWJVVoJdwfXL-pxjpy' class='tile' target='_blank' data-title='Controle de Férias' data-desc='Férias'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1682,7 +1540,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Controle de Férias</h3>
-            <p class='tile-description'>Pasta com todos os controles de férias dos colaboradores.</p>
+            <p class='tile-description'>Controles de férias dos colaboradores.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1693,7 +1551,7 @@
           </div>
         </a>
 
-        <a href='https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF' class='tile' target='_blank' data-title='Modelos de RH' data-desc='Documentos RH'>
+        <a href='https://drive.google.com/drive/folders/1LRQmYAVtNBOFfJ8KmBUvtOvYwKhxsDrF' class='tile' target='_blank' data-title='Modelos de RH' data-desc='Documentos'>
           <button class='tile-favorite' onclick='toggleFavorite(event, this)'>
             <i class='far fa-star'></i>
           </button>
@@ -1704,7 +1562,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Modelos de RH</h3>
-            <p class='tile-description'>Pasta com documentos e modelos de recursos humanos.</p>
+            <p class='tile-description'>Documentos e modelos de RH.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1726,7 +1584,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>QLS Atualizados</h3>
-            <p class='tile-description'>Pasta com todos os QLS atualizados semanalmente.</p>
+            <p class='tile-description'>QLS atualizados semanalmente.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1748,7 +1606,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Reciclagens</h3>
-            <p class='tile-description'>Todos os controles de reciclagem de vigilantes.</p>
+            <p class='tile-description'>Controles de reciclagem.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1770,7 +1628,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>CNVs</h3>
-            <p class='tile-description'>Pasta com todas as Carteiras Nacionais de Vigilante.</p>
+            <p class='tile-description'>Carteiras Nacionais de Vigilante.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1792,7 +1650,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Diretrizes</h3>
-            <p class='tile-description'>Pasta com todas as diretrizes de postos de trabalho.</p>
+            <p class='tile-description'>Diretrizes de postos de trabalho.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1814,7 +1672,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Treinamentos/DDS</h3>
-            <p class='tile-description'>Pasta com todos os treinamentos e DDS realizados.</p>
+            <p class='tile-description'>Treinamentos e DDS realizados.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1855,7 +1713,7 @@
           </div>
           <div class='tile-content'>
             <h3 class='tile-title'>Vídeo do Painel</h3>
-            <p class='tile-description'>Vídeo explicativo completo sobre o uso do painel de comando.</p>
+            <p class='tile-description'>Vídeo explicativo sobre o uso do painel.</p>
           </div>
           <div class='tile-footer'>
             <div class='tile-meta'>
@@ -1882,7 +1740,7 @@
         <span><strong>Orbenk</strong> Segurança Patrimonial</span>
       </div>
       <p>Centro de Comando • Supervisor Douglas Jelinsky</p>
-      <p style='margin-top: 0.5rem; opacity: 0.7;'>© 2026 Todos os direitos reservados</p>
+      <p style='margin-top: 0.5rem; opacity: 0.7; font-size: 0.75rem;'>© 2026 Todos os direitos reservados</p>
       
       <div class='footer-links'>
         <a href='#sistemas'>Sistemas</a>
@@ -1894,7 +1752,6 @@
     </div>
   </footer>
 
-  <!-- Toast -->
   <div class='toast' id='toast'>
     <div class='toast-icon'>
       <i class='fas fa-check'></i>
@@ -1905,20 +1762,16 @@
     </div>
   </div>
 
-  <!-- Scroll to Top -->
   <button class='scroll-top' id='scrollTop' onclick='scrollToTop()'>
     <i class='fas fa-arrow-up'></i>
   </button>
 
   <script>
-    // State
     let favorites = JSON.parse(localStorage.getItem('orbenk_favorites') || '[]');
     let currentTheme = localStorage.getItem('orbenk_theme') || 'dark';
 
-    // Initialize
     document.addEventListener('DOMContentLoaded', () => {
       applyTheme(currentTheme);
-      updateFavoritesCount();
       initFavorites();
       initSearch();
       initNavigation();
@@ -1926,7 +1779,6 @@
       initKeyboardShortcuts();
     });
 
-    // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
       currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -1940,7 +1792,6 @@
       themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     }
 
-    // Favorites
     function toggleFavorite(event, btn) {
       event.preventDefault();
       event.stopPropagation();
@@ -1963,13 +1814,11 @@
         btn.innerHTML = '<i class="fas fa-star"></i>';
         showToast('Adicionado aos favoritos', title);
         
-        // Animation
         btn.style.transform = 'scale(1.3)';
         setTimeout(() => btn.style.transform = 'scale(1)', 200);
       }
       
       localStorage.setItem('orbenk_favorites', JSON.stringify(favorites));
-      updateFavoritesCount();
     }
 
     function initFavorites() {
@@ -1983,11 +1832,6 @@
       });
     }
 
-    function updateFavoritesCount() {
-      document.getElementById('favCount').innerText = favorites.length;
-    }
-
-    // Search
     function initSearch() {
       const searchInput = document.getElementById('searchInput');
       
@@ -2009,30 +1853,25 @@
             if (match) visibleCount++;
           });
           
-          // Update count
           const countBadge = section.querySelector('.section-count');
           if (countBadge) {
             countBadge.innerText = query ? visibleCount : tiles.length;
           }
           
-          // Show empty state
           const emptyState = document.getElementById(`empty-${category}`);
           if (emptyState) {
             emptyState.classList.toggle('show', visibleCount === 0 && query !== '');
           }
           
-          // Hide section if no results
           section.style.display = visibleCount === 0 && query !== '' ? 'none' : 'block';
         });
       });
     }
 
-    // Navigation
     function initNavigation() {
       const sections = document.querySelectorAll('.section');
       const navLinks = document.querySelectorAll('.nav-link');
       
-      // Click handling
       navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
           navLinks.forEach(l => l.classList.remove('active'));
@@ -2040,7 +1879,6 @@
         });
       });
       
-      // Scroll spy
       const observerOptions = {
         rootMargin: '-20% 0px -80% 0px',
         threshold: 0
@@ -2060,7 +1898,6 @@
       sections.forEach(section => observer.observe(section));
     }
 
-    // Scroll to Top
     function initScrollTop() {
       const scrollBtn = document.getElementById('scrollTop');
       
@@ -2077,16 +1914,13 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Keyboard Shortcuts
     function initKeyboardShortcuts() {
       document.addEventListener('keydown', (e) => {
-        // Ctrl/Cmd + K for search
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
           e.preventDefault();
           document.getElementById('searchInput').focus();
         }
         
-        // Escape to clear search
         if (e.key === 'Escape') {
           const searchInput = document.getElementById('searchInput');
           if (document.activeElement === searchInput) {
@@ -2098,7 +1932,6 @@
       });
     }
 
-    // Toast Notification
     function showToast(title, message) {
       const toast = document.getElementById('toast');
       toast.querySelector('.toast-title').innerText = title;
@@ -2110,19 +1943,12 @@
       }, 3000);
     }
 
-    // Expand All (placeholder for future functionality)
-    function expandAll(category) {
-      showToast('Informação', 'Funcionalidade de expandir em desenvolvimento');
-    }
-
-    // Favorites Button
     document.getElementById('favoritesBtn').addEventListener('click', () => {
       if (favorites.length === 0) {
         showToast('Atenção', 'Você não tem favoritos salvos');
         return;
       }
       
-      // Filter to show only favorites
       const searchInput = document.getElementById('searchInput');
       searchInput.value = '';
       searchInput.dispatchEvent(new Event('input'));
